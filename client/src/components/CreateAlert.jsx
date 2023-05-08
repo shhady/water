@@ -11,6 +11,8 @@ const CreateAlert = () => {
   const addressRef = useRef(null);
   const statusRef = useRef(null);
 
+  const url = "http://localhost:5000";
+
   const submitHandler = () => {
     const data = {
       t1: trigger,
@@ -20,6 +22,13 @@ const CreateAlert = () => {
       addr: addressRef.current.value,
     };
     //send request
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
   };
 
   return (
