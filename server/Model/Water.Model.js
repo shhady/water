@@ -33,18 +33,16 @@ const waterSchema = new mongoose.Schema({
     },
     city: {
         type: String,
-        required: true
+
     },
     street: {
         type: String,
-        required: true
     },
     number: {
         type: Number,
-        required: true,
     }
 },{timestamps : true});
 
 const Water = mongoose.model('Water', waterSchema);
 
-module.exports = Water;
+export default Water;
