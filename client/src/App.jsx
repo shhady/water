@@ -1,10 +1,11 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 
+import CreateAlert from "./components/CreateAlert";
+
 function App() {
-  return <>mosab1111</>;
+  const [section, setSection] = useState(0);
+  return <div>{section === 0 && <CreateAlert />}</div>;
 }
 
 export default App;
