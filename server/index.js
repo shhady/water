@@ -29,3 +29,5 @@ mongoose
     server.listen(PORT, () => console.log(`server running on port : ${PORT}`))
   )
   .catch((error) => console.log(error));
+
+console.log("Talal");
