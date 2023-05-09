@@ -14,6 +14,12 @@ import mongoose from "mongoose";
 // Where do we get the parameter ranges? (standard for water values, acidity, etc. )
 // How do we ensure that indicators are valid for the problem? (pH is irrelevant to Cyber)
 
+/**
+ * System provides us with alerts
+ * Decide what combinations need to be done for all types of systems
+ * 
+ */
+
 const waterSchema = new mongoose.Schema(
   {
     S: {
@@ -33,7 +39,6 @@ const waterSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
     t: {
       type: String,
       required: true,
