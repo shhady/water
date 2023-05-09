@@ -1,12 +1,18 @@
 import mongoose from "mongoose";
 
-//P Pond
-//T TRIGER
-//p parameter
-//t type
-//v value
-//I indicator
-//S status
+//P Pond                - id of the water pond
+//T TRIGGER             - main problem
+//p parameter           - subproblem
+//t type                - more info on subproblem
+//I indicator           - type of parameter
+//v value               - value of parameter
+//S status              - todo/in progress/done
+
+// Is address optional?
+// Should we save all types of  problems and sub problems?
+// Where do we get the data? (where does the problem come from)
+// Where do we get the parameter ranges? (standard for water values, acidity, etc. )
+// How do we ensure that indicators are valid for the problem? (pH is irrelevant to Cyber)
 
 const waterSchema = new mongoose.Schema(
   {

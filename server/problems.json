@@ -1,0 +1,24 @@
+[
+    {
+        "property": "Cyber",
+        "values": [
+            null,
+            "Spam attack",
+            "Virus",
+            "Blackmail",
+            "DoS",
+            "Phishing",
+            "Authorization"
+        ]
+    },
+    {
+        "property": "Water pollution",
+        "values": [
+            null,
+            "Opacity",
+            "Chlorination",
+            "Acidity",
+            "Conductivity"
+        ]
+    }
+]
