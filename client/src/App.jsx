@@ -1,11 +1,13 @@
-import { useState } from "react";
 import "./App.css";
 
-import CreateAlert from "./components/CreateAlert";
+import AlertTable from "./components/AlertTable";
 
 function App() {
-  const [section, setSection] = useState(0);
-  return <div>{section === 0 && <CreateAlert />}</div>;
+  return (
+    <div className="App">
+      <AlertTable />
+    </div>
+  );
 }
 
 export default App;
