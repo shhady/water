@@ -1,9 +1,6 @@
 import { useState, useRef } from "react";
 import "../styles/CreateAlert.css";
 
-
-function 
-
 const CreateAlert = () => {
   const [trigger, setTrigger] = useState(null);
   const parameterRef = useRef(null);
