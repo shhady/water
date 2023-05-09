@@ -2,12 +2,17 @@ import { DataGrid } from "@mui/x-data-grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { useQuery } from "react-query";
-// Get all Cyber alerts
-// Get all water pollution alerts
+import { useState } from "react";
 
 const fetchData = async (url) => {
   const res = await fetch(url);
   return res.json();
+};
+
+const url = "http://localhost:5000";
+
+const pondCLickHandler = (params) => {
+  alert(params.row.alerts);
 };
 
 const columns = [
@@ -19,11 +24,39 @@ const columns = [
   { field: "createdAt", headerName: "Created At", width: 130 },
   { field: "updatedAt", headerName: "Updated At", width: 130 },
   { field: "status", headerName: "Status", width: 90 },
+  {
+    field: "action",
+    headerName: "Action",
+    width: 150,
+    renderCell: (params) => (
+      <button
+        onClick={() => console.log(`Clicked row with id ${params.row.id}`)}
+      >
+        Click me
+      </button>
+    ),
+  },
+];
+
+const pondColumns = [
+  { field: "id", headerName: "ID", width: 70 },
+  { field: "pond", headerName: "Pond Number", width: 130 },
+  { field: "alerts", headerName: "Alerts", width: 130 },
+  {
+    field: "action",
+    headerName: "Action",
+    width: 150,
+    renderCell: (params) => (
+      <button onClick={() => pondCLickHandler(params)}>Click me</button>
+    ),
+  },
 ];
 
 const AlertTable = () => {
-  const waterResponse = useQuery("water", () => fetchData("water"));
-  const cyberResponse = useQuery("cyber", () => fetchData("cyber"));
+  const waterResponse = useQuery("water", () => fetchData(url + "/WaterData"));
+  const cyberResponse = useQuery("cyber", () =>
+    fetchData(url + "/CyberProblem")
+  );
 
   if (waterResponse.isLoading || cyberResponse.isLoading) {
     return (
@@ -39,10 +72,19 @@ const AlertTable = () => {
 
   // * Don't know if this works
   const data = [...waterResponse.data, ...cyberResponse.data];
+  const pondRows = Object.values(
+    data.reduce((acc, curr, index) => {
+      const { P, T, p } = curr;
+      acc[P] = acc[P] || { id: index, pond: P, alerts: [] };
+      acc[P].alerts.push(T + " - " + p);
+      return acc;
+    }, {})
+  );
+
   const rows = data.map((dat, index) => {
     return {
       id: index,
-      Pond: dat.P,
+      pond: dat.P,
       alertType: dat.T,
       parameter: dat.p,
       value: dat.v,
@@ -59,7 +101,18 @@ const AlertTable = () => {
         columns={columns}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
+            paginationModel: { page: 0, pageSize: 10 },
+          },
+        }}
+        pageSizeOptions={[5, 10]}
+        checkboxSelection
+      />
+      <DataGrid
+        rows={pondRows}
+        columns={pondColumns}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 10 },
           },
         }}
         pageSizeOptions={[5, 10]}

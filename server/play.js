@@ -1,5 +1,4 @@
 import pict from "pict-pairwise-testing";
-
 // model for a fictitious mortgage calculator application
 const model = {
   parameters: [
