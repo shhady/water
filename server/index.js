@@ -2,9 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import http from "http";
-import waterRoute from "./Routes/Water.Routes.js";
-import mainWaterProblem from "./Routes/MainWaterProblem.Route.js";
-import cyberRoute from "./Routes/Cyber.Routes.js";
+import waterRoute from "./routes/Water.Route.js";
+import cyberRoute from "./routes/Cyber.Route.js";
+import triggerRoute from "./routes/Trigger.Route.js";
+import identifiersRoute from "./routes/Identifiers.Route.js";
+import configConditionRoute from "./routes/configCondition.Route.js";
+
 const app = express();
 const server = http.createServer(app);
 import path from "path";
@@ -22,8 +25,10 @@ app.use(
   })
 );
 app.use("/WaterData", waterRoute);
-app.use("/MainWaterProblem", mainWaterProblem);
 app.use("/CyberProblem", cyberRoute);
+app.use("/Triggers", triggerRoute);
+app.use("/Identifiers", identifiersRoute);
+app.use("/configConditions", configConditionRoute);
 
 const CONNECTION_URL = `mongodb+srv://waterproject:t2k4VkJn963j7guP@water.wn7b7lm.mongodb.net/`;
 const PORT = process.env.PORT || 5000;

@@ -1,4 +1,4 @@
-import Cyber from "../Model/Cyber.Model.js";
+import Cyber from "../models/Cyber.Model.js";
 
 // CyberProblem/addNew to create new Cyber
 const createCyber = async (req, res) => {
