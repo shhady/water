@@ -5,6 +5,7 @@ import {
   createConfigCondition,
   updateConfigCondition,
   deleteConfigCondition,
+  generateConfigConditions,
 } from "../controllers/configCondition.Controller.js";
 
 const router = express.Router();
@@ -13,6 +14,7 @@ const router = express.Router();
 router.get("/", getConfigConditions);
 // POST /configConditions
 router.post("/", createConfigCondition);
+router.post("/generate", generateConfigConditions);
 
 // GET /configConditions/:id
 router.get("/:id", getConfigConditionById);

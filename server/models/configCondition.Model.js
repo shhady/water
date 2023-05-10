@@ -17,8 +17,8 @@ const configConditionSchema = new mongoose.Schema(
     type: { type: String, required: true },
     triggerName: { type: String, required: true },
     measuredValue: { type: String, required: true },
-    valueType: { type: String, required: true },
-    level: { type: String, required: true },
+    valueType: { type: String },
+    level: { type: String },
   },
   { timestamps: true }
 );
