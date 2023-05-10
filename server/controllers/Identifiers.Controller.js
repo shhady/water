@@ -24,6 +24,42 @@ const getIdentifierById = async (req, res) => {
   }
 };
 
+function createUniqueString(additionalIdentifier) {
+  const date = new Date();
+  const dateString = date.toISOString().slice(0, 19).replace(/[-:]/g, "");
+  return `${dateString}-${additionalIdentifier}-${Math.random().toString(36).slice(2)}`;
+}
+
+function getRandomIndex(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
+const generateIdentifiers = async (req, res) => {
+  try {
+    let cities = req.body.cities;
+    let streets = req.body.streets;
+    let numbers = req.body.numbers;
+    let stati = req.body.stati;
+    const numberLimit = req.body.numberLimit;
+
+    for (let i = 0; i < numberLimit; i++) {
+      const additionalIdentifier = createUniqueString("");
+      const number = getRandomIndex(numbers);
+      const city = getRandomIndex(cities);
+      const street = getRandomIndex(streets);
+      const status = getRandomIndex(stati);
+      const latitude = Math.random()*1000;
+      const longitude = Math.random()*1000;
+      await Identifier.create({ additionalIdentifier, number, city, street,status,latitude,longitude });
+    }
+
+    res.status(200).send("Identifiers generated successfully");
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+
+
 // Create a new identifier
 const createIdentifier = async (req, res) => {
   const {
@@ -110,4 +146,5 @@ export {
   getIdentifierById,
   updateIdentifier,
   deleteIdentifier,
+  generateIdentifiers
 };

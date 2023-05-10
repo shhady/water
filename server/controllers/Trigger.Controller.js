@@ -12,6 +12,30 @@ const getTriggers = async (req, res) => {
   }
 };
 
+const generateTriggers = async (req, res) => {
+  try {
+    let triggersLimit = req.body.triggersLimit;
+    let meaning = req.body.meaning;
+    let numberOffset = req.body.numberOffset;
+    let numberLimit = req.body.numberLimit;
+    let systems = req.body.systems;
+
+    for (let i = 0; i < numberLimit; i++) {
+      const trigger = Math.floor(Math.random() * triggersLimit);
+      const number = numberOffset + i + 1;
+      const index = Math.floor(Math.random() * systems.length);
+      const system = systems[index];
+
+      await Trigger.create({ trigger, number, meaning, system });
+    }
+
+    res.status(200).send("Triggers generated successfully");
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+
 // @desc    Get a single trigger
 // @route   GET /triggers/:id
 // @access  Public
@@ -86,4 +110,5 @@ export {
   createTrigger,
   updateTrigger,
   deleteTrigger,
+  generateTriggers
 };

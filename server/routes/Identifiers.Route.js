@@ -5,7 +5,8 @@ import {
   createIdentifier,
   updateIdentifier,
   deleteIdentifier,
-} from "../Controller/Identifiers.Controller.js";
+  generateIdentifiers,
+} from "../controllers/Identifiers.Controller.js";
 
 const router = express.Router();
 
@@ -13,6 +14,7 @@ const router = express.Router();
 router.get("/", getIdentifiers);
 // POST /identifiers
 router.post("/", createIdentifier);
+router.post("/generate", generateIdentifiers);
 
 // GET /identifiers/:id
 router.get("/:id", getIdentifierById);

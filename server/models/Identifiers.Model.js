@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const identifierSchema = new mongoose.Schema(
   {
-    identifierId: { type: String, required: true },
     additionalIdentifier: { type: String, required: true, unique: true },
     status: { type: String, required: true },
     city: { type: String, required: true },

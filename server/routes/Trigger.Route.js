@@ -5,13 +5,14 @@ import {
   createTrigger,
   updateTrigger,
   deleteTrigger,
-} from "../Controller/Trigger.Controller.js";
+  generateTriggers,
+} from "../controllers/Trigger.Controller.js";
 
 const router = express.Router();
 
 // GET /triggers
 router.get("/", getTriggers);
-
+router.post("/generate", generateTriggers);
 // GET /triggers/:id
 router.get("/:id", getTriggerById);
 

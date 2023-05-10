@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import {createWaterData, getAllWaterData, getWaterDataById, updateWaterData, deleteWaterData } from '../Controller/Water.Controller.js';
+import {createWaterData, getAllWaterData, getWaterDataById, updateWaterData, deleteWaterData } from '../controllers/Water.Controller.js';
 
 // Create a new water data entry
 router.post('/', createWaterData);

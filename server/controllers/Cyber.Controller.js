@@ -48,17 +48,27 @@ const createCyber = async (req, res) => {
 //CyberProblem/getAllFiltering
 const getAllCyberFiltering = async (req, res) => {
     try {
-      const { status } = req.body;
-      const query = status ? { S: parseInt(status) } : {};
-  
-      const cyber = (await Cyber.find(query)).filter(c=>c.S);
-  
-      res.status(200).json(cyber);
+        const { status } = req.body;
+        const query = status ? { S: parseInt(status) } : {};
+
+        const cyber = (await Cyber.find(query)).filter(c => c.S);
+
+        res.status(200).json(cyber);
     } catch (error) {
-      res.status(500).json({ message: "Something went wrong" });
+        res.status(500).json({ message: "Something went wrong" });
     }
-  };
-  
+};
 
 
-export { createCyber,getAllCyberFiltering };
+//CyberProblem/getAllFiltering
+const getAllCyber = async (req, res) => {
+    try {
+        const cyber = await Cyber.find({});
+        res.status(200).json(cyber);
+    } catch (error) {
+        res.status(500).json({ message: "Something went wrong" });
+    }
+};
+
+
+export { createCyber, getAllCyberFiltering ,getAllCyber};

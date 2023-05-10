@@ -3,7 +3,7 @@ import {
   createCyber,
   getAllCyberFiltering,
   getAllCyber,
-} from "../Controller/Cyber.Controller.js";
+} from "../controllers/Cyber.Controller.js";
 
 const router = express.Router();
 
