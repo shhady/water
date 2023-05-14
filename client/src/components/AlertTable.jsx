@@ -104,7 +104,7 @@ const AlertTable = () => {
             paginationModel: { page: 0, pageSize: 10 },
           },
         }}
-        pageSizeOptions={[5, 10]}
+        pageSizeOptions={[10, 50, 100]}
         checkboxSelection
       />
       <DataGrid
@@ -115,7 +115,7 @@ const AlertTable = () => {
             paginationModel: { page: 0, pageSize: 10 },
           },
         }}
-        pageSizeOptions={[5, 10]}
+        pageSizeOptions={[10, 50, 100]}
         checkboxSelection
       />
     </div>
