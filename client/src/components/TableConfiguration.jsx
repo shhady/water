@@ -1,52 +1,65 @@
 import { Tables } from "../CustomHook/Tables.Custom";
 
 function TableConfiguration(promp) {
+  const triggersColums = [
+    { field: "id", headerName: "Trigger ID", flex: 1, hide: true },
+    { field: "trigger", headerName: "Trigger", flex: 1 },
+    { field: "meaning", headerName: "Meaning", flex: 1 },
+    { field: "number", headerName: "Number", flex: 1 },
+    { field: "system", headerName: "System", flex: 1 },
+    {
+      field: "createdAt",
+      headerName: "Created",
+      flex: 1,
+    },
+    {
+      field: "updatedAt",
+      headerName: "Updated",
+      flex: 1,
+    },
+  ];
+  const identifiersColums = [
+    { field: "id", headerName: "Identifier ID", flex: 1, hide: true },
+    {
+      field: "additionalIdentifier",
+      headerName: "additionalIdentifier",
+      flex: 1,
+    },
+    { field: "status", headerName: "status", flex: 1 },
+    { field: "city", headerName: "city", flex: 1 },
+    { field: "street", headerName: "street", flex: 1 },
+    { field: "number", headerName: "number", flex: 1 },
+    { field: "latitude", headerName: "latitude", flex: 1 },
+    { field: "longitude", headerName: "longitude", flex: 1 },
+    { field: "createdAt", headerName: "Created", flex: 1 },
+    { field: "updatedAt", headerName: "Updated", flex: 1 },
+  ];
 
-    const triggersColums = [
-        { field: "id", headerName: "ID", width: 70 },
-        { field: "trigger", headerName: "Trigger", width: 130 },
-        { field: "meaning", headerName: "Meaning", width: 130 },
-        { field: "number", headerName: "Number", width: 130 },
-        { field: "system", headerName: "System", width: 130 },
-        { field: "createdAt", headerName: "Created At", width: 130 },
-        { field: "updatedAt", headerName: "Updated At", width: 130 },
-    ]
-    const identifiersColums = [
-        { field: "id", headerName: "ID", width: 70 },
-        { field: "additionalIdentifier", headerName: "additionalIdentifier", width: 130 },
-        { field: "status", headerName: "status", width: 130 },
-        { field: "city", headerName: "city", width: 130 },
-        { field: "street", headerName: "street", width: 130 },
-        { field: "number", headerName: "number", width: 130 },
-        { field: "latitude", headerName: "latitude", width: 130 },
-        { field: "longitude", headerName: "longitude", width: 130 },
-        { field: "createdAt", headerName: "Created At", width: 130 },
-        { field: "updatedAt", headerName: "Updated At", width: 130 },
-    ];
-
-    const configConditionsColums = [
-        { field: "id", headerName: "ID", width: 70 },
-        { field: "autoGenerator", headerName: "autoGenerator", width: 130 },
-        { field: "systemId", headerName: "systemId", width: 130 },
-        { field: "previousSystemId", headerName: "previousSystemId", width: 130 },
-        { field: "trigger", headerName: "trigger", width: 130 },
-        { field: "type", headerName: "type", width: 130 },
-        { field: "triggerName", headerName: "triggerName", width: 130 },
-        { field: "measuredValue", headerName: "measuredValue", width: 130 },
-        { field: "valueType", headerName: "valueType", width: 130 },
-        { field: "createdAt", headerName: "Created At", width: 130 },
-        { field: "updatedAt", headerName: "Updated At", width: 130 },
-    ];
-    return (<>
-        <h2>Triggers</h2>
-        <Tables QueryName={"Triggers"} columns={triggersColums} />
-        <hr />
-        <h2>Identifiers</h2>
-        <Tables QueryName={"Identifiers"} columns={identifiersColums} />
-        <hr />
-        <h2>Config Conditions</h2>
-        <Tables QueryName={"configConditions"} columns={configConditionsColums} />
-    </>);
+  const configConditionsColums = [
+    { field: "id", headerName: "config Condition ID", flex: 1, hide: true },
+    { field: "autoGenerator", headerName: "autoGenerator", flex: 1 },
+    { field: "systemId", headerName: "systemId", flex: 1 },
+    { field: "previousSystemId", headerName: "previousSystemId", flex: 1 },
+    { field: "trigger", headerName: "trigger", flex: 1 },
+    { field: "type", headerName: "type", flex: 1 },
+    { field: "triggerName", headerName: "triggerName", flex: 1 },
+    { field: "measuredValue", headerName: "measuredValue", flex: 1 },
+    { field: "valueType", headerName: "valueType", flex: 1 },
+    { field: "createdAt", headerName: "Created", flex: 1 },
+    { field: "updatedAt", headerName: "Updated", flex: 1 },
+  ];
+  return (
+    <>
+      <h2>Triggers</h2>
+      <Tables QueryName={"Triggers"} columns={triggersColums} />
+      <hr />
+      <h2>Identifiers</h2>
+      <Tables QueryName={"Identifiers"} columns={identifiersColums} />
+      <hr />
+      <h2>Config Conditions</h2>
+      <Tables QueryName={"configConditions"} columns={configConditionsColums} />
+    </>
+  );
 }
 
-export { TableConfiguration }
+export { TableConfiguration };
