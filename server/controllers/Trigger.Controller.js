@@ -35,7 +35,6 @@ const generateTriggers = async (req, res) => {
   }
 };
 
-
 // @desc    Get a single trigger
 // @route   GET /triggers/:id
 // @access  Public
@@ -74,10 +73,10 @@ const createTrigger = async (req, res) => {
 // @access  Public
 const updateTrigger = async (req, res) => {
   try {
-    const { trigger, meaning, number, system } = req.body;
+    const { trigger, meaning, number, system, status } = req.body;
     const updatedTrigger = await Trigger.findByIdAndUpdate(
       req.params.id,
-      { trigger, meaning, number, system },
+      { trigger, meaning, number, system, status },
       { new: true }
     );
     if (!updatedTrigger) {
@@ -110,5 +109,5 @@ export {
   createTrigger,
   updateTrigger,
   deleteTrigger,
-  generateTriggers
+  generateTriggers,
 };
