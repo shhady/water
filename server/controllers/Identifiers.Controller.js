@@ -27,7 +27,9 @@ const getIdentifierById = async (req, res) => {
 function createUniqueString(additionalIdentifier) {
   const date = new Date();
   const dateString = date.toISOString().slice(0, 19).replace(/[-:]/g, "");
-  return `${dateString}-${additionalIdentifier}-${Math.random().toString(36).slice(2)}`;
+  return `${dateString}-${additionalIdentifier}-${Math.random()
+    .toString(36)
+    .slice(2)}`;
 }
 
 function getRandomIndex(array) {
@@ -38,7 +40,6 @@ const generateIdentifiers = async (req, res) => {
     let cities = req.body.cities;
     let streets = req.body.streets;
     let numbers = req.body.numbers;
-    let stati = req.body.stati;
     const numberLimit = req.body.numberLimit;
 
     for (let i = 0; i < numberLimit; i++) {
@@ -46,10 +47,16 @@ const generateIdentifiers = async (req, res) => {
       const number = getRandomIndex(numbers);
       const city = getRandomIndex(cities);
       const street = getRandomIndex(streets);
-      const status = getRandomIndex(stati);
-      const latitude = Math.random()*1000;
-      const longitude = Math.random()*1000;
-      await Identifier.create({ additionalIdentifier, number, city, street,status,latitude,longitude });
+      const latitude = Math.random() * 1000;
+      const longitude = Math.random() * 1000;
+      await Identifier.create({
+        additionalIdentifier,
+        number,
+        city,
+        street,
+        latitude,
+        longitude,
+      });
     }
 
     res.status(200).send("Identifiers generated successfully");
@@ -58,14 +65,11 @@ const generateIdentifiers = async (req, res) => {
   }
 };
 
-
-
 // Create a new identifier
 const createIdentifier = async (req, res) => {
   const {
     identifierId,
     additionalIdentifier,
-    status,
     city,
     street,
     number,
@@ -76,7 +80,6 @@ const createIdentifier = async (req, res) => {
     const newIdentifier = await Identifier.create({
       identifierId,
       additionalIdentifier,
-      status,
       city,
       street,
       number,
@@ -146,5 +149,5 @@ export {
   getIdentifierById,
   updateIdentifier,
   deleteIdentifier,
-  generateIdentifiers
+  generateIdentifiers,
 };
