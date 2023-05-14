@@ -40,13 +40,19 @@ function Tables(params) {
     return <h1>ERROR</h1>;
   }
 
-  const deleteHandler = (obj) => {
+  const clickHandler = (obj) => {
     console.log(obj);
+    obj.row.status = true;
     fetch(url + "/" + params.QueryName + "/" + obj.id, {
-      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "PUT",
+      body: JSON.stringify(obj.row),
     }).then((res) => {
       if (res.ok) {
-        setRows(Rows.filter((t) => t._id !== obj.id));
+        // setRows([...Rows]);
+        console.log("done");
       }
     });
   };
@@ -56,7 +62,7 @@ function Tables(params) {
     headerName: "Action",
     width: 150,
     renderCell: (obj) => (
-      <button onClick={() => deleteHandler(obj)}>Delete me</button>
+      <button onClick={() => clickHandler(obj)}>Update me</button>
     ),
   });
 

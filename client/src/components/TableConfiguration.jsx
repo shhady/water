@@ -7,6 +7,7 @@ function TableConfiguration(promp) {
     { field: "meaning", headerName: "Meaning", flex: 1 },
     { field: "number", headerName: "Number", flex: 1 },
     { field: "system", headerName: "System", flex: 1 },
+    { field: "status", headerName: "Status", flex: 1 },
     {
       field: "createdAt",
       headerName: "Created",
@@ -37,7 +38,6 @@ function TableConfiguration(promp) {
 
   const configConditionsColums = [
     { field: "id", headerName: "config Condition ID", flex: 1, hide: true },
-    { field: "autoGenerator", headerName: "autoGenerator", flex: 1 },
     { field: "systemId", headerName: "systemId", flex: 1 },
     { field: "previousSystemId", headerName: "previousSystemId", flex: 1 },
     { field: "trigger", headerName: "trigger", flex: 1 },
