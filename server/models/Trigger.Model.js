@@ -6,6 +6,7 @@ const triggerSchema = new mongoose.Schema(
     meaning: { type: String, required: true },
     number: { type: Number, required: true },
     system: { type: String, required: true },
+    status: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
