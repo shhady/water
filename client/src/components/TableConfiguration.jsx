@@ -1,6 +1,6 @@
 import { Tables } from "../CustomHook/Tables.Custom";
 
-function TableConfiguration(promp) {
+function TableConfiguration() {
   const triggersColums = [
     { field: "id", headerName: "Trigger ID", flex: 1, hide: true },
     { field: "trigger", headerName: "Trigger", flex: 1 },
