@@ -78,7 +78,6 @@ function Tables(params) {
           },
           columns: {
             columnVisibilityModel: {
-              // Hide columns status and traderName, the other columns will remain visible
               id: false,
             },
           },
