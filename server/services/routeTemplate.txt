@@ -1,0 +1,18 @@
+import express from "express";
+import {
+    getAll>Name<,
+    create>Name<,
+    get>Name<,
+    update>Name<,
+    delete>Name<,
+} from "../controllers/>Name<.Controller.js";
+
+const router = express.Router();
+
+router.get("/", getAll>Name<);
+router.post("/", create>Name<);
+router.get("/:id", get>Name<);
+router.put("/:id", update>Name<);
+router.delete("/:id", delete>Name<);
+
+export default router;

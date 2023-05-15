@@ -1,0 +1,11 @@
+import mongoose from "mongoose";
+
+const >Name<Schema = new mongoose.Schema(
+    {   
+    },
+    { timestamps: true }
+);
+
+const >Name< = mongoose.model(">Name<", >Name<Schema);
+
+export default >Name<;
