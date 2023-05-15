@@ -12,3 +12,12 @@ S status              - todo/in progress/done
 
 # cyber
 P Pond                - case 1: west ,case 2: east , case 3 :south , case 4: north
+
+
+# triggers
+1. Water pollution 
+
+
+
+
+

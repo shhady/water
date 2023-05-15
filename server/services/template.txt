@@ -1,0 +1,6 @@
+const >Name< = require("../models/>Name<.Model.js");
+
+//@desc Create New contact
+//@route POST /api/contacts
+//@access private
+
