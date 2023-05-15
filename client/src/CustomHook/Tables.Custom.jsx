@@ -4,13 +4,14 @@ import { useQuery } from "react-query";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import moment from "moment";
-
+import { useNavigate } from "react-router-dom";
 const fetchData = async (url) => {
   const res = await fetch(url);
   return res.json();
 };
 const url = "http://localhost:5000";
 function Tables(params) {
+  const navigate = useNavigate();
   const Response = useQuery(params.QueryName, () =>
     fetchData(url + "/" + params.QueryName)
   );
@@ -57,6 +58,11 @@ function Tables(params) {
     });
   };
 
+  const createHandler = () => {
+
+    navigate(`./add_trigger`);
+  };
+
   const Columns = params.columns.concat({
     field: "action",
     headerName: "Action",
@@ -68,6 +74,7 @@ function Tables(params) {
 
   return (
     <div style={{ width: "100%" }}>
+       <button onClick={() => createHandler()}>+</button>
       <DataGrid
         autoHeight
         rows={Rows}

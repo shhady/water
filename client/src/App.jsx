@@ -1,14 +1,27 @@
 import "./App.css";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AlertTable from "./components/AlertTable";
 import { TableConfiguration } from "./components/TableConfiguration";
-
+import {
+  AddTrigger
+} from "./pages";
 function App() {
   return (
+
+    <BrowserRouter>
     <div className="App">
-      {/* <AlertTable /> */}
-      <TableConfiguration/>
+      <Routes>
+        <Route path="/" element={<TableConfiguration />} />
+        <Route path="/add_trigger" element={<AddTrigger />} />
+       
+      </Routes>
     </div>
+  </BrowserRouter>
+
+    // <div className="App">
+    //   {/* <AlertTable /> */}
+    //   <TableConfiguration/>
+    // </div>
   );
 }
 
