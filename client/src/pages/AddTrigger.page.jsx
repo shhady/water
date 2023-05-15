@@ -1,6 +1,7 @@
-import { React } from "react";
 import { FormRow } from "../components";
 import useAddTrigger from "../CustomHook/useAddTrigger";
+import useChangeLanguage from "../CustomHook/useChangeLanguage";
+
 import {
   ADD_TRIGGER_TITLE,
   WAITING_BUTTON,
@@ -9,7 +10,10 @@ import {
   TRIGGER_FIELD,
   SYSTEM_FIELD,
   MEANING_FIELD,
+  LANGUAGE_BUTTON,
+  setLanguage
 } from "../constants";
+
 function AddTrigger() {
   const {
     trigger,
@@ -30,11 +34,26 @@ function AddTrigger() {
     handleSystemBlur,
     handleSubmit,
     isDisabled,
-
   } = useAddTrigger();
+
+  const { language,
+    handleLanguageChange } = useChangeLanguage();
 
   return (
     <>
+      <select
+        name="language"
+        id="language"
+        value={language}
+        onChange={(e) => { handleLanguageChange(e); setLanguage(e.target.value); }}
+        className={`form-input`}
+      >
+
+        <option value=''>{LANGUAGE_BUTTON}</option>
+        <option value="he">עברית</option>
+        <option value="en">English</option>
+      </select>
+
       <div className="form-add-item card text-center">
         <h2 className="text-center p-b m-1">{ADD_TRIGGER_TITLE}</h2>
         <form onSubmit={handleSubmit}>
@@ -78,9 +97,9 @@ function AddTrigger() {
             message={meaningError.message}
           />
 
-            {/* system field */}
+          {/* system field */}
 
-<FormRow
+          <FormRow
             error={meaningError.isError}
             type="text"
             name="system"
@@ -93,29 +112,11 @@ function AddTrigger() {
             message={systemError.message}
           />
 
-            {/* <FormRow
-              type="text"
-              name="system"
-              id="system"
-              maxLength="4"
-              placeholder={SYSTEM_FIELD}
-              value={system}
-              onChange={handleSystemChange}
-              onBlur={handleSystemBlur}
-              className={`form-input ${systemError.isError && "error"}`}
-            />
-            
-          </div>
-          {systemError.isError && (
-            <div>
-              <small>{systemError.message}</small>
-            </div>
-          )} */}
+
 
           <button
-            className={`btn btn-success m-t-1   ${
-              isDisabled ? "disabled" : ""
-            } `}
+            className={`btn btn-success m-t-1   ${isDisabled ? "disabled" : ""
+              } `}
             onClick={handleSubmit}
             name="submit"
             type="submit"

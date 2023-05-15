@@ -1,6 +1,5 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AlertTable from "./components/AlertTable";
 import { TableConfiguration } from "./components/TableConfiguration";
 import {
   AddTrigger

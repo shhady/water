@@ -1,3 +1,8 @@
+import  HEBREW_LANGUAGE  from "./hebrewLanguage";
+import  ENGLISH_LANGUAGE  from "./englishLanguage";
+
+export const DEFAULT_LANGUAGE = "he";
+export let language = DEFAULT_LANGUAGE;
 export const BASE_URL_SERVER = "http://localhost:5000";
 export const MS_1000 = 1000;
 export const DEFAULT_TIME_ALERT = 3;
@@ -7,17 +12,67 @@ export const DANGER_TIME_ALERT = 2.5;
 export const MIN_LEN_NUMBER = 2;
 export const MIN_LEN_MEANING = 2;
 export const SUCCESS = true;
-export const TRIGGER_FIELD_ERROR =  "-";
-export const NUMBER_FIELD_ERROR = "-";
-export const MEANING_FIELD_ERROR = "-";
-export const SYSTEM_FIELD_ERROR = "-";
-export const SUCCESS_ADD_ROW_MSG = 'הנתונים נשלחו בהצלחה';
-export const WAITING_BUTTON = "המתן...";
-export const SEND_TRIGGER_BUTTON = "שלח טריגר";
-export const ADD_TRIGGER_TITLE = " הוספת טריגר";
-export const NUMBER_FIELD = "Number";
-export const TRIGGER_FIELD = "Trigger";
-export const SYSTEM_FIELD = "System";
-export const MEANING_FIELD = "Meaning";
+
+export let TRIGGER_FIELD_ERROR ;
+export let NUMBER_FIELD_ERROR ;
+export let MEANING_FIELD_ERROR ;
+export let SYSTEM_FIELD_ERROR ;
+export let SUCCESS_ADD_ROW_MSG ;
+export let WAITING_BUTTON ;
+export let SEND_TRIGGER_BUTTON ;
+export let ADD_TRIGGER_TITLE ;
+export let NUMBER_FIELD ;
+export let TRIGGER_FIELD ;
+export let SYSTEM_FIELD ;
+export let MEANING_FIELD ;
+export let LANGUAGE_BUTTON;
+
+export const setLanguage = (lang = "he") => {
+
+    if (lang === "he")
+    {
+        TRIGGER_FIELD_ERROR = HEBREW_LANGUAGE.TRIGGER_FIELD_ERROR;
+        NUMBER_FIELD_ERROR =  HEBREW_LANGUAGE.NUMBER_FIELD_ERROR;
+        MEANING_FIELD_ERROR = HEBREW_LANGUAGE.MEANING_FIELD_ERROR;
+        SYSTEM_FIELD_ERROR = HEBREW_LANGUAGE.SYSTEM_FIELD_ERROR;
+        SUCCESS_ADD_ROW_MSG = HEBREW_LANGUAGE.SUCCESS_ADD_ROW_MSG;
+        WAITING_BUTTON = HEBREW_LANGUAGE.WAITING_BUTTON;
+        SEND_TRIGGER_BUTTON = HEBREW_LANGUAGE.SEND_TRIGGER_BUTTON;
+        ADD_TRIGGER_TITLE = HEBREW_LANGUAGE.ADD_TRIGGER_TITLE;
+        NUMBER_FIELD = HEBREW_LANGUAGE.NUMBER_FIELD;
+        TRIGGER_FIELD = HEBREW_LANGUAGE.TRIGGER_FIELD;
+        SYSTEM_FIELD = HEBREW_LANGUAGE.SYSTEM_FIELD;
+        MEANING_FIELD = HEBREW_LANGUAGE.MEANING_FIELD;
+        LANGUAGE_BUTTON = HEBREW_LANGUAGE.LANGUAGE_BUTTON;
+        document.getElementsByTagName('html')[0].setAttribute("dir", "rtl");
+
+    }
+    else if (lang === "en") {
+        TRIGGER_FIELD_ERROR = ENGLISH_LANGUAGE.TRIGGER_FIELD_ERROR;
+        NUMBER_FIELD_ERROR =  ENGLISH_LANGUAGE.NUMBER_FIELD_ERROR;
+        MEANING_FIELD_ERROR = ENGLISH_LANGUAGE.MEANING_FIELD_ERROR;
+        SYSTEM_FIELD_ERROR = ENGLISH_LANGUAGE.SYSTEM_FIELD_ERROR;
+        SUCCESS_ADD_ROW_MSG = ENGLISH_LANGUAGE.SUCCESS_ADD_ROW_MSG;
+        WAITING_BUTTON = ENGLISH_LANGUAGE.WAITING_BUTTON;
+        SEND_TRIGGER_BUTTON = ENGLISH_LANGUAGE.SEND_TRIGGER_BUTTON;
+        ADD_TRIGGER_TITLE = ENGLISH_LANGUAGE.ADD_TRIGGER_TITLE;
+        NUMBER_FIELD = ENGLISH_LANGUAGE.NUMBER_FIELD;
+        TRIGGER_FIELD = ENGLISH_LANGUAGE.TRIGGER_FIELD;
+        SYSTEM_FIELD = ENGLISH_LANGUAGE.SYSTEM_FIELD;
+        MEANING_FIELD = ENGLISH_LANGUAGE.MEANING_FIELD;
+        LANGUAGE_BUTTON = ENGLISH_LANGUAGE.LANGUAGE_BUTTON;
+        document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");
+    }
+    document.getElementsByTagName('html')[0].setAttribute("lang", lang);
+
+}
+setLanguage("he");//set hebrew language by default
+
+
+
+
+
+
+
 
 
