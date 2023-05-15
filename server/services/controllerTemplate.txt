@@ -1,0 +1,88 @@
+const >Name< = require("../models/>Name<.Model.js");
+
+//@desc Get all >Name<
+//@route GET /
+//@access public
+const getAll>Name< = async (req, res) => {
+    try {
+        const data = await >Name<.find({});
+        if(!data) 
+            throw new Error("Server error, failed to fetch data");
+        res.status(200).json({data: data});
+    } catch (e) {
+        res.status(500).json({error: e.message});
+    }
+}
+
+//@desc Create new >Name<
+//@route POST /
+//@access public
+const create>Name< = async (req, res) => {
+    try {
+        const data = await >Name<.create({...req.body});
+        if(!data) throw new Error("Server error, failed to create data");
+        res.status(201).json({data: data});
+    } catch (e) {
+        res.status(500).json({error: e.message});
+    }
+}
+
+//@desc Get >Name< by ID
+//@route GET /:id
+//@access public
+const get>Name< = async (req,res) => {
+    try {
+        const id = req.params.id;
+        if(!id) throw new Error("Invalid id")
+        const data = await >Name<.findById(id);
+        if(!data) throw new Error("Server error, failed to create data");
+        res.status(200).json({data: data});
+    } catch (e) {
+        res.status(500).json({error: e.message});
+    }
+}
+
+//@desc Update >Name< by ID
+//@route PUT /:id
+//@access public
+const update>Name< = async (req,res) => {
+    try {
+        const id = req.params.id;
+        if(!id) throw new Error("Invalid id")
+        const updatedData = await >Name<.findByIdAndUpdate(
+            id,
+            { ...req.body },
+            { new: true }
+        );
+        if(!updatedData) throw new Error("Failed to update data");
+        res.status(200).json({data: updatedData});
+    } catch (e) {
+        res.status(500).json({error: e.message});
+    }
+}
+
+
+//@desc Delete >Name< by ID
+//@route DELETE /:id
+//@access public
+const delete>Name< = async (req,res) => {
+    try {
+        const id = req.params.id;
+        if(!id) throw new Error("Invalid id")
+        const data = await >Name<.findByIdAndDelete(id);
+        if(!data) throw new Error("Failed to update data");
+        res.status(200).json({data: data});
+    } catch (e) {
+        res.status(500).json({error: e.message});
+    }
+}
+
+export {
+    getAll>Name<,
+    create>Name<,
+    get>Name<,
+    update>Name<,
+    delete>Name<,
+};
+
+
