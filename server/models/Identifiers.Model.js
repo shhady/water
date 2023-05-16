@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const identifierSchema = new mongoose.Schema(
   {
     additionalIdentifier: { type: String, required: true, unique: true },
-    status: { type: Boolean, default: false },
+    status: { type: String, required: true },
     city: { type: String, required: true },
     street: { type: String, required: true },
     number: { type: Number, required: true },

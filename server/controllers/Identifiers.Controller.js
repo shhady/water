@@ -41,7 +41,8 @@ const generateIdentifiers = async (req, res) => {
     let streets = req.body.streets;
     let numbers = req.body.numbers;
     const numberLimit = req.body.numberLimit;
-
+  
+    const statusArray = ["new", "in progress", "postponed", "canceled"];
     for (let i = 0; i < numberLimit; i++) {
       const additionalIdentifier = createUniqueString("");
       const number = getRandomIndex(numbers);
@@ -49,11 +50,14 @@ const generateIdentifiers = async (req, res) => {
       const street = getRandomIndex(streets);
       const latitude = Math.random() * 1000;
       const longitude = Math.random() * 1000;
+      const index = Math.floor(Math.random() * statusArray.length);
+      const status = statusArray[index];
       await Identifier.create({
         additionalIdentifier,
-        number,
+        status,
         city,
         street,
+        number,
         latitude,
         longitude,
       });
