@@ -64,7 +64,9 @@ function Tables(params) {
       .filter((col) => {
         return col != "id" && col != "createdAt" && col != "updatedAt";
       });
+    const link = url + "/" + params.QueryName;
     localStorage.setItem("inputs", JSON.stringify(inputs));
+    localStorage.setItem("url", link);
     navigate(`./add_trigger`);
   };
 
