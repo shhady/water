@@ -44,11 +44,11 @@ function checkPH() {
 }
 function checkML() {
   const numberLevel = Math.floor(Math.random() * 3000);
-  if (300 <= numberLevel <= 800) {
+  if (numberLevel >= 300 && numberLevel <= 800) {
     return [numberLevel, "too drink and worthy of irrigation"];
-  } else if (0 <= numberLevel <= 800) {
+  } else if (numberLevel >= 0 && numberLevel <= 800) {
     return [numberLevel, "normal"];
-  } else if (300 <= numberLevel <= 2000) {
+  } else if (numberLevel >= 300 && numberLevel <= 2000) {
     return [numberLevel, "worthy of irrigation"];
   }
 
