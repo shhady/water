@@ -1,13 +1,29 @@
 import { Tables } from "../CustomHook/Tables.Custom";
 
 function TableConfiguration() {
-  const triggersColums = [
+  const triggersColumns = [
     { field: "id", headerName: "Trigger ID", flex: 1, hide: true },
-    { field: "trigger", headerName: "Trigger", flex: 1 },
-    { field: "meaning", headerName: "Meaning", flex: 1 },
+    {
+      field: "trigger",
+      headerName: "Trigger",
+      flex: 1,
+    },
+    {
+      field: "meaning",
+      headerName: "Meaning",
+      flex: 1,
+    },
     { field: "number", headerName: "Number(Sensor)", flex: 1 },
-    { field: "system", headerName: "System", flex: 1 },
-    { field: "status", headerName: "Status", flex: 1 },
+    {
+      field: "system",
+      headerName: "System",
+      flex: 1,
+    },
+    {
+      field: "status",
+      headerName: "Status",
+      flex: 1,
+    },
     {
       field: "createdAt",
       headerName: "Created",
@@ -19,14 +35,19 @@ function TableConfiguration() {
       flex: 1,
     },
   ];
-  const identifiersColums = [
+  const identifiersColumns = [
     { field: "id", headerName: "Identifier ID", flex: 1, hide: true },
     {
       field: "additionalIdentifier",
       headerName: "additionalIdentifier",
       flex: 1,
     },
-    { field: "status", headerName: "status", flex: 1 },
+    {
+      field: "status",
+      headerName: "status",
+      flex: 1,
+      values: ["new", "in progress", "postponed", "canceled"],
+    },
     { field: "city", headerName: "city", flex: 1 },
     { field: "street", headerName: "street", flex: 1 },
     { field: "number", headerName: "number", flex: 1 },
@@ -36,7 +57,7 @@ function TableConfiguration() {
     { field: "updatedAt", headerName: "Updated", flex: 1 },
   ];
 
-  const configConditionsColums = [
+  const configConditionsColumns = [
     { field: "id", headerName: "config Condition ID", flex: 1, hide: true },
     { field: "systemId", headerName: "systemId", flex: 1 },
     { field: "previousSystemId", headerName: "previousSystemId", flex: 1 },
@@ -51,13 +72,21 @@ function TableConfiguration() {
   return (
     <>
       <h2>Triggers</h2>
-      <Tables QueryName={"Triggers"} columns={triggersColums} />
+      <Tables QueryName={"Triggers"} columns={triggersColumns} type="Trigger" />
       <hr />
       <h2>Identifiers</h2>
-      <Tables QueryName={"Identifiers"} columns={identifiersColums} />
+      <Tables
+        QueryName={"Identifiers"}
+        columns={identifiersColumns}
+        type="Identifier"
+      />
       <hr />
       <h2>Config Conditions</h2>
-      <Tables QueryName={"configConditions"} columns={configConditionsColums} />
+      <Tables
+        QueryName={"configConditions"}
+        columns={configConditionsColumns}
+        type="ConfigConditions"
+      />
     </>
   );
 }

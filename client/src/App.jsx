@@ -11,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<TableConfiguration />} />
           <Route path="/add_trigger" element={<AddTrigger />} />
-          <Route path="/create" element={<CreateRow />} />
+          <Route path="/data-form" element={<CreateRow />} />
         </Routes>
       </div>
     </BrowserRouter>
