@@ -43,6 +43,7 @@ function Tables(params) {
 
   const clickHandler = (obj) => {
     console.log(obj);
+
     obj.row.status = true;
     fetch(url + "/" + params.QueryName + "/" + obj.id, {
       headers: {

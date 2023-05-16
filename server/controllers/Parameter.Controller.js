@@ -22,6 +22,7 @@ const getParameters = async (req, res) => {
   }
 };
 
+//use to check message in parameter by min and max number
 const checkMessage = async (req, res) => {
   try {
     const parameter = await Parameter.findById(req.params.id);
