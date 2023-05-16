@@ -43,6 +43,7 @@ function AddTrigger() {
     <>
       <select
         name="language"
+        
         id="language"
         value={language}
         onChange={(e) => { handleLanguageChange(e); setLanguage(e.target.value); }}
