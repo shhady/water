@@ -5,7 +5,7 @@ function TableConfiguration() {
     { field: "id", headerName: "Trigger ID", flex: 1, hide: true },
     { field: "trigger", headerName: "Trigger", flex: 1 },
     { field: "meaning", headerName: "Meaning", flex: 1 },
-    { field: "number", headerName: "Number", flex: 1 },
+    { field: "number", headerName: "Number(Sensor)", flex: 1 },
     { field: "system", headerName: "System", flex: 1 },
     { field: "status", headerName: "Status", flex: 1 },
     {
