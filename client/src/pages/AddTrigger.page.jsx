@@ -30,70 +30,68 @@ function AddTrigger() {
     handleSystemBlur,
     handleSubmit,
     isDisabled,
-
   } = useAddTrigger();
 
   return (
-    <>
-      <div className="form-add-item card text-center">
-        <h2 className="text-center p-b m-1">{ADD_TRIGGER_TITLE}</h2>
-        <form onSubmit={handleSubmit}>
-          {/* trigger field */}
-          <FormRow
-            error={triggerError.isError}
-            type="number"
-            name="trigger"
-            id="trigger"
-            placeholder={TRIGGER_FIELD}
-            value={trigger}
-            handleChange={handleTriggerChange}
-            handleBlur={handleTriggerBlur}
-            message={triggerError.message}
-          />
+    <div className="form-add-item card text-center">
+      <h2 className="text-center p-b m-1">{ADD_TRIGGER_TITLE}</h2>
+      <form onSubmit={handleSubmit}>
+        {/* trigger field */}
+        <FormRow
+          error={triggerError.isError}
+          type="number"
+          name="trigger"
+          id="trigger"
+          placeholder={TRIGGER_FIELD}
+          value={trigger}
+          handleChange={handleTriggerChange}
+          handleBlur={handleTriggerBlur}
+          message={triggerError.message}
+        />
 
-          {/* number field */}
-          <FormRow
-            error={numberError.isError}
-            type="number"
-            name="number"
-            id="number"
-            placeholder={NUMBER_FIELD}
-            value={number}
-            handleChange={handleNumberChange}
-            handleBlur={handleNumberBlur}
-            message={numberError.message}
-          />
+        {/* number field */}
+        <FormRow
+          error={numberError.isError}
+          type="number"
+          name="number"
+          id="number"
+          placeholder={NUMBER_FIELD}
+          value={number}
+          handleChange={handleNumberChange}
+          handleBlur={handleNumberBlur}
+          message={numberError.message}
+        />
 
-          {/* meaning field */}
-          <FormRow
-            error={meaningError.isError}
-            type="text"
-            name="meaning"
-            id="meaning"
-            maxLength="2"
-            placeholder={MEANING_FIELD}
-            value={meaning}
-            handleChange={handleMeaningChange}
-            handleBlur={handleMeaningBlur}
-            message={meaningError.message}
-          />
+        {/* meaning field */}
+        <FormRow
+          error={meaningError.isError}
+          type="text"
+          name="meaning"
+          id="meaning"
+          maxLength="2"
+          placeholder={MEANING_FIELD}
+          value={meaning}
+          handleChange={handleMeaningChange}
+          handleBlur={handleMeaningBlur}
+          message={meaningError.message}
+        />
 
-            {/* system field */}
+        {/* system field */}
 
-<FormRow
-            error={meaningError.isError}
-            type="text"
-            name="system"
-            id="system"
-            maxLength="2"
-            placeholder={SYSTEM_FIELD}
-            value={system}
-            handleChange={handleSystemChange}
-            handleBlur={handleSystemBlur}
-            message={systemError.message}
-          />
+        <FormRow
+          error={meaningError.isError}
+          type="text"
+          name="system"
+          id="system"
+          maxLength="2"
+          placeholder={SYSTEM_FIELD}
+          value={system}
+          handleChange={handleSystemChange}
+          handleBlur={handleSystemBlur}
+          message={systemError.message}
+        />
 
-            {/* <FormRow
+        {/* <FormRow
               type="text"
               name="system"
               id="system"
@@ -112,20 +110,17 @@ function AddTrigger() {
             </div>
           )} */}
 
-          <button
-            className={`btn btn-success m-t-1   ${
-              isDisabled ? "disabled" : ""
-            } `}
-            onClick={handleSubmit}
-            name="submit"
-            type="submit"
-            style={{ paddingLeft: "4rem", paddingRight: "4rem" }}
-          >
-            {isDisabled ? WAITING_BUTTON : SEND_TRIGGER_BUTTON}
-          </button>
-        </form>
-      </div>
-    </>
+        <button
+          className={`btn btn-success m-t-1   ${isDisabled ? "disabled" : ""} `}
+          onClick={handleSubmit}
+          name="submit"
+          type="submit"
+          style={{ paddingLeft: "4rem", paddingRight: "4rem" }}
+        >
+          {isDisabled ? WAITING_BUTTON : SEND_TRIGGER_BUTTON}
+        </button>
+      </form>
+    </div>
   );
 }
 
