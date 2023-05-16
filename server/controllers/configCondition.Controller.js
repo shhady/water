@@ -47,26 +47,33 @@ const generateConfigConditions = async (req, res) => {
     documents = await Trigger.find({}, "_id");
     const triggersElementIds = documents.map((doc) => doc._id.toString());
 
-    const types = req.body.types;
-    const triggerNames = req.body.triggerNames;
-    const valueFlucts = req.body.valueFlucts;
-    const stati = req.body.stati;
-    const valueTypes = req.body.valueTypes;
+    const triggerNames = [
+      "conductivity",
+      "opacity",
+      "acidity",
+      "chlorine",
+      "Permissions",
+      "blackmail",
+      "spam",
+      "fishing",
+      "DoS",
+      "virus",
+    ];
 
     for (let i = 0; i < numberLimit; ++i) {
       const autoGenerator = Math.random() < 0.5;
       const systemId = getRandom(triggersElementIds);
       const previousSystemId = getRandom(identifierElementIds);
-      const trigger = Math.floor(Math.random() * 2000);
-      const type = getRandom(types);
-      const randomIndex = getRandomIndex(triggerNames);
-      const triggerName = triggerNames[randomIndex];
-      const measuredValue = getRandomNumber(
-        valueFlucts[randomIndex][0],
-        valueFlucts[randomIndex][1]
+      let trigger = Math.floor(Math.random() * triggerNames.length);
+      const typeOFTriggers = {
+        cyber: ["Permissions", "blackmail", "spam", "fishing", "DoS", "virus"],
+        WaterQuality: ["conductivity", "opacity", "acidity", "chlorine"],
+      };
+      const triggerName = triggerNames[trigger];
+      const type = Object.keys(typeOFTriggers).find((key) =>
+        typeOFTriggers[key].includes(triggerName)
       );
-      const valueType = valueTypes[randomIndex];
-      const level = stati[randomIndex];
+      trigger += 1;
 
       await ConfigCondition.create({
         autoGenerator,
@@ -75,9 +82,6 @@ const generateConfigConditions = async (req, res) => {
         trigger,
         type,
         triggerName,
-        measuredValue,
-        valueType,
-        level,
       });
     }
     res.status(200).send("DONE");

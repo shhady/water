@@ -35,7 +35,7 @@ const checkMessage = async (req, res) => {
     }
 
     for (const range of parameter.ranges) {
-      if (range.min === null ||  range.min == range.max) {
+      if (range.min === null || range.min == range.max) {
         if (value == range.min) {
           res.status(200).json({ message: range.message });
           return;
