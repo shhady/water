@@ -64,7 +64,7 @@ const createTrigger = async (req, res) => {
     });
     res.status(201).json(newTrigger);
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error" + error.message });
   }
 };
 
