@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const CreateRow = ({ apiUrl, stringArray }) => {
+const CreateRow = () => {
   const [formData, setFormData] = useState({});
+  const stringArray = JSON.parse(localStorage.getItem("inputs"));
+  const apiUrl = JSON.parse(localStorage.getItem("url"));
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
