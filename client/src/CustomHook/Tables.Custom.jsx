@@ -59,12 +59,7 @@ function Tables(params) {
   };
 
   const createHandler = () => {
-    const inputs = params.columns
-      .map((col) => col.field)
-      .filter((col) => {
-        return col != "id" && col != "createdAt" && col != "updatedAt";
-      });
-    localStorage.setItem("inputs", JSON.stringify(inputs));
+
     navigate(`./add_trigger`);
   };
 
@@ -79,7 +74,7 @@ function Tables(params) {
 
   return (
     <div style={{ width: "100%" }}>
-      <button onClick={() => createHandler()}>+</button>
+       <button onClick={() => createHandler()}>+</button>
       <DataGrid
         autoHeight
         rows={Rows}

@@ -11,7 +11,7 @@ import {
   SYSTEM_FIELD,
   MEANING_FIELD,
   LANGUAGE_BUTTON,
-  setLanguage,
+  setLanguage
 } from "../constants";
 
 function AddTrigger() {
@@ -36,7 +36,8 @@ function AddTrigger() {
     isDisabled,
   } = useAddTrigger();
 
-  const { language, handleLanguageChange } = useChangeLanguage();
+  const { language,
+    handleLanguageChange } = useChangeLanguage();
 
   return (
     <>
@@ -44,13 +45,11 @@ function AddTrigger() {
         name="language"
         id="language"
         value={language}
-        onChange={(e) => {
-          handleLanguageChange(e);
-          setLanguage(e.target.value);
-        }}
+        onChange={(e) => { handleLanguageChange(e); setLanguage(e.target.value); }}
         className={`form-input`}
       >
-        <option value="">{LANGUAGE_BUTTON}</option>
+
+        <option value=''>{LANGUAGE_BUTTON}</option>
         <option value="he">עברית</option>
         <option value="en">English</option>
       </select>
@@ -113,10 +112,11 @@ function AddTrigger() {
             message={systemError.message}
           />
 
+
+
           <button
-            className={`btn btn-success m-t-1   ${
-              isDisabled ? "disabled" : ""
-            } `}
+            className={`btn btn-success m-t-1   ${isDisabled ? "disabled" : ""
+              } `}
             onClick={handleSubmit}
             name="submit"
             type="submit"
