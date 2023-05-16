@@ -1,8 +1,9 @@
 import  HEBREW_LANGUAGE  from "./hebrewLanguage";
 import  ENGLISH_LANGUAGE  from "./englishLanguage";
+import  {getItem} from "../services/localStorageService";
 
 export const DEFAULT_LANGUAGE = "he";
-export let language = DEFAULT_LANGUAGE;
+export let language = getItem('language') || DEFAULT_LANGUAGE;//set hebrew language by default
 export const BASE_URL_SERVER = "http://localhost:5000";
 export const MS_1000 = 1000;
 export const DEFAULT_TIME_ALERT = 3;
@@ -31,6 +32,7 @@ export const setLanguage = (lang = "he") => {
 
     if (lang === "he")
     {
+        
         TRIGGER_FIELD_ERROR = HEBREW_LANGUAGE.TRIGGER_FIELD_ERROR;
         NUMBER_FIELD_ERROR =  HEBREW_LANGUAGE.NUMBER_FIELD_ERROR;
         MEANING_FIELD_ERROR = HEBREW_LANGUAGE.MEANING_FIELD_ERROR;
@@ -64,9 +66,10 @@ export const setLanguage = (lang = "he") => {
         document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");
     }
     document.getElementsByTagName('html')[0].setAttribute("lang", lang);
+     language = lang
 
 }
-setLanguage("he");//set hebrew language by default
+setLanguage(language);
 
 
 
