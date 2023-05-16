@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { TableConfiguration } from "./components/TableConfiguration";
 import { AddTrigger } from "./pages";
-//import CreateRow from "./pages/CreateRow.page";
+import CreateRow from "./pages/CreateRow.page";
 
 function App() {
   return (
@@ -11,6 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<TableConfiguration />} />
           <Route path="/add_trigger" element={<AddTrigger />} />
+          <Route path="/create" element={<CreateRow />} />
         </Routes>
       </div>
     </BrowserRouter>

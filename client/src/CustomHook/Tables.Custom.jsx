@@ -65,9 +65,9 @@ function Tables(params) {
         return col != "id" && col != "createdAt" && col != "updatedAt";
       });
     const link = url + "/" + params.QueryName;
-    localStorage.setItem("inputs", JSON.stringify(inputs));
-    localStorage.setItem("url", link);
-    navigate(`./add_trigger`);
+    localStorage.setItem("inputs-array", JSON.stringify(inputs));
+    localStorage.setItem("post-url", link);
+    navigate(`/create`);
   };
 
   const Columns = params.columns.concat({
