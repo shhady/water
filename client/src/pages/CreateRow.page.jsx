@@ -1,15 +1,16 @@
-import { useState } from "react";
-import axios from "axios";
-import { CircularProgress } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-
 import TriggerForm from "../components/TriggerForm";
+import IdentifierForm from "../components/IdentifierForm";
+import ConfigConditionForm from "../components/ConfigConditionForm";
 
 const CreateRow = () => {
   const formType = localStorage.getItem("form-type");
 
   return (
-    <div className="CreateRow">{formType === "Trigger" && <TriggerForm />}</div>
+    <div className="CreateRow">
+      {formType === "Trigger" && <TriggerForm />}
+      {formType == "Identifier" && <IdentifierForm />}
+      {formType == "ConfigConditions" && <ConfigConditionForm />}
+    </div>
   );
 };
 

@@ -5,15 +5,17 @@ import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import { baseURL } from "../constants/urlConstants";
+
 const fetchData = async (url) => {
   const res = await fetch(url);
   return res.json();
 };
-const url = "http://localhost:5000";
+
 function Tables(params) {
   const navigate = useNavigate();
   const Response = useQuery(params.QueryName, () =>
-    fetchData(url + "/" + params.QueryName)
+    fetchData(baseURL + "/" + params.QueryName)
   );
   const Data = Response.data;
   const [Rows, setRows] = useState([]);

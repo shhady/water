@@ -46,7 +46,6 @@ function TableConfiguration() {
       field: "status",
       headerName: "status",
       flex: 1,
-      values: ["new", "in progress", "postponed", "canceled"],
     },
     { field: "city", headerName: "city", flex: 1 },
     { field: "street", headerName: "street", flex: 1 },

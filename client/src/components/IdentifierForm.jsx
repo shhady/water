@@ -1,12 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import {
-  meaningValues,
-  statusValues,
-  systemValues,
-} from "../constants/TriggerConstants";
-import { baseURL, triggers } from "../constants/urlConstants.js";
+import { statusValues } from "../constants/IdentifierConstants";
+import { baseURL, identifiers } from "../constants/urlConstants.js";
 
 const defaultObj = {
   meaning: "",
@@ -15,7 +11,7 @@ const defaultObj = {
   number: 0,
 };
 
-const TriggerForm = () => {
+const IdentifierForm = () => {
   const initialData = JSON.parse(localStorage.getItem("form-data"));
   const [formData, setFormData] = useState(initialData || defaultObj);
   const navigate = useNavigate();
@@ -28,10 +24,7 @@ const TriggerForm = () => {
   const handlePost = async () => {
     try {
       const data = { ...formData };
-      data.trigger = meaningValues.findIndex(
-        (value) => value === formData.meaning
-      );
-      await axios.post(baseURL + triggers, data);
+      await axios.post(baseURL + identifiers, data);
       console.log("Post request successful!");
     } catch (error) {
       console.error("Error sending POST request:", error);
@@ -41,10 +34,7 @@ const TriggerForm = () => {
   const handleUpdate = async () => {
     try {
       const data = { ...formData };
-      data.trigger = meaningValues.findIndex(
-        (value) => value === formData.meaning
-      );
-      await axios.put(baseURL + triggers + "/" + initialData.id, data);
+      await axios.put(baseURL + identifiers + "/" + initialData.id, data);
       console.log("Post request successful!");
     } catch (error) {
       console.error("Error sending POST request:", error);
@@ -64,36 +54,12 @@ const TriggerForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <select
-        name="meaning"
-        value={formData.meaning}
+      <input
+        type="text"
+        name="additionalIdentifier"
+        value={formData.additionalIdentifier}
         onChange={handleInputChange}
-      >
-        <option value="" disabled>
-          Select Value
-        </option>
-        {meaningValues.map((value, index) => (
-          <option key={index} value={value}>
-            {value}
-          </option>
-        ))}
-      </select>
-
-      <select
-        name="system"
-        value={formData.system}
-        onChange={handleInputChange}
-      >
-        <option value="" disabled>
-          Select Option
-        </option>
-        {systemValues.map((option, index) => (
-          <option key={index} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-
+      />
       <select
         name="status"
         value={formData.status}
@@ -108,13 +74,35 @@ const TriggerForm = () => {
           </option>
         ))}
       </select>
-
+      <input
+        type="text"
+        name="city"
+        value={formData.city}
+        onChange={handleInputChange}
+      />
+      <input
+        type="text"
+        name="street"
+        value={formData.street}
+        onChange={handleInputChange}
+      />
       <input
         type="number"
         name="number"
         value={formData.number}
         onChange={handleInputChange}
-        placeholder="Number"
+      />
+      <input
+        type="number"
+        name="latitude"
+        value={formData.latitude}
+        onChange={handleInputChange}
+      />
+      <input
+        type="number"
+        name="longitude"
+        value={formData.longitude}
+        onChange={handleInputChange}
       />
 
       <button type="submit">Submit</button>
@@ -122,4 +110,4 @@ const TriggerForm = () => {
   );
 };
 
-export default TriggerForm;
+export default IdentifierForm;
