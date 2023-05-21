@@ -10,14 +10,12 @@ const parameterSchema = new mongoose.Schema(
           type: String,
           required: true,
         },
-        min: {  
+        min: {
           type: Number,
-          required: true,
           default: null,
         },
         max: {
           type: Number,
-          required: true,
           default: null,
         },
       },

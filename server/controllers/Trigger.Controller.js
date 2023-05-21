@@ -65,16 +65,17 @@ const getTriggerById = async (req, res) => {
 // @access  Public
 const createTrigger = async (req, res) => {
   try {
-    const { trigger, meaning, number, system } = req.body;
+    const { trigger, meaning, number, system, status } = req.body;
     const newTrigger = await Trigger.create({
       trigger,
       meaning,
       number,
       system,
+      status,
     });
     res.status(201).json(newTrigger);
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error" + error.message });
   }
 };
 

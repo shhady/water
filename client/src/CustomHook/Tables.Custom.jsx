@@ -5,15 +5,17 @@ import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import { baseURL } from "../constants/urlConstants";
+
 const fetchData = async (url) => {
   const res = await fetch(url);
   return res.json();
 };
-const url = "http://localhost:5000";
+
 function Tables(params) {
   const navigate = useNavigate();
   const Response = useQuery(params.QueryName, () =>
-    fetchData(url + "/" + params.QueryName)
+    fetchData(baseURL + "/" + params.QueryName)
   );
   const Data = Response.data;
   const [Rows, setRows] = useState([]);
@@ -43,32 +45,15 @@ function Tables(params) {
 
   const clickHandler = (obj) => {
     console.log(obj);
-
-    obj.row.status = true;
-    fetch(url + "/" + params.QueryName + "/" + obj.id, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "PUT",
-      body: JSON.stringify(obj.row),
-    }).then((res) => {
-      if (res.ok) {
-        // setRows([...Rows]);
-        console.log("done");
-      }
-    });
+    localStorage.setItem("form-type", params.type);
+    localStorage.setItem("form-data", JSON.stringify(obj.row));
+    navigate("/data-form");
   };
 
   const createHandler = () => {
-    const inputs = params.columns
-      .map((col) => col.field)
-      .filter((col) => {
-        return col != "id" && col != "createdAt" && col != "updatedAt";
-      });
-    const link = url + "/" + params.QueryName;
-    localStorage.setItem("inputs", JSON.stringify(inputs));
-    localStorage.setItem("url", link);
-    navigate(`./add_trigger`);
+    localStorage.setItem("form-type", params.type);
+    localStorage.removeItem("form-data");
+    navigate("/data-form");
   };
 
   const Columns = params.columns.concat({
@@ -76,7 +61,7 @@ function Tables(params) {
     headerName: "Action",
     width: 150,
     renderCell: (obj) => (
-      <button onClick={() => clickHandler(obj)}>Update me</button>
+      <button onClick={() => clickHandler(obj)}>Update</button>
     ),
   });
 
