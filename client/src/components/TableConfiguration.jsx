@@ -65,6 +65,7 @@ function TableConfiguration() {
     { field: "triggerName", headerName: "triggerName", flex: 1 },
     { field: "measuredValue", headerName: "measuredValue", flex: 1 },
     { field: "valueType", headerName: "valueType", flex: 1 },
+    { field: "level", headerName: "Level", flex: 1 },
     { field: "createdAt", headerName: "Created", flex: 1 },
     { field: "updatedAt", headerName: "Updated", flex: 1 },
   ];
