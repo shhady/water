@@ -1,6 +1,6 @@
 import { FormRow } from "../components";
 import useAddTrigger from "../CustomHook/useAddTrigger";
-import useChangeLanguage from "../CustomHook/useChangeLanguage";
+import { useState, useEffect } from "react";
 
 import {
   ADD_TRIGGER_TITLE,
@@ -10,8 +10,6 @@ import {
   TRIGGER_FIELD,
   SYSTEM_FIELD,
   MEANING_FIELD,
-  LANGUAGE_BUTTON,
-  setLanguage,
 } from "../constants";
 
 function AddTrigger() {
@@ -36,24 +34,11 @@ function AddTrigger() {
     isDisabled,
   } = useAddTrigger();
 
-  const { language, handleLanguageChange } = useChangeLanguage();
+
 
   return (
     <>
-      <select
-        name="language"
-        id="language"
-        value={language}
-        onChange={(e) => {
-          handleLanguageChange(e);
-          setLanguage(e.target.value);
-        }}
-        className={`form-input`}
-      >
-        <option value="">{LANGUAGE_BUTTON}</option>
-        <option value="he">עברית</option>
-        <option value="en">English</option>
-      </select>
+
 
       <div className="form-add-item card text-center">
         <h2 className="text-center p-b m-1">{ADD_TRIGGER_TITLE}</h2>
@@ -113,10 +98,11 @@ function AddTrigger() {
             message={systemError.message}
           />
 
+
+
           <button
-            className={`btn btn-success m-t-1   ${
-              isDisabled ? "disabled" : ""
-            } `}
+            className={`btn btn-success m-t-1   ${isDisabled ? "disabled" : ""
+              } `}
             onClick={handleSubmit}
             name="submit"
             type="submit"

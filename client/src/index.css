@@ -667,10 +667,19 @@ small {
   margin-bottom: auto;
   margin-bottom: 1.5rem;
   font-size: 1.9rem;
-  width: 35%;
   border: 0.2rem solid var(--dark-gray);
 }
 
+.form-add-item input,textarea {
+  width: 35%;
+}
+
+select {
+  width: fit-content;
+  min-width: 11.5%;
+  text-align: center;
+
+}
 .justified {
   display: flex;
   justify-content: center;
@@ -780,7 +789,7 @@ input[type="range"] {
     margin-right: 0;
   }
 
-  .form-add-item input, select, textarea {
+  .form-add-item input, textarea {
     width: 35%;
   }
 
