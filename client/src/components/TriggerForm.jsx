@@ -70,7 +70,7 @@ const TriggerForm = () => {
         onChange={handleInputChange}
       >
         <option value="" disabled>
-          Select Value
+          Select Meaning
         </option>
         {meaningValues.map((value, index) => (
           <option key={index} value={value}>
@@ -85,7 +85,7 @@ const TriggerForm = () => {
         onChange={handleInputChange}
       >
         <option value="" disabled>
-          Select Option
+          Select System
         </option>
         {systemValues.map((option, index) => (
           <option key={index} value={option}>
@@ -100,7 +100,7 @@ const TriggerForm = () => {
         onChange={handleInputChange}
       >
         <option value="" disabled>
-          Select Item
+          Select Status
         </option>
         {statusValues.map((item, index) => (
           <option key={index} value={item}>
