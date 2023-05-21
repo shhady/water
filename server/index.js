@@ -8,6 +8,7 @@ import triggerRoute from "./routes/Trigger.Route.js";
 import identifiersRoute from "./routes/Identifiers.Route.js";
 import configConditionRoute from "./routes/configCondition.Route.js";
 import ParameterRoute from "./routes/Parameter.Route.js";
+import ConnectionRoute from "./routes/Connection.Route.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -31,6 +32,7 @@ app.use("/Triggers", triggerRoute);
 app.use("/Identifiers", identifiersRoute);
 app.use("/configConditions", configConditionRoute);
 app.use("/Parameters", ParameterRoute);
+app.use("/Connection", ConnectionRoute);
 
 const CONNECTION_URL = `mongodb+srv://waterproject:t2k4VkJn963j7guP@water.wn7b7lm.mongodb.net/`;
 const PORT = process.env.PORT || 5000;
