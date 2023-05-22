@@ -103,6 +103,8 @@ const deleteParameter = async (req, res) => {
   }
 };
 
+const addRange = async (req, res) => {};
+
 export {
   createParameter,
   getParameters,

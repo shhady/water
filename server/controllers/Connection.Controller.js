@@ -42,10 +42,10 @@ const createConnection = async (req, res) => {
 const getConnectionsByTriggers = async (req, res) => {
   try {
     const { parameters } = req.body;
-    const triggerNumbers = parameters.map((param) => param.trigger);
+    //const triggerNumbers = parameters.map((param) => param.trigger);
 
     const data = await Connection.find({
-      "parameters.trigger": { $in: triggerNumbers },
+      "parameters.trigger": { $in: parameters },
     });
 
     if (!data) throw new Error("Server error, failed to fetch data");

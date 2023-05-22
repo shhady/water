@@ -1,7 +1,7 @@
 import TriggerTable from "./TriggerTable";
 import IdentifierTable from "./IdentifierTable";
 import ConfigConditionTable from "./ConfigConditionTable";
-import ConnectionsTable from "./ConnectionsTable";
+import ConnectionsForm from "./ConnectionsForm";
 import ParameterTable from "./ParameterTable";
 
 function TableConfiguration() {
@@ -13,7 +13,7 @@ function TableConfiguration() {
       <hr />
       <ConfigConditionTable />
       <hr />
-      <ConnectionsTable />
+      <ConnectionsForm />
       <hr />
       <ParameterTable />
     </div>

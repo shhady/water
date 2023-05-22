@@ -1,32 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useQuery } from "react-query";
+import { baseURL } from "../constants/urlConstants";
 
-const parameters = [
-  {
-    _id: 1,
-    name: "acidity",
-    unit: "pH",
-    ranges: [
-      {
-        message: "Too hight",
-        min: 0,
-        max: 7,
-      },
-      {
-        message: "OK",
-        min: 7,
-        max: 7,
-      },
-      {
-        message: "Too low",
-        min: 7,
-        max: 14,
-      },
-    ],
-  },
-]; // TODO: make get request to receive all Parameters
+const fetchData = async (url) => {
+  const res = await fetch(url);
+  return res.json();
+};
 
 const ParameterTable = () => {
   const [expandedRows, setExpandedRows] = useState([]);
+  const [parameters, setParameters] = useState([]);
+  const Response = useQuery("Parameters", () =>
+    fetchData(baseURL + "/Parameters")
+  );
+  useEffect(() => {
+    if (Response.data) {
+      console.log(Response.data);
+      setParameters(Response.data);
+    }
+  }, [Response.data]);
 
   const handleRowExpand = (rowId) => {
     if (expandedRows.includes(rowId)) {
@@ -61,76 +53,79 @@ const ParameterTable = () => {
         </tr>
       </thead>
       <tbody>
-        {parameters.map((parameter) => (
-          <React.Fragment key={parameter._id}>
-            <tr>
-              <td>{parameter.name}</td>
-              <td>{parameter.unit}</td>
-              <td>
-                <button onClick={() => handleRowExpand(parameter._id)}>
-                  Expand
-                </button>
-              </td>
-            </tr>
-            {expandedRows.includes(parameter._id) && (
+        {parameters &&
+          parameters.map((parameter) => (
+            <React.Fragment key={parameter._id}>
               <tr>
-                <td colSpan={3}>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Message</th>
-                        <th>Min</th>
-                        <th>Max</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {parameter.ranges.map((range, index) => (
-                        <tr key={index}>
-                          <td>{range.message}</td>
-                          <td>{range.min}</td>
-                          <td>{range.max}</td>
+                <td>{parameter.name}</td>
+                <td>{parameter.unit}</td>
+                <td>
+                  <button onClick={() => handleRowExpand(parameter._id)}>
+                    Expand
+                  </button>
+                </td>
+              </tr>
+              {expandedRows.includes(parameter._id) && (
+                <tr>
+                  <td colSpan={3}>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Message</th>
+                          <th>Min</th>
+                          <th>Max</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {parameter.ranges.map((range, index) => (
+                          <tr key={index}>
+                            <td>{range.message}</td>
+                            <td>{range.min}</td>
+                            <td>{range.max}</td>
+                            <td>
+                              <button
+                                onClick={() =>
+                                  handleUpdateRange(parameter._id, range._id)
+                                }
+                              >
+                                Update
+                              </button>
+                              <button
+                                onClick={() =>
+                                  handleDeleteRange(parameter._id, range._id)
+                                }
+                              >
+                                Delete
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                        <tr>
+                          <td>
+                            <input type="text" name="message" />
+                          </td>
+                          <td>
+                            <input type="number" name="min" />
+                          </td>
+                          <td>
+                            <input type="number" name="max" />
+                          </td>
                           <td>
                             <button
-                              onClick={() =>
-                                handleUpdateRange(parameter._id, range._id)
-                              }
+                              onClick={() => handleAddRange(parameter._id)}
                             >
-                              Update
-                            </button>
-                            <button
-                              onClick={() =>
-                                handleDeleteRange(parameter._id, range._id)
-                              }
-                            >
-                              Delete
+                              Add Range
                             </button>
                           </td>
                         </tr>
-                      ))}
-                      <tr>
-                        <td>
-                          <input type="text" name="message" />
-                        </td>
-                        <td>
-                          <input type="number" name="min" />
-                        </td>
-                        <td>
-                          <input type="number" name="max" />
-                        </td>
-                        <td>
-                          <button onClick={() => handleAddRange(parameter._id)}>
-                            Add Range
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-            )}
-          </React.Fragment>
-        ))}
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              )}
+            </React.Fragment>
+          ))}
       </tbody>
     </table>
   );
