@@ -9,11 +9,7 @@ import identifiersRoute from "./routes/Identifiers.Route.js";
 import configConditionRoute from "./routes/configCondition.Route.js";
 import ParameterRoute from "./routes/Parameter.Route.js";
 import ConnectionRoute from "./routes/Connection.Route.js";
-<<<<<<< HEAD
 import TriggerTypeRoute from "./routes/TriggerType.Route.js";
-=======
-import triggerTypeRoute from "./routes/TriggerType.Route.js";
->>>>>>> 65d3dc0ed1d425ef3c2c23e5b1b5eb30b65f18e8
 
 const app = express();
 const server = http.createServer(app);
@@ -38,11 +34,7 @@ app.use("/Identifiers", identifiersRoute);
 app.use("/configConditions", configConditionRoute);
 app.use("/Parameters", ParameterRoute);
 app.use("/Connections", ConnectionRoute);
-<<<<<<< HEAD
 app.use("/TriggerTypes", TriggerTypeRoute);
-=======
-app.use("/TriggerType", triggerTypeRoute);
->>>>>>> 65d3dc0ed1d425ef3c2c23e5b1b5eb30b65f18e8
 
 const CONNECTION_URL = `mongodb+srv://waterproject:t2k4VkJn963j7guP@water.wn7b7lm.mongodb.net/`;
 const PORT = process.env.PORT || 5000;
@@ -52,5 +44,3 @@ mongoose
     server.listen(PORT, () => console.log(`server running on port : ${PORT}`))
   )
   .catch((error) => console.log(error));
-
-console.log("Talal");
