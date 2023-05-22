@@ -1,4 +1,4 @@
-const Connection = require("../models/Connection.Model.js");
+import Connection from ("../models/Connection.Model.js");
 
 //@desc Get all Connection
 //@route GET /
