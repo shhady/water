@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { statusValues } from "../constants/IdentifierConstants";
 import { baseURL, identifiers } from "../constants/urlConstants.js";
 import { meaningValues } from "../constants/TriggerConstants";
+import { configConditions } from "../constants/urlConstants.js";
 
 export {
   FormRow,
@@ -15,4 +16,5 @@ export {
   baseURL,
   identifiers,
   meaningValues,
+  configConditions,
 };

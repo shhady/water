@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { DataGrid } from "@mui/x-data-grid";
 
 const parameters = [
   {
@@ -86,8 +85,8 @@ const ParameterTable = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {parameter.ranges.map((range) => (
-                        <tr key={range._id}>
+                      {parameter.ranges.map((range, index) => (
+                        <tr key={index}>
                           <td>{range.message}</td>
                           <td>{range.min}</td>
                           <td>{range.max}</td>
