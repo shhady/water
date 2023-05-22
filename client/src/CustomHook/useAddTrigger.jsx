@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useInput from "./useInput";
-// import { useAlertGlobalContext } from "../context/alert/AlertContext";
+import { useAlertGlobalContext } from "../context/alert/AlertContext";
 import { validateNumber, validateMeaning } from "../utils";
 
 import {
@@ -18,7 +18,7 @@ import {
 import { apiPost } from "../api/api";
 
 const useAddTrigger = () => {
-  // const { setAlert } = useAlertGlobalContext();
+  const { setAlert } = useAlertGlobalContext();
   const [isDisabled, setIsDisabled] = useState(false);
   const [formData, setFormData] = useState({
     trigger: "",
@@ -45,7 +45,7 @@ const useAddTrigger = () => {
       }
 
       const intervalId = setTimeout(() => {
-        // setAlert(SUCCESS_ADD_ROW_MSG, "success", SUCCESS_TIME_ALERT);
+        setAlert(SUCCESS_ADD_ROW_MSG, "success", SUCCESS_TIME_ALERT);
         setIsDisabled(false);
         setValueTrigger("");
         setValueMeaning("");
@@ -94,6 +94,7 @@ const useAddTrigger = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     if (
       !trigger ||
       !meaning ||

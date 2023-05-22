@@ -6,7 +6,7 @@ const  ENGLISH_LANGUAGE = {
     SUCCESS_ADD_ROW_MSG : "The data sent successfully",
     WAITING_BUTTON : "Waiting...",
     SEND_TRIGGER_BUTTON : "Send trigger",
-    ADD_TRIGGER_TITLE : "Adding a trigger",
+    ADD_TRIGGER_TITLE : "Add a new trigger",
     NUMBER_FIELD : "Number",
     TRIGGER_FIELD : "Trigger",
     SYSTEM_FIELD : "System",
