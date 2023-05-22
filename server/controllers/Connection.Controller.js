@@ -1,4 +1,4 @@
-import Connection from ("../models/Connection.Model.js");
+import Connection from "../models/Connection.Model.js";
 
 //@desc Get all Connection
 //@route GET /
@@ -29,17 +29,31 @@ const createConnection = async (req, res) => {
 //@desc get by triggers new Connection
 //@route POST /
 //@access public
+// const getConnectionsByTriggers = async (req, res) => {
+//   try {
+//     const { parameters } = req.body;
+//     const data = await Connection.find({ parameters: { $in: parameters } });
+//     if (!data) throw new Error("Server error, failed to fetch data");
+//     res.status(200).json({ data: data });
+//   } catch (e) {
+//     res.status(500).json({ error: e.message });
+//   }
+// };
 const getConnectionsByTriggers = async (req, res) => {
-    try {
-      const { parameters } = req.body;
-      const data = await Connection.find({ "parameters": { "$in": parameters } });
-      if (!data) throw new Error("Server error, failed to fetch data");
-      res.status(200).json({ data: data });
-    } catch (e) {
-      res.status(500).json({ error: e.message });
-    }
-  };
-  
+  try {
+    const { parameters } = req.body;
+    const triggerNumbers = parameters.map((param) => param.trigger);
+
+    const data = await Connection.find({
+      "parameters.trigger": { $in: triggerNumbers },
+    });
+
+    if (!data) throw new Error("Server error, failed to fetch data");
+    res.status(200).json({ data });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+};
 
 //@desc Get Connection by ID
 //@route GET /:id
@@ -96,5 +110,5 @@ export {
   getConnection,
   updateConnection,
   deleteConnection,
-  getConnectionsByTriggers
+  getConnectionsByTriggers,
 };
