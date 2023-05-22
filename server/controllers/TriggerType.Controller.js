@@ -1,11 +1,11 @@
-import >Name< from "../models/>Name<.Model.js";
+const TriggerType = require("../models/TriggerType.Model.js");
 
-//@desc Get all >Name<
+//@desc Get all TriggerType
 //@route GET /
 //@access public
-const getAll>Name< = async (req, res) => {
+const getAllTriggerType = async (req, res) => {
     try {
-        const data = await >Name<.find({});
+        const data = await TriggerType.find({});
         if(!data) 
             throw new Error("Server error, failed to fetch data");
         res.status(200).json({data: data});
@@ -14,12 +14,12 @@ const getAll>Name< = async (req, res) => {
     }
 }
 
-//@desc Create new >Name<
+//@desc Create new TriggerType
 //@route POST /
 //@access public
-const create>Name< = async (req, res) => {
+const createTriggerType = async (req, res) => {
     try {
-        const data = await >Name<.create({...req.body});
+        const data = await TriggerType.create({...req.body});
         if(!data) throw new Error("Server error, failed to create data");
         res.status(201).json({data: data});
     } catch (e) {
@@ -27,14 +27,14 @@ const create>Name< = async (req, res) => {
     }
 }
 
-//@desc Get >Name< by ID
+//@desc Get TriggerType by ID
 //@route GET /:id
 //@access public
-const get>Name< = async (req,res) => {
+const getTriggerType = async (req,res) => {
     try {
         const id = req.params.id;
         if(!id) throw new Error("Invalid id")
-        const data = await >Name<.findById(id);
+        const data = await TriggerType.findById(id);
         if(!data) throw new Error("Server error, failed to create data");
         res.status(200).json({data: data});
     } catch (e) {
@@ -42,14 +42,14 @@ const get>Name< = async (req,res) => {
     }
 }
 
-//@desc Update >Name< by ID
+//@desc Update TriggerType by ID
 //@route PUT /:id
 //@access public
-const update>Name< = async (req,res) => {
+const updateTriggerType = async (req,res) => {
     try {
         const id = req.params.id;
         if(!id) throw new Error("Invalid id")
-        const updatedData = await >Name<.findByIdAndUpdate(
+        const updatedData = await TriggerType.findByIdAndUpdate(
             id,
             { ...req.body },
             { new: true }
@@ -62,14 +62,14 @@ const update>Name< = async (req,res) => {
 }
 
 
-//@desc Delete >Name< by ID
+//@desc Delete TriggerType by ID
 //@route DELETE /:id
 //@access public
-const delete>Name< = async (req,res) => {
+const deleteTriggerType = async (req,res) => {
     try {
         const id = req.params.id;
         if(!id) throw new Error("Invalid id")
-        const data = await >Name<.findByIdAndDelete(id);
+        const data = await TriggerType.findByIdAndDelete(id);
         if(!data) throw new Error("Failed to update data");
         res.status(200).json({data: data});
     } catch (e) {
@@ -78,11 +78,11 @@ const delete>Name< = async (req,res) => {
 }
 
 export {
-    getAll>Name<,
-    create>Name<,
-    get>Name<,
-    update>Name<,
-    delete>Name<,
+    getAllTriggerType,
+    createTriggerType,
+    getTriggerType,
+    updateTriggerType,
+    deleteTriggerType,
 };
 
 

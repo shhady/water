@@ -32,7 +32,7 @@ app.use("/Triggers", triggerRoute);
 app.use("/Identifiers", identifiersRoute);
 app.use("/configConditions", configConditionRoute);
 app.use("/Parameters", ParameterRoute);
-app.use("/Connection", ConnectionRoute);
+app.use("/Connections", ConnectionRoute);
 
 const CONNECTION_URL = `mongodb+srv://waterproject:t2k4VkJn963j7guP@water.wn7b7lm.mongodb.net/`;
 const PORT = process.env.PORT || 5000;

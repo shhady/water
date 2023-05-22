@@ -1,8 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { statusValues } from "../constants/IdentifierConstants";
-import { baseURL, identifiers } from "../constants/urlConstants.js";
+import { useNavigate, statusValues, baseURL, identifiers } from "./index.js";
 
 const defaultObj = {
   meaning: "",

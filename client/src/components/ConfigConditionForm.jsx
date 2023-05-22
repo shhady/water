@@ -1,8 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { meaningValues } from "../constants/TriggerConstants";
-import { baseURL, configConditions } from "../constants/urlConstants.js";
+import {
+  useNavigate,
+  meaningValues,
+  baseURL,
+  configConditions,
+} from "./index.js";
 
 const defaultObj = {
   meaning: "",
