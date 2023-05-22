@@ -19,12 +19,12 @@ const getAllTriggerType = async (req, res) => {
 const createTriggerType = async (req, res) => {
   try {
     console.log(req.body);
-    const { triggerType } = req.body;
-    const isExist = await TriggerType.findOne({ name: triggerType });
+    const { name, type, number } = req.body;
+    const isExist = await TriggerType.findOne({ name: name });
     if (isExist) {
-        throw new Error("Server error, failed to create data is Exist");
+      throw new Error("Server error, failed to create data is Exist");
     }
-    const data = await TriggerType.create({ name: triggerType });
+    const data = await TriggerType.create({ name, type, number });
     if (!data) throw new Error("Server error, failed to create data");
     res.status(201).json({ data: data });
   } catch (e) {

@@ -16,7 +16,7 @@ function TriggerType() {
 
     setTriggerTypeError("");
 
-    const url = "http://localhost:5000/TriggerType";
+    const url = "http://localhost:5000/TriggerTypes";
     const headers = {
       "Content-Type": "application/json",
     };
@@ -25,7 +25,7 @@ function TriggerType() {
     try {
       fetch(url, {
         method: method,
-        body: JSON.stringify({ triggerType: triggerType }), // Wrap triggerType in an object to match your API's expected payload
+        body: JSON.stringify({ name: triggerType }), // Wrap triggerType in an object to match your API's expected payload
         headers: headers,
       })
         .then((response) => {
@@ -37,7 +37,7 @@ function TriggerType() {
           // Use the response data
           console.log("Data", data);
           if (data.error) {
-            setTriggerTypeError(data.error)
+            setTriggerTypeError(data.error);
           }
         })
         .catch((error) => {
