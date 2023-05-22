@@ -12,6 +12,7 @@ const getTriggers = async (req, res) => {
   }
 };
 
+//use to generate fake data
 const generateTriggers = async (req, res) => {
   try {
     let numberLimit = req.body.numberLimit;

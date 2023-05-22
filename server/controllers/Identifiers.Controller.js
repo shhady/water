@@ -24,6 +24,7 @@ const getIdentifierById = async (req, res) => {
   }
 };
 
+// to create Unique text use it in additionalIdentifier
 function createUniqueString(additionalIdentifier) {
   const date = new Date();
   const dateString = date.toISOString().slice(0, 19).replace(/[-:]/g, "");
@@ -32,9 +33,12 @@ function createUniqueString(additionalIdentifier) {
     .slice(2)}`;
 }
 
+//to get random index in array
 function getRandomIndex(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
+
+//use to generate fake data
 const generateIdentifiers = async (req, res) => {
   try {
     let cities = req.body.cities;
