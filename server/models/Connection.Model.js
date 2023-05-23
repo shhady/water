@@ -16,10 +16,6 @@ const ConnectionSchema = new mongoose.Schema(
           type: Number,
           required: true,
         },
-        type: {
-          type: String,
-          required: true,
-        },
         value: {
           type: Number,
           required: true,
