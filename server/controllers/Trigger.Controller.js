@@ -12,21 +12,31 @@ const getTriggers = async (req, res) => {
   }
 };
 
+//use to generate fake data
 const generateTriggers = async (req, res) => {
   try {
-    let triggersLimit = req.body.triggersLimit;
-    let meaning = req.body.meaning;
-    let numberOffset = req.body.numberOffset;
     let numberLimit = req.body.numberLimit;
-    let systems = req.body.systems;
-
+    const systems = ["hydrand", "pond", "tubes", "tower"];
+    const triggerNames = [
+      "conductivity",
+      "opacity",
+      "acidity",
+      "chlorine",
+      "Permissions",
+      "blackmail",
+      "spam",
+      "fishing",
+      "DoS",
+      "virus",
+    ];
     for (let i = 0; i < numberLimit; i++) {
-      const trigger = Math.floor(Math.random() * triggersLimit);
-      const number = numberOffset + i + 1;
+      let trigger = Math.floor(Math.random() * triggerNames.length);
+      const meaning = triggerNames[trigger];
+      const number = Math.floor(Math.random() * 4) + 1;
       const index = Math.floor(Math.random() * systems.length);
       const system = systems[index];
-
-      await Trigger.create({ trigger, number, meaning, system });
+      trigger += 1;
+      await Trigger.create({ trigger, meaning, number, meaning, system });
     }
 
     res.status(200).send("Triggers generated successfully");
@@ -55,16 +65,17 @@ const getTriggerById = async (req, res) => {
 // @access  Public
 const createTrigger = async (req, res) => {
   try {
-    const { trigger, meaning, number, system } = req.body;
+    const { trigger, meaning, number, system, status } = req.body;
     const newTrigger = await Trigger.create({
       trigger,
       meaning,
       number,
       system,
+      status,
     });
     res.status(201).json(newTrigger);
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error" + error.message });
   }
 };
 

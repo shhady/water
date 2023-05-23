@@ -1,4 +1,4 @@
-const >Name< = require("../models/>Name<.Model.js");
+import >Name< from "../models/>Name<.Model.js";
 
 //@desc Get all >Name<
 //@route GET /

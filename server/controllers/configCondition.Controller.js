@@ -31,14 +31,29 @@ const getConfigConditionById = async (req, res) => {
 function getRandom(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
-function getRandomIndex(array) {
-  return Math.floor(Math.random() * array.length);
-}
-function getRandomNumber(min, max) {
-  const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-  return randomNumber;
-}
 
+function checkPH() {
+  const numberLevel = Math.floor(Math.random() * 14);
+  if (7 == numberLevel) {
+    return [numberLevel, "normal"];
+  }
+  if (0 <= numberLevel < 7) {
+    return [numberLevel, "low"];
+  }
+  return [numberLevel, "hight"];
+}
+function checkML() {
+  const numberLevel = Math.floor(Math.random() * 3000);
+  if (numberLevel >= 300 && numberLevel <= 800) {
+    return [numberLevel, "too drink and worthy of irrigation"];
+  } else if (numberLevel >= 0 && numberLevel <= 800) {
+    return [numberLevel, "normal"];
+  } else if (numberLevel >= 300 && numberLevel <= 2000) {
+    return [numberLevel, "worthy of irrigation"];
+  }
+
+  return [numberLevel, "not apply"];
+}
 const generateConfigConditions = async (req, res) => {
   try {
     const numberLimit = req.body.numberLimit;
@@ -73,8 +88,27 @@ const generateConfigConditions = async (req, res) => {
       const type = Object.keys(typeOFTriggers).find((key) =>
         typeOFTriggers[key].includes(triggerName)
       );
+      let level = "";
+      let measuredValue = "";
+      let valueType = "";
+      let res = [];
       trigger += 1;
-
+      switch (triggerName) {
+        case "chlorine":
+          res = checkML();
+          measuredValue = res[0];
+          valueType = res[1];
+          level = "mlg";
+          break;
+        case "acidity":
+          res = checkPH();
+          measuredValue = res[0];
+          valueType = res[1];
+          level = "ph";
+          break;
+        default:
+          break;
+      }
       await ConfigCondition.create({
         autoGenerator,
         systemId,
@@ -82,6 +116,9 @@ const generateConfigConditions = async (req, res) => {
         trigger,
         type,
         triggerName,
+        measuredValue,
+        valueType,
+        level,
       });
     }
     res.status(200).send("DONE");

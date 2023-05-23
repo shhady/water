@@ -24,6 +24,7 @@ const getIdentifierById = async (req, res) => {
   }
 };
 
+// to create Unique text use it in additionalIdentifier
 function createUniqueString(additionalIdentifier) {
   const date = new Date();
   const dateString = date.toISOString().slice(0, 19).replace(/[-:]/g, "");
@@ -32,16 +33,20 @@ function createUniqueString(additionalIdentifier) {
     .slice(2)}`;
 }
 
+//to get random index in array
 function getRandomIndex(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
+
+//use to generate fake data
 const generateIdentifiers = async (req, res) => {
   try {
     let cities = req.body.cities;
     let streets = req.body.streets;
     let numbers = req.body.numbers;
     const numberLimit = req.body.numberLimit;
-
+  
+    const statusArray = ["new", "in progress", "postponed", "canceled"];
     for (let i = 0; i < numberLimit; i++) {
       const additionalIdentifier = createUniqueString("");
       const number = getRandomIndex(numbers);
@@ -49,11 +54,14 @@ const generateIdentifiers = async (req, res) => {
       const street = getRandomIndex(streets);
       const latitude = Math.random() * 1000;
       const longitude = Math.random() * 1000;
+      const index = Math.floor(Math.random() * statusArray.length);
+      const status = statusArray[index];
       await Identifier.create({
         additionalIdentifier,
-        number,
+        status,
         city,
         street,
+        number,
         latitude,
         longitude,
       });

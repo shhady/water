@@ -22,6 +22,7 @@ const getParameters = async (req, res) => {
   }
 };
 
+//use to check message in parameter by min and max number
 const checkMessage = async (req, res) => {
   try {
     const parameter = await Parameter.findById(req.params.id);
@@ -101,6 +102,8 @@ const deleteParameter = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+const addRange = async (req, res) => {};
 
 export {
   createParameter,

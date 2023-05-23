@@ -43,3 +43,20 @@ conductivity, opacity, acidity, chlorine
 2. WaterQuality: ["conductivity", "opacity", "acidity", "chlorine"],
 
 <!-- 3. Hydrants ["water flow", "reverse flow","water pressure","life line","update","battery"] -->
+
+# system
+1. hydrand
+2. pond
+3. tubes
+4. tower
+
+
+identifiers :
+status : new , in progress, postponed, canceled
+
+# activities
+
+0. Do nothing
+1. Call phone
+2. Send Email
+3. Send SMS
