@@ -3,6 +3,7 @@ import IdentifierTable from "./IdentifierTable";
 import ConfigConditionTable from "./ConfigConditionTable";
 import ConnectionsForm from "./ConnectionsForm";
 import ParameterTable from "./ParameterTable";
+import SensorTable from "./SensorTable";
 
 function TableConfiguration() {
   return (
@@ -16,6 +17,8 @@ function TableConfiguration() {
       <ConnectionsForm />
       <hr />
       <ParameterTable />
+      <hr />
+      <SensorTable />
     </div>
   );
 }
