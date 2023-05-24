@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TableLookUps from "../constants/TableLookUps";
 
 const CheckboxList = ({ options, checkedItems, setCheckedItems }) => {
   const handleCheckboxChange = (event, index) => {
@@ -23,7 +24,9 @@ const CheckboxList = ({ options, checkedItems, setCheckedItems }) => {
           {option.name}
         </label>
       ))}
-      <p>Checked Items: {JSON.stringify(checkedItems)}</p>
+      <p>
+        {TableLookUps("Checked Items")}: {JSON.stringify(checkedItems)}
+      </p>
     </div>
   );
 };

@@ -26,8 +26,8 @@ const ConfigConditionTable = () => {
     },
     { field: "valueType", headerName: TableLookUps("valueType"), flex: 1 },
     { field: "level", headerName: TableLookUps("Level"), flex: 1 },
-    { field: "createdAt", headerName: TableLookUps("Created"), flex: 1 },
-    { field: "updatedAt", headerName: TableLookUps("Updated"), flex: 1 },
+    { field: "createdAt", headerName: TableLookUps("createdAt"), flex: 1 },
+    { field: "updatedAt", headerName: TableLookUps("createdAt"), flex: 1 },
   ];
   return (
     <div>

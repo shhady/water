@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TableLookUps from "../constants/TableLookUps";
 
 const ConnectionTable = ({ connections }) => {
   const [expandedRows, setExpandedRows] = useState([]);
@@ -35,10 +36,10 @@ const ConnectionTable = ({ connections }) => {
     <table>
       <thead>
         <tr>
-          <th>Meaning</th>
-          <th>Activity</th>
-          <th>Parameters</th>
-          <th>Actions</th>
+          <th>{TableLookUps("Meaning")} </th>
+          <th>{TableLookUps("Activity")}</th>
+          <th>{TableLookUps("Parameters")}</th>
+          <th>{TableLookUps("Actions")}</th>
         </tr>
       </thead>
       <tbody>

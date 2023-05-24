@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { baseURL } from "../constants/urlConstants";
+import TableLookUps from "../constants/TableLookUps";
 
 const fetchData = async (url) => {
   const res = await fetch(url);
@@ -47,9 +48,9 @@ const ParameterTable = () => {
     <table>
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Unit</th>
-          <th>Ranges</th>
+          <th>{TableLookUps("Name")}</th>
+          <th>{TableLookUps("Unit")}</th>
+          <th>{TableLookUps("Ranges")}</th>
         </tr>
       </thead>
       <tbody>
