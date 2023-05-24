@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { baseURL } from "../constants/urlConstants";
+import TableLookUps from "../constants/TableLookUps";
 
 const fetchData = async (url) => {
   const res = await fetch(url);
@@ -47,9 +48,9 @@ const ParameterTable = () => {
     <table>
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Unit</th>
-          <th>Ranges</th>
+          <th>{TableLookUps("Name")}</th>
+          <th>{TableLookUps("Unit")}</th>
+          <th>{TableLookUps("Ranges")}</th>
         </tr>
       </thead>
       <tbody>
@@ -61,7 +62,7 @@ const ParameterTable = () => {
                 <td>{parameter.unit}</td>
                 <td>
                   <button onClick={() => handleRowExpand(parameter._id)}>
-                    Expand
+                    {TableLookUps("Expand")}
                   </button>
                 </td>
               </tr>
@@ -71,10 +72,10 @@ const ParameterTable = () => {
                     <table>
                       <thead>
                         <tr>
-                          <th>Message</th>
-                          <th>Min</th>
-                          <th>Max</th>
-                          <th>Actions</th>
+                          <th>{TableLookUps("Message")}</th>
+                          <th>{TableLookUps("Min")}</th>
+                          <th>{TableLookUps("Max")}</th>
+                          <th>{TableLookUps("Actions")}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -89,14 +90,14 @@ const ParameterTable = () => {
                                   handleUpdateRange(parameter._id, range._id)
                                 }
                               >
-                                Update
+                                {TableLookUps("Update")}
                               </button>
                               <button
                                 onClick={() =>
                                   handleDeleteRange(parameter._id, range._id)
                                 }
                               >
-                                Delete
+                                {TableLookUps("Delete")}
                               </button>
                             </td>
                           </tr>
@@ -115,7 +116,7 @@ const ParameterTable = () => {
                             <button
                               onClick={() => handleAddRange(parameter._id)}
                             >
-                              Add Range
+                              {TableLookUps("Add Range")}
                             </button>
                           </td>
                         </tr>

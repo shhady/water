@@ -56,12 +56,26 @@ function Tables(params) {
     navigate("/data-form");
   };
 
+  //get the lang out of attribute as has been set in the constants/index.js file
+  let lang = document.getElementsByTagName("html")[0].getAttribute("lang");
+  const lookUps = {
+    en: { action: "Action", update: "Update" },
+    he: { action: "פעולה", update: "עדכון" },
+    ar: { action: "إجراءات", update: "تحديث" },
+  };
+  ////if set lang is not supported do back to english///
+  if (!lookUps[lang]) {
+    lang = "en";
+  }
+
   const Columns = params.columns.concat({
     field: "action",
-    headerName: "Action",
+    headerName: lookUps[lang]["action"],
     width: 150,
     renderCell: (obj) => (
-      <button onClick={() => clickHandler(obj)}>Update</button>
+      <button onClick={() => clickHandler(obj)}>
+        {lookUps[lang]["update"]}
+      </button>
     ),
   });
 
