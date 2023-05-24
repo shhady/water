@@ -61,6 +61,7 @@ function Tables(params) {
   const lookUps = {
     en: { action: "Action", update: "Update" },
     he: { action: "פעולה", update: "עדכון" },
+    ar: { action: "إجراءات", update: "تحديث" },
   };
   ////if set lang is not supported do back to english///
   if (!lookUps[lang]) {

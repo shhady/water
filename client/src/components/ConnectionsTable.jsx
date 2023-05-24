@@ -76,14 +76,14 @@ const ConnectionTable = ({ connections }) => {
                     <button
                       onClick={() => handleEditParameter(connection._id, index)}
                     >
-                      Edit
+                      {TableLookUps("Edit")}
                     </button>{" "}
                     <button
                       onClick={() =>
                         handleDeleteParameter(connection._id, index)
                       }
                     >
-                      Delete
+                      {TableLookUps("Delete")}
                     </button>
                   </td>
                 </tr>
