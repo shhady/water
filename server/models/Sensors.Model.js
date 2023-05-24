@@ -2,6 +2,13 @@ import mongoose, { Mongoose } from "mongoose";
 
 const SensorsSchema = new mongoose.Schema(
   {
+    sensorName: {
+      type: String,
+      default: "sim",
+    },
+    sensorType: {
+      type: String,
+    },
     System: {
       type: String,
     },
