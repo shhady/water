@@ -1,44 +1,49 @@
 import React from "react";
 import { Tables } from "../CustomHook/Tables.Custom";
+import TableLookUps from "../constants/TableLookUps";
 
 const TriggerTable = () => {
   const triggersColumns = [
     { field: "id", headerName: "Trigger ID", flex: 1, hide: true },
     {
       field: "trigger",
-      headerName: "Trigger",
+      headerName: TableLookUps("trigger"),
       flex: 1,
     },
     {
       field: "meaning",
-      headerName: "Meaning",
+      headerName: TableLookUps("meaning"),
+
       flex: 1,
     },
-    { field: "number", headerName: "Number(Sensor)", flex: 1 },
+    { field: "number", headerName: TableLookUps("number"), flex: 1 },
     {
       field: "system",
-      headerName: "System",
+      headerName: TableLookUps("system"),
       flex: 1,
     },
     {
       field: "status",
-      headerName: "Status",
+      headerName: TableLookUps("status"),
+
       flex: 1,
     },
     {
       field: "createdAt",
-      headerName: "Created",
+      headerName: TableLookUps("createdAt"),
+
       flex: 1,
     },
     {
       field: "updatedAt",
-      headerName: "Updated",
+      headerName: TableLookUps("updatedAt"),
+
       flex: 1,
     },
   ];
   return (
     <div>
-      <h2>Triggers</h2>
+      <h2>{TableLookUps("triggers")}</h2>
       <Tables QueryName={"Triggers"} columns={triggersColumns} type="Trigger" />
     </div>
   );

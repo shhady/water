@@ -1,30 +1,36 @@
 import React from "react";
 import { Tables } from "../CustomHook/Tables.Custom";
+import TableLookUps from "../constants/TableLookUps";
 
 const IdentifierTable = () => {
   const identifiersColumns = [
-    { field: "id", headerName: "Identifier ID", flex: 1, hide: true },
+    {
+      field: "id",
+      headerName: TableLookUps("IdentifierID"),
+      flex: 1,
+      hide: true,
+    },
     {
       field: "additionalIdentifier",
-      headerName: "additionalIdentifier",
+      headerName: TableLookUps("additionalIdentifier"),
       flex: 1,
     },
     {
       field: "status",
-      headerName: "status",
+      headerName: TableLookUps("status"),
       flex: 1,
     },
-    { field: "city", headerName: "city", flex: 1 },
-    { field: "street", headerName: "street", flex: 1 },
-    { field: "number", headerName: "number", flex: 1 },
-    { field: "latitude", headerName: "latitude", flex: 1 },
-    { field: "longitude", headerName: "longitude", flex: 1 },
-    { field: "createdAt", headerName: "Created", flex: 1 },
-    { field: "updatedAt", headerName: "Updated", flex: 1 },
+    { field: "city", headerName: TableLookUps("city"), flex: 1 },
+    { field: "street", headerName: TableLookUps("street"), flex: 1 },
+    { field: "number", headerName: TableLookUps("number"), flex: 1 },
+    { field: "latitude", headerName: TableLookUps("latitude"), flex: 1 },
+    { field: "longitude", headerName: TableLookUps("longitude"), flex: 1 },
+    { field: "createdAt", headerName: TableLookUps("createdAt"), flex: 1 },
+    { field: "updatedAt", headerName: TableLookUps("updatedAt"), flex: 1 },
   ];
   return (
     <div>
-      <h2>Identifiers</h2>
+      <h2>{TableLookUps("Identifiers")}</h2>
       <Tables
         QueryName={"Identifiers"}
         columns={identifiersColumns}
