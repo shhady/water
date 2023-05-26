@@ -1,11 +1,15 @@
 import Trigger from "../models/Trigger.Model.js";
+import TriggerType from "../models/TriggerType.Model.js"; // Import the TriggerType model
 
 // @desc    Get all triggers
 // @route   GET /triggers
 // @access  Public
 const getTriggers = async (req, res) => {
   try {
-    const triggers = await Trigger.find();
+    const triggers = await Trigger.find()
+      .populate("triggerType", "number name type") // Populate the triggerType field with number, name, and type fields
+      .populate("sensor"); // Populate the sensor field
+
     res.status(200).json(triggers);
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
@@ -15,30 +19,7 @@ const getTriggers = async (req, res) => {
 //use to generate fake data
 const generateTriggers = async (req, res) => {
   try {
-    let numberLimit = req.body.numberLimit;
-    const systems = ["hydrand", "pond", "tubes", "tower"];
-    const triggerNames = [
-      "conductivity",
-      "opacity",
-      "acidity",
-      "chlorine",
-      "Permissions",
-      "blackmail",
-      "spam",
-      "fishing",
-      "DoS",
-      "virus",
-    ];
-    for (let i = 0; i < numberLimit; i++) {
-      let trigger = Math.floor(Math.random() * triggerNames.length);
-      const meaning = triggerNames[trigger];
-      const number = Math.floor(Math.random() * 4) + 1;
-      const index = Math.floor(Math.random() * systems.length);
-      const system = systems[index];
-      trigger += 1;
-      await Trigger.create({ trigger, meaning, number, meaning, system });
-    }
-
+    //we have to create a sensor and a triggerType
     res.status(200).send("Triggers generated successfully");
   } catch (error) {
     res.status(500).send(error.message);
@@ -50,7 +31,10 @@ const generateTriggers = async (req, res) => {
 // @access  Public
 const getTriggerById = async (req, res) => {
   try {
-    const trigger = await Trigger.findById(req.params.id);
+    const trigger = await Trigger.findById(req.params.id)
+      .populate("triggerType", "number name type") // Populate the triggerType field with number, name, and type fields
+      .populate("sensor"); // Populate the sensor field
+
     if (!trigger) {
       return res.status(404).json({ error: "Trigger not found" });
     }
@@ -65,17 +49,31 @@ const getTriggerById = async (req, res) => {
 // @access  Public
 const createTrigger = async (req, res) => {
   try {
-    const { trigger, meaning, number, system, status } = req.body;
-    const newTrigger = await Trigger.create({
-      trigger,
-      meaning,
-      number,
-      system,
-      status,
+    const { name, type, number } = req.body; // Assuming the request body contains the name, type, and number for the new trigger
+
+    // Find the corresponding TriggerType document based on the number
+    const triggerType = await TriggerType.findOne({ number });
+
+    if (!triggerType) {
+      // If the triggerType does not exist, return an error
+      return res.status(404).json({ error: "Trigger type not found" });
+    }
+
+    // Create a new trigger document
+    const trigger = new Trigger({
+      triggerType: triggerType._id, // Assign the TriggerType's ObjectId to the triggerType field
+      // Add any other fields you want to populate
+      // For example, if you want to assign a sensor, you can use: sensor: req.body.sensorId
+      // Assuming the sensorId is provided in the request body
     });
-    res.status(201).json(newTrigger);
+
+    // Save the trigger to the database
+    const savedTrigger = await trigger.save();
+
+    // Return the created trigger
+    res.status(201).json({ trigger: savedTrigger });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" + error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -84,15 +82,19 @@ const createTrigger = async (req, res) => {
 // @access  Public
 const updateTrigger = async (req, res) => {
   try {
-    const { trigger, meaning, number, system, status } = req.body;
+    const { triggerType, sensor, status } = req.body;
     const updatedTrigger = await Trigger.findByIdAndUpdate(
       req.params.id,
-      { trigger, meaning, number, system, status },
+      { triggerType, sensor, status },
       { new: true }
-    );
+    )
+      .populate("triggerType", "number name type") // Populate the triggerType field with number, name, and type fields
+      .populate("sensor"); // Populate the sensor field with the associated Sensors data
+
     if (!updatedTrigger) {
       return res.status(404).json({ error: "Trigger not found" });
     }
+
     res.status(200).json(updatedTrigger);
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
