@@ -13,6 +13,42 @@ const getAllTriggerType = async (req, res) => {
   }
 };
 
+//@desc Generate triggerTypes
+//@route POST /generate
+//@access public
+const generateTriggerTypes = async (req, res) => {
+  try {
+    const triggerNames = [
+      "conductivity",
+      "opacity",
+      "acidity",
+      "chlorine",
+      "Permissions",
+      "blackmail",
+      "spam",
+      "fishing",
+      "DoS",
+      "virus",
+    ];
+    const typeOFTriggers = {
+      Cyber: ["Permissions", "blackmail", "spam", "fishing", "DoS", "virus"],
+      "Water Quality": ["conductivity", "opacity", "acidity", "chlorine"],
+    };
+
+    triggerNames.forEach(async (trigger, index) => {
+      const triggerName = triggerNames[index];
+      const type = Object.keys(typeOFTriggers).find((key) =>
+        typeOFTriggers[key].includes(triggerName)
+      );
+      await TriggerType.create({ name: trigger, type, number: index + 1 });
+    });
+
+    res.status(201).send("Worked");
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+};
+
 //@desc Create new TriggerType
 //@route POST /
 //@access public
@@ -87,4 +123,5 @@ export {
   getTriggerType,
   updateTriggerType,
   deleteTriggerType,
+  generateTriggerTypes,
 };
