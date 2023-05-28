@@ -7,41 +7,8 @@ import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { baseURL } from "../constants/urlConstants";
 
-const fetchData = async (url) => {
-  const res = await fetch(url);
-  return res.json();
-};
-
 function Tables(params) {
   const navigate = useNavigate();
-  const Response = useQuery(params.QueryName, () =>
-    fetchData(baseURL + "/" + params.QueryName)
-  );
-  const Data = Response.data;
-  const [Rows, setRows] = useState([]);
-  useEffect(() => {
-    if (Data != null) {
-      setRows(
-        Data.map((t) => ({
-          ...t,
-          id: t._id,
-          createdAt: moment(t.createdAt).format("HH:mm:ss DD-MM-YYYY"),
-          updatedAt: moment(t.updatedAt).format("HH:mm:ss DD-MM-YYYY"),
-        }))
-      );
-    }
-  }, [Data]);
-
-  if (Response.isLoading) {
-    return (
-      <Box sx={{ display: "flex" }}>
-        <CircularProgress />
-      </Box>
-    );
-  }
-  if (Response.isError) {
-    return <h1>ERROR</h1>;
-  }
 
   const clickHandler = (obj) => {
     console.log(obj);
@@ -78,6 +45,8 @@ function Tables(params) {
       </button>
     ),
   });
+
+  console.log(Rows);
 
   return (
     <div style={{ width: "100%" }}>
