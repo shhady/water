@@ -6,9 +6,37 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { baseURL } from "../constants/urlConstants";
-
+const fetchData = async (url) => {
+  const res = await fetch(url);
+  return res.json();
+};
 function Tables(params) {
+  const url = baseURL + "/" + params.QueryName;
   const navigate = useNavigate();
+  const Response = useQuery(url, () => fetchData(url));
+  const Data = Response.data;
+  const { Massage } = params;
+  const [Rows, setRows] = useState([]);
+  useEffect(() => {
+    if (Massage == undefined) {
+      return;
+    }
+    if (Data != null) {
+      console.log("Transformed Data", Massage);
+      setRows(Massage(Data));
+    }
+  }, [Data]);
+
+  if (Response.isLoading) {
+    return (
+      <Box sx={{ display: "flex" }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+  if (Response.isError) {
+    return <h1>ERROR</h1>;
+  }
 
   const clickHandler = (obj) => {
     console.log(obj);
@@ -45,8 +73,6 @@ function Tables(params) {
       </button>
     ),
   });
-
-  console.log(Rows);
 
   return (
     <div style={{ width: "100%" }}>
