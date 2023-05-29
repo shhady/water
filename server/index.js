@@ -16,7 +16,6 @@ const app = express();
 const server = http.createServer(app);
 import path from "path";
 import { fileURLToPath } from "url";
-import TriggerType from "./models/TriggerType.Model.js";
 // app.use(express.bodyParser());
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -57,10 +56,5 @@ mongoose
   .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     server.listen(PORT, () => console.log(`server running on port : ${PORT}`));
-    TriggerType.create({
-      name: "",
-      number: 1,
-      type: "",
-    });
   })
   .catch((error) => console.log(error));

@@ -23,7 +23,16 @@ const useFetch = (url) => {
     }
   }, [Data]);
 
-  
+  if (Response.isLoading) {
+    return (
+      <Box sx={{ display: "flex" }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+  if (Response.isError) {
+    return <h1>ERROR</h1>;
+  }
 };
 
 export default useFetch;
