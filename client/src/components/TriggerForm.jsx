@@ -64,59 +64,72 @@ const TriggerForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <select
-        name="meaning"
-        value={formData.meaning}
-        onChange={handleInputChange}
-      >
-        <option value="" disabled>
-          Select Meaning
-        </option>
-        {meaningValues.map((value, index) => (
-          <option key={index} value={value}>
-            {value}
+      <div>
+        <label htmlFor="meaning">meaning</label>
+        <select
+          id="meaning"
+          name="meaning"
+          value={formData.meaning}
+          onChange={handleInputChange}
+        >
+          <option value="" disabled>
+            Select Meaning
           </option>
-        ))}
-      </select>
-
-      <select
-        name="system"
-        value={formData.system}
-        onChange={handleInputChange}
-      >
-        <option value="" disabled>
-          Select System
-        </option>
-        {systemValues.map((option, index) => (
-          <option key={index} value={option}>
-            {option}
+          {meaningValues.map((value, index) => (
+            <option key={index} value={value}>
+              {value}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label htmlFor="system">system</label>
+        <select
+          id="system"
+          name="system"
+          value={formData.system}
+          onChange={handleInputChange}
+        >
+          <option value="" disabled>
+            Select System
           </option>
-        ))}
-      </select>
-
-      <select
-        name="status"
-        value={formData.status}
-        onChange={handleInputChange}
-      >
-        <option value="" disabled>
-          Select Status
-        </option>
-        {statusValues.map((item, index) => (
-          <option key={index} value={item}>
-            {item}
+          {systemValues.map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label htmlFor="status">status</label>
+        <select
+          id="status"
+          name="status"
+          value={formData.status}
+          onChange={handleInputChange}
+        >
+          <option value="" disabled>
+            Select Status
           </option>
-        ))}
-      </select>
-
-      <input
-        type="number"
-        name="number"
-        value={formData.number}
-        onChange={handleInputChange}
-        placeholder="Number"
-      />
-
+          {statusValues.map((item, index) => (
+            <option key={index} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label htmlFor="number">number</label>
+        <input
+          id="number"
+          
+          type="number"
+          name="number"
+          value={formData.number}
+          onChange={handleInputChange}
+          placeholder="Number"
+        />
+      </div>
       <button type="submit">Submit</button>
     </form>
   );

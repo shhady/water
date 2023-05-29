@@ -1,4 +1,4 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 const SensorsSchema = new mongoose.Schema(
   {
@@ -17,12 +17,10 @@ const SensorsSchema = new mongoose.Schema(
       // number of pond, number of tube, number of tower
       type: Number,
     },
-    triggers: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Trigger",
-      },
-    ],
+    Trigger: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Trigger", // Reference to the "Trigger" model
+    },
   },
   { timestamps: true }
 );

@@ -6,29 +6,24 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { baseURL } from "../constants/urlConstants";
-
 const fetchData = async (url) => {
   const res = await fetch(url);
   return res.json();
 };
-
 function Tables(params) {
+  const url = baseURL + "/" + params.QueryName;
   const navigate = useNavigate();
-  const Response = useQuery(params.QueryName, () =>
-    fetchData(baseURL + "/" + params.QueryName)
-  );
+  const Response = useQuery(url, () => fetchData(url));
   const Data = Response.data;
+  const { Massage } = params;
   const [Rows, setRows] = useState([]);
   useEffect(() => {
+    if (Massage == undefined) {
+      return;
+    }
     if (Data != null) {
-      setRows(
-        Data.map((t) => ({
-          ...t,
-          id: t._id,
-          createdAt: moment(t.createdAt).format("HH:mm:ss DD-MM-YYYY"),
-          updatedAt: moment(t.updatedAt).format("HH:mm:ss DD-MM-YYYY"),
-        }))
-      );
+      console.log("Transformed Data", Massage);
+      setRows(Massage(Data));
     }
   }, [Data]);
 

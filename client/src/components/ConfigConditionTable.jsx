@@ -29,10 +29,15 @@ const ConfigConditionTable = () => {
     { field: "createdAt", headerName: TableLookUps("createdAt"), flex: 1 },
     { field: "updatedAt", headerName: TableLookUps("createdAt"), flex: 1 },
   ];
+  const massage = (Data) => {
+    console.log("Config Conditions");
+    return [];
+  }
   return (
     <div>
       <h2>{TableLookUps("Config Conditions")}</h2>
       <Tables
+        Massage={massage}
         QueryName={"configConditions"}
         columns={configConditionsColumns}
         type="ConfigConditions"

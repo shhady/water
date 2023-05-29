@@ -28,10 +28,16 @@ const IdentifierTable = () => {
     { field: "createdAt", headerName: TableLookUps("createdAt"), flex: 1 },
     { field: "updatedAt", headerName: TableLookUps("updatedAt"), flex: 1 },
   ];
+  const massage = (Data) => {
+    console.log("Identifiers");
+
+    return [];
+  }
   return (
     <div>
       <h2>{TableLookUps("Identifiers")}</h2>
       <Tables
+       Massage={massage}
         QueryName={"Identifiers"}
         columns={identifiersColumns}
         type="Identifier"

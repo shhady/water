@@ -2,14 +2,9 @@ import mongoose from "mongoose";
 
 const triggerSchema = new mongoose.Schema(
   {
-    //trigger type is type of quality water or cyber attack
-    triggerType: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "TriggerType",
-      required: true,
-    },
-    //if the problem has been solved or not
-    status: { type: Boolean, default: false },
+    triggerType: { type: mongoose.Schema.Types.ObjectId, ref: "TriggerType" }, // To get trigger number, trigger name and trigger type
+    sensor: { type: mongoose.Schema.Types.ObjectId, ref: "Sensors" }, // To get system data
+    status: { type: Boolean, default: false }, // if the trigger has been resolved
   },
   { timestamps: true }
 );
