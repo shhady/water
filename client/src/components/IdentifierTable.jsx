@@ -11,8 +11,21 @@ const IdentifierTable = () => {
       hide: true,
     },
     {
-      field: "additionalIdentifier",
-      headerName: TableLookUps("additionalIdentifier"),
+      field: "sensorName",
+      headerName: TableLookUps("sensorName"),
+      flex: 1,
+    },
+    {
+      field: "sensorType",
+      headerName: TableLookUps("sensorType"),
+      flex: 1,
+    },{
+      field: "System",
+      headerName: TableLookUps("System"),
+      flex: 1,
+    },{
+      field: "SystemNumber",
+      headerName: TableLookUps("SystemNumber"),
       flex: 1,
     },
     {
@@ -29,9 +42,26 @@ const IdentifierTable = () => {
     { field: "updatedAt", headerName: TableLookUps("updatedAt"), flex: 1 },
   ];
   const massage = (Data) => {
-    console.log("Identifiers");
-
-    return [];
+    console.log("Identifiers",Data);
+    Data = Data.map((identifier) => {
+      return {
+        id: identifier._id,
+        sensorName: identifier.sensor.sensorName,
+        sensorType: identifier.sensor.sensorType,
+        System: identifier.sensor.System,
+        SystemNumber: identifier.sensor.SystemNumber,
+        status:identifier.status,
+        city: identifier.city,
+        street: identifier.street,
+        number: identifier.number,
+        latitude: identifier.latitude,
+        longitude: identifier.longitude,
+        createdAt: identifier.createdAt,
+        updatedAt: identifier.updatedAt,
+      };
+    });
+    console.log("Data Trigger", Data);
+    return Data;
   }
   return (
     <div>
