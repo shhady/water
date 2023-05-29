@@ -41,6 +41,7 @@ const TriggerTable = () => {
       flex: 1,
     },
   ];
+  
   return (
     <div>
       <h2>{TableLookUps("triggers")}</h2>
