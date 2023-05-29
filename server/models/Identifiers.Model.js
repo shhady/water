@@ -2,7 +2,11 @@ import mongoose from "mongoose";
 
 const identifierSchema = new mongoose.Schema(
   {
-    additionalIdentifier: { type: String, required: true, unique: true },
+    sensor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Sensors",
+      default: " ",
+    },
     status: { type: String, required: true },
     city: { type: String, required: true },
     street: { type: String, required: true },
