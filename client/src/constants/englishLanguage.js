@@ -10,7 +10,7 @@ const  ENGLISH_LANGUAGE = {
     NUMBER_FIELD : "Number",
     TRIGGER_FIELD : "Trigger",
     SYSTEM_FIELD : "System",
-    MEANING_FIELD : "Meaning",
+    MEANING_FIELD : "Meaning",  
     LANGUAGE_BUTTON : "Change language"
 
 }
