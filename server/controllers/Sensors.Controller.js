@@ -1,4 +1,5 @@
 import Sensors from "../models/Sensors.Model.js";
+import Trigger from "../models/Trigger.Model.js";
 
 // Get all sensors
 const getAllSensors = async (req, res) => {
@@ -44,8 +45,28 @@ const getSensors = async (req, res) => {
 // Update an existing sensor by ID
 const updateSensors = async (req, res) => {
   const { id } = req.params;
-  const { sensorName, sensorType, System, SystemNumber, Trigger } = req.body;
+  const {
+    sensorName,
+    sensorType,
+    System,
+    SystemNumber,
+    Trigger: TriggerType,
+  } = req.body;
   try {
+    const sensor = await Sensors.findById(id).populate("Trigger");
+    if (!sensor) {
+      return res.status(404).json({ message: "Sensor not found" });
+    }
+    await Trigger.create({
+      sensorName: sensor.sensorName,
+      sensorType: sensor.sensorType,
+      System: sensor.System,
+      SystemNumber: sensor.SystemNumber,
+      triggerNumber: sensor.Trigger.number,
+      triggerName: sensor.Trigger.name,
+      triggerType: sensor.Trigger.type,
+    });
+
     const updatedSensor = await Sensors.findByIdAndUpdate(
       id,
       {
@@ -53,16 +74,14 @@ const updateSensors = async (req, res) => {
         sensorType,
         System,
         SystemNumber,
-        Trigger,
+        Trigger: TriggerType,
       },
       { new: true }
     ).populate("Trigger");
-    if (!updatedSensor) {
-      return res.status(404).json({ message: "Sensor not found" });
-    }
+
     res.json(updatedSensor);
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: error.message });
   }
 };
 
