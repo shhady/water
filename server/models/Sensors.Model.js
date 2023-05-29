@@ -10,9 +10,11 @@ const SensorsSchema = new mongoose.Schema(
       type: String,
     },
     System: {
+      // pond, tube, tower
       type: String,
     },
     SystemNumber: {
+      // number of pond, number of tube, number of tower
       type: Number,
     },
     Trigger: {
