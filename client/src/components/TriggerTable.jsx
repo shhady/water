@@ -72,6 +72,9 @@ const TriggerTable = () => {
       flex: 1,
     },
   ];
+<<<<<<< HEAD
+  
+=======
 
   const massage = (Data) => {
     Data = Data.map((trigger) => {
@@ -93,6 +96,7 @@ const TriggerTable = () => {
     return Data;
   };
 
+>>>>>>> 7f521f4618e802a9e92c46d50215d7c117211ad2
   return (
     <div>
       <h2>{TableLookUps("triggers")}</h2>
