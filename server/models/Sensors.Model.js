@@ -19,7 +19,7 @@ const SensorsSchema = new mongoose.Schema(
     },
     Trigger: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Trigger", // Reference to the "Trigger" model
+      ref: "TriggerType", // Reference to the "Trigger" model
     },
   },
   { timestamps: true }

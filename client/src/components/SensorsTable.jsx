@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Tables } from "../CustomHook/Tables.Custom";
 import TableLookUps from "../constants/TableLookUps";
 
-const TriggerTable = () => {
+const SensorsTable = () => {
   const [rows, setRows] = useState([]);
-  const triggersColumns = [
-    { field: "id", headerName: "Trigger ID", flex: 1, hide: true },
+  const sensorsColumns = [
+    { field: "id", headerName: "Sensor ID", flex: 1, hide: true },
     //trigger number
     {
       field: "trigger",
@@ -54,12 +54,6 @@ const TriggerTable = () => {
       flex: 1,
     },
     {
-      field: "status",
-      headerName: TableLookUps("status"),
-
-      flex: 1,
-    },
-    {
       field: "createdAt",
       headerName: TableLookUps("createdAt"),
 
@@ -74,36 +68,34 @@ const TriggerTable = () => {
   ];
 
   const massage = (Data) => {
-    Data = Data.map((trigger) => {
+    Data = Data.map((sensor) => {
       return {
-        id: trigger._id,
-        trigger: trigger.triggerNumber,
-        triggerName: trigger.triggerName,
-        triggerType: trigger.triggerType,
-        sensorName: trigger.sensorName,
-        sensorType: trigger.sensorType,
-        System: trigger.System,
-        SystemNumber: trigger.SystemNumber,
-        status: trigger.status,
-        createdAt: trigger.createdAt,
-        updatedAt: trigger.updatedAt,
+        id: sensor._id,
+        trigger: sensor.Trigger.number,
+        triggerName: sensor.Trigger.name,
+        triggerType: sensor.Trigger.type,
+        sensorName: sensor.sensorName,
+        sensorType: sensor.sensorType,
+        System: sensor.System,
+        SystemNumber: sensor.SystemNumber,
+        createdAt: sensor.createdAt,
+        updatedAt: sensor.updatedAt,
       };
     });
-    console.log("Data Trigger", Data);
     return Data;
   };
 
   return (
     <div>
-      <h2>{TableLookUps("triggers")}</h2>
+      <h2>{TableLookUps("sensors")}</h2>
       <Tables
-        QueryName={"Triggers"}
+        QueryName={"Sensors"}
         Massage={massage}
-        columns={triggersColumns}
-        type="Trigger"
+        columns={sensorsColumns}
+        type="Sensor"
       />
     </div>
   );
 };
 
-export default TriggerTable;
+export default SensorsTable;

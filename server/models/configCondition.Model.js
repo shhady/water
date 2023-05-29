@@ -12,12 +12,15 @@ const configConditionSchema = new mongoose.Schema(
       ref: "Identifier",
       required: true,
     },
-    trigger: { type: Number, required: true },
-    type: { type: String, required: true },
-    triggerName: { type: String, required: true },
-    measuredValue: { type: String, default: "" },
-    valueType: { type: String, default: "" },
-    level: { type: String, default: "" },
+    parameter: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Parameter",
+      required: true,
+    },
+    value: {
+      type: Number,
+      required: true,
+    },
   },
   { timestamps: true }
 );
