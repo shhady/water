@@ -2,6 +2,13 @@ import mongoose from "mongoose";
 
 const SensorsSchema = new mongoose.Schema(
   {
+    sensorName: {
+      type: String,
+      default: "sim",
+    },
+    sensorType: {
+      type: String,
+    },
     System: {
       type: String,
     },
@@ -11,13 +18,6 @@ const SensorsSchema = new mongoose.Schema(
     Trigger: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Trigger", // Reference to the "Trigger" model
-    },
-    sensorName: {
-      type: String,
-      default: "sim",
-    },
-    sensorType: {
-      type: String,
     },
   },
   { timestamps: true }

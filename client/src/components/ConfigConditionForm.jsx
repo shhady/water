@@ -57,50 +57,77 @@ const ConfigConditionForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="systemId"
-        value={formData.systemId}
-        onChange={handleInputChange}
-      />
-      <input
-        type="text"
-        name="previousSystemId"
-        value={formData.previousSystemId}
-        onChange={handleInputChange}
-      />
-      <input
-        type="text"
-        name="type"
-        value={formData.type}
-        onChange={handleInputChange}
-      />
-      <select
-        name="triggerName"
-        value={formData.triggerName}
-        onChange={handleInputChange}
-      >
-        <option value="" disabled>
-          Select Value
-        </option>
-        {meaningValues.map((value, index) => (
-          <option key={index} value={value}>
-            {value}
+      <div>
+        <label htmlFor="systemId">system Id</label>
+        <input
+          id="systemId"
+          type="text"
+          name="systemId"
+          value={formData.systemId}
+          onChange={handleInputChange}
+          placeholder="systemId"
+        />
+      </div>
+      <div>
+        <label htmlFor="previousSystemId">previous System Id</label>
+        <input
+          type="text"
+          id="previousSystemId"
+          name="previousSystemId"
+          value={formData.previousSystemId}
+          onChange={handleInputChange}
+          placeholder="previousSystemId"
+        />
+      </div>
+      <div>
+        <label htmlFor="type">type</label>
+        <input
+          type="text"
+          name="type"
+          value={formData.type}
+          onChange={handleInputChange}
+          placeholder="type"
+          id="type"
+        />
+      </div>
+      <div>
+        <label htmlFor="triggerName">trigger Name</label>
+        <select
+          id="triggerName"
+          name="triggerName"
+          value={formData.triggerName}
+          onChange={handleInputChange}
+        >
+          <option value="" disabled>
+            Select Value
           </option>
-        ))}
-      </select>
-      <input
-        type="number"
-        name="measuredValue"
-        value={formData.measuredValue}
-        onChange={handleInputChange}
-      />
-      <input
-        type="text"
-        name="valueType"
-        value={formData.valueType}
-        onChange={handleInputChange}
-      />
+          {meaningValues.map((value, index) => (
+            <option key={index} value={value}>
+              {value}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label htmlFor="measuredValue">measured Value</label>
+        <input
+          id="measuredValue"
+          type="number"
+          name="measuredValue"
+          value={formData.measuredValue}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="valueType">value Type</label>
+        <input
+          id="valueType"
+          type="text"
+          name="valueType"
+          value={formData.valueType}
+          onChange={handleInputChange}
+        />
+      </div>
       <button type="submit">Submit</button>
     </form>
   );
