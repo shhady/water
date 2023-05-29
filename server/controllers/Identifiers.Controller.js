@@ -1,5 +1,4 @@
 import Identifier from "../models/Identifiers.Model.js";
-import mongoose from "mongoose";
 
 // to create Unique text use it in additionalIdentifier
 function createUniqueString(additionalIdentifier) {
@@ -84,10 +83,10 @@ const createIdentifier = async (req, res) => {
     number,
     latitude,
     longitude,
-    additionalIdentifier,
   } = req.body;
+  // const additionalIdentifier = createUniqueString("");
   try {
-    const newIdentifier = await Identifier.create({
+    const newIdentifier = new Identifier({
       sensor,
       status,
       city,
@@ -95,9 +94,10 @@ const createIdentifier = async (req, res) => {
       number,
       latitude,
       longitude,
-      additionalIdentifier,
     });
-    res.status(201).json(newIdentifier);
+    const saveIdentifier = await newIdentifier.save();
+
+    res.status(201).json(saveIdentifier);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

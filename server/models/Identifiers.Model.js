@@ -5,7 +5,7 @@ const identifierSchema = new mongoose.Schema(
     sensor: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Sensors",
-      default: " ",
+      default: null,
     },
     status: { type: String, required: true },
     city: { type: String, required: true },
