@@ -1,115 +1,91 @@
 import Trigger from "../models/Trigger.Model.js";
+import Sensors from "../models/Sensors.Model.js";
 
-// @desc    Get all triggers
-// @route   GET /triggers
-// @access  Public
+// Get all triggers
 const getTriggers = async (req, res) => {
   try {
     const triggers = await Trigger.find();
-    res.status(200).json(triggers);
+    res.json(triggers);
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
-const generateTriggers = async (req, res) => {
-  try {
-    let numberLimit = req.body.numberLimit;
-    const systems = ["hydrand", "pond", "tubes", "tower"];
-    const triggerNames = [
-      "conductivity",
-      "opacity",
-      "acidity",
-      "chlorine",
-      "Permissions",
-      "blackmail",
-      "spam",
-      "fishing",
-      "DoS",
-      "virus",
-    ];
-    for (let i = 0; i < numberLimit; i++) {
-      let trigger = Math.floor(Math.random() * triggerNames.length);
-      const meaning = triggerNames[trigger];
-      const number = Math.floor(Math.random() * 4) + 1;
-      const index = Math.floor(Math.random() * systems.length);
-      const system = systems[index];
-      trigger += 1;
-      await Trigger.create({ trigger, meaning, number, meaning, system });
-    }
-
-    res.status(200).send("Triggers generated successfully");
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
-};
-
-// @desc    Get a single trigger
-// @route   GET /triggers/:id
-// @access  Public
+// Get a single trigger by ID
 const getTriggerById = async (req, res) => {
+  const { id } = req.params;
   try {
-    const trigger = await Trigger.findById(req.params.id);
+    const trigger = await Trigger.findById(id);
     if (!trigger) {
-      return res.status(404).json({ error: "Trigger not found" });
+      return res.status(404).json({ message: "Trigger not found" });
     }
-    res.status(200).json(trigger);
+    res.json(trigger);
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
-// @desc    Create a new trigger
-// @route   POST /triggers
-// @access  Public
+// Create a new trigger
 const createTrigger = async (req, res) => {
+  const { sensorId } = req.body;
   try {
-    const { trigger, meaning, number, system, status } = req.body;
+    const sensor = await Sensors.findById(sensorId).populate("Trigger");
+    if (!sensor) {
+      return res.status(404).json({ message: "Sensor not found" });
+    }
+
+    const { number, name, type } = sensor.Trigger;
+
     const newTrigger = await Trigger.create({
-      trigger,
-      meaning,
-      number,
-      system,
-      status,
+      sensorName: sensor.sensorName,
+      sensorType: sensor.sensorType,
+      System: sensor.System,
+      SystemNumber: sensor.SystemNumber,
+      triggerNumber: number,
+      triggerName: name,
+      triggerType: type,
     });
+
     res.status(201).json(newTrigger);
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" + error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
-// @desc    Update a trigger
-// @route   PUT /triggers/:id
-// @access  Public
+// Update an existing trigger by ID
 const updateTrigger = async (req, res) => {
+  const { id } = req.params;
+  const { triggerNumber, triggerName, triggerType } = req.body;
   try {
-    const { trigger, meaning, number, system, status } = req.body;
     const updatedTrigger = await Trigger.findByIdAndUpdate(
-      req.params.id,
-      { trigger, meaning, number, system, status },
+      id,
+      {
+        triggerNumber,
+        triggerName,
+        triggerType,
+      },
       { new: true }
     );
     if (!updatedTrigger) {
-      return res.status(404).json({ error: "Trigger not found" });
+      return res.status(404).json({ message: "Trigger not found" });
     }
-    res.status(200).json(updatedTrigger);
+    res.json(updatedTrigger);
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
-// @desc    Delete a trigger
-// @route   DELETE /triggers/:id
-// @access  Public
+// Delete a trigger by ID
 const deleteTrigger = async (req, res) => {
+  const { id } = req.params;
   try {
-    const deletedTrigger = await Trigger.findByIdAndDelete(req.params.id);
+    const deletedTrigger = await Trigger.findByIdAndDelete(id);
     if (!deletedTrigger) {
-      return res.status(404).json({ error: "Trigger not found" });
+      return res.status(404).json({ message: "Trigger not found" });
     }
-    res.status(200).json({ message: "Trigger deleted successfully" });
+    res.json({ message: "Trigger deleted successfully" });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -119,5 +95,4 @@ export {
   createTrigger,
   updateTrigger,
   deleteTrigger,
-  generateTriggers,
 };

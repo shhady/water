@@ -53,3 +53,10 @@ conductivity, opacity, acidity, chlorine
 
 identifiers :
 status : new , in progress, postponed, canceled
+
+# activities
+
+0. Do nothing
+1. Call phone
+2. Send Email
+3. Send SMS

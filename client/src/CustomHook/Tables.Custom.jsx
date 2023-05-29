@@ -6,29 +6,24 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { baseURL } from "../constants/urlConstants";
-
 const fetchData = async (url) => {
   const res = await fetch(url);
   return res.json();
 };
-
 function Tables(params) {
+  const url = baseURL + "/" + params.QueryName;
   const navigate = useNavigate();
-  const Response = useQuery(params.QueryName, () =>
-    fetchData(baseURL + "/" + params.QueryName)
-  );
+  const Response = useQuery(url, () => fetchData(url));
   const Data = Response.data;
+  const { Massage } = params;
   const [Rows, setRows] = useState([]);
   useEffect(() => {
+    if (Massage == undefined) {
+      return;
+    }
     if (Data != null) {
-      setRows(
-        Data.map((t) => ({
-          ...t,
-          id: t._id,
-          createdAt: moment(t.createdAt).format("HH:mm:ss DD-MM-YYYY"),
-          updatedAt: moment(t.updatedAt).format("HH:mm:ss DD-MM-YYYY"),
-        }))
-      );
+      console.log("Transformed Data", Massage);
+      setRows(Massage(Data));
     }
   }, [Data]);
 
@@ -56,12 +51,26 @@ function Tables(params) {
     navigate("/data-form");
   };
 
+  //get the lang out of attribute as has been set in the constants/index.js file
+  let lang = document.getElementsByTagName("html")[0].getAttribute("lang");
+  const lookUps = {
+    en: { action: "Action", update: "Update" },
+    he: { action: "פעולה", update: "עדכון" },
+    ar: { action: "إجراءات", update: "تحديث" },
+  };
+  ////if set lang is not supported do back to english///
+  if (!lookUps[lang]) {
+    lang = "en";
+  }
+
   const Columns = params.columns.concat({
     field: "action",
-    headerName: "Action",
+    headerName: lookUps[lang]["action"],
     width: 150,
     renderCell: (obj) => (
-      <button onClick={() => clickHandler(obj)}>Update</button>
+      <button onClick={() => clickHandler(obj)}>
+        {lookUps[lang]["update"]}
+      </button>
     ),
   });
 

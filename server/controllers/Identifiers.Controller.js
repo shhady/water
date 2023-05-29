@@ -1,29 +1,6 @@
 import Identifier from "../models/Identifiers.Model.js";
 
-// Get all identifiers
-const getIdentifiers = async (req, res) => {
-  try {
-    const identifiers = await Identifier.find();
-    res.json(identifiers);
-  } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
-
-// Get a single identifier by ID
-const getIdentifierById = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const identifier = await Identifier.findById(id);
-    if (!identifier) {
-      return res.status(404).json({ message: "Identifier not found" });
-    }
-    res.json(identifier);
-  } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
-
+// to create Unique text use it in additionalIdentifier
 function createUniqueString(additionalIdentifier) {
   const date = new Date();
   const dateString = date.toISOString().slice(0, 19).replace(/[-:]/g, "");
@@ -32,16 +9,19 @@ function createUniqueString(additionalIdentifier) {
     .slice(2)}`;
 }
 
+//to get random index in array
 function getRandomIndex(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
+
+//use to generate fake data
 const generateIdentifiers = async (req, res) => {
   try {
     let cities = req.body.cities;
     let streets = req.body.streets;
     let numbers = req.body.numbers;
     const numberLimit = req.body.numberLimit;
-  
+
     const statusArray = ["new", "in progress", "postponed", "canceled"];
     for (let i = 0; i < numberLimit; i++) {
       const additionalIdentifier = createUniqueString("");
@@ -69,39 +49,34 @@ const generateIdentifiers = async (req, res) => {
   }
 };
 
-// Create a new identifier
-const createIdentifier = async (req, res) => {
-  const {
-    identifierId,
-    additionalIdentifier,
-    city,
-    street,
-    number,
-    latitude,
-    longitude,
-  } = req.body;
+// Get all identifiers
+const getIdentifiers = async (req, res) => {
   try {
-    const newIdentifier = await Identifier.create({
-      identifierId,
-      additionalIdentifier,
-      city,
-      street,
-      number,
-      latitude,
-      longitude,
-    });
-    res.status(201).json(newIdentifier);
+    const identifiers = await Identifier.find().populate("sensor");
+    res.json(identifiers);
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
 };
 
-// Update an existing identifier by ID
-const updateIdentifier = async (req, res) => {
+// Get a single identifier by ID
+const getIdentifierById = async (req, res) => {
   const { id } = req.params;
+  try {
+    const identifier = await Identifier.findById(id).populate("sensor");
+    if (!identifier) {
+      return res.status(404).json({ message: "Identifier not found" });
+    }
+    res.json(identifier);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+// Create a new identifier
+const createIdentifier = async (req, res) => {
   const {
-    identifierId,
-    additionalIdentifier,
+    sensor,
     status,
     city,
     street,
@@ -109,12 +84,35 @@ const updateIdentifier = async (req, res) => {
     latitude,
     longitude,
   } = req.body;
+  // const additionalIdentifier = createUniqueString("");
+  try {
+    const newIdentifier = new Identifier({
+      sensor,
+      status,
+      city,
+      street,
+      number,
+      latitude,
+      longitude,
+    });
+    const saveIdentifier = await newIdentifier.save();
+
+    res.status(201).json(saveIdentifier);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Update an existing identifier by ID
+const updateIdentifier = async (req, res) => {
+  const { id } = req.params;
+  const { sensor, status, city, street, number, latitude, longitude } =
+    req.body;
   try {
     const updatedIdentifier = await Identifier.findByIdAndUpdate(
       id,
       {
-        identifierId,
-        additionalIdentifier,
+        sensor,
         status,
         city,
         street,
@@ -123,7 +121,7 @@ const updateIdentifier = async (req, res) => {
         longitude,
       },
       { new: true }
-    );
+    ).populate("sensor");
     if (!updatedIdentifier) {
       return res.status(404).json({ message: "Identifier not found" });
     }
@@ -137,7 +135,9 @@ const updateIdentifier = async (req, res) => {
 const deleteIdentifier = async (req, res) => {
   const { id } = req.params;
   try {
-    const deletedIdentifier = await Identifier.findByIdAndDelete(id);
+    const deletedIdentifier = await Identifier.findByIdAndDelete(id).populate(
+      "sensor"
+    );
     if (!deletedIdentifier) {
       return res.status(404).json({ message: "Identifier not found" });
     }
