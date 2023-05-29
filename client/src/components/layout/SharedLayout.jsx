@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Alert } from "../";
 import  useChangeLanguage  from "../../CustomHook/useChangeLanguage";
-import { setItem } from "../../services/localStorageService";
+import { setItem, getItem } from "../../services/localStorageService";
 import {
 
   LANGUAGE_BUTTON,
@@ -29,11 +29,11 @@ const SharedLayout = () => {
           setLanguage(language);
           reloadWindow();
         }}
-        className={`form-input m-t`}
-      >
-        <option value=''>{LANGUAGE_BUTTON}</option>
-        <option value="he">עברית</option>
-        <option value="en">English</option>
+        className={`dropdown form-input m-t`}
+      >     
+        <option value=''>{`${getItem('language')==='en'? 'English':'עברית'}`}</option>
+        <option value="he"  >עברית</option>
+        <option value="en" >English</option>
       </select>
 
       <div className="container">

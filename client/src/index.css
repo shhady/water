@@ -879,6 +879,14 @@ button.disabled {
 }
 
 
+.dropdown {
+	appearance: none;
+	padding: 5px;
+	background-color: #0d05f5;
+	color: white;
+	border: none;
+	outline: none;
+}
 
 
 
