@@ -3,7 +3,7 @@ import IdentifierTable from "./IdentifierTable";
 import ConfigConditionTable from "./ConfigConditionTable";
 import ConnectionsForm from "./ConnectionsForm";
 import ParameterTable from "./ParameterTable";
-import SensorTable from "./SensorTable";
+import SensorsTable from "./SensorsTable";
 
 function TableConfiguration() {
   return (
@@ -18,7 +18,7 @@ function TableConfiguration() {
       <hr />
       <ParameterTable />
       <hr />
-      <SensorTable />
+      <SensorsTable />
     </div>
   );
 }
