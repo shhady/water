@@ -7,6 +7,8 @@ import {
   LANGUAGE_BUTTON,
   setLanguage
 } from "../../constants";
+
+const currentLanguage = getItem('language');
 const SharedLayout = () => {
 
   const { language,
@@ -31,9 +33,10 @@ const SharedLayout = () => {
         }}
         className={`dropdown form-input m-t`}
       >     
-        <option value=''>{`${getItem('language')==='en'? 'English':'עברית'}`}</option>
+        <option value=''>{`${currentLanguage==='en'? 'English':currentLanguage==='he'? 'עברית':'العربية'}`}</option>
         <option value="he"  >עברית</option>
         <option value="en" >English</option>
+        <option value="ar">العربية</option>
       </select>
 
       <div className="container">
