@@ -1,12 +1,7 @@
-import spinner from '../../assets/spinner.gif';
-import {LOADING_ALT} from "../../constants"
+import spinner from "../../assets/spinner.gif";
 const Spinner = () => (
   <>
-    <img
-      src={spinner}
-      alt={LOADING_ALT}
-      className="spinner"
-    />
+    <img src={spinner} alt="loading..." className="spinner" />
   </>
 );
 

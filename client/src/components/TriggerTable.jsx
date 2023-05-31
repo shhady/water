@@ -1,73 +1,73 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Tables } from "../CustomHook/Tables.Custom";
-import TableLookUps from "../constants/TableLookUps";
+import translate from "../services/translate";
 
 const TriggerTable = () => {
-  const [rows, setRows] = useState([]);
+  const language = localStorage.getItem("language");
   const triggersColumns = [
     { field: "id", headerName: "Trigger ID", flex: 1, hide: true },
     //trigger number
     {
       field: "trigger",
-      headerName: TableLookUps("trigger"),
+      headerName: translate(language, "trigger"),
       flex: 1,
     },
     //trigger name
     {
       field: "triggerName",
-      headerName: TableLookUps("triggerName"),
+      headerName: translate(language, "triggerName"),
       flex: 1,
     },
     //trigger number
 
     {
       field: "triggerType",
-      headerName: TableLookUps("triggerType"),
+      headerName: translate(language, "triggerType"),
       flex: 1,
     },
     //Sensore
     //sensorName
     {
       field: "sensorName",
-      headerName: TableLookUps("sensorName"),
+      headerName: translate(language, "sensorName"),
       flex: 1,
     },
     //Sensore
     //sensorType
     {
       field: "sensorType",
-      headerName: TableLookUps("sensorType"),
+      headerName: translate(language, "sensorType"),
       flex: 1,
     },
     //Sensore
     //System
     {
       field: "System",
-      headerName: TableLookUps("System"),
+      headerName: translate(language, "System"),
       flex: 1,
     },
     //Sensore
     //SystemNumber
     {
       field: "SystemNumber",
-      headerName: TableLookUps("SystemNumber"),
+      headerName: translate(language, "SystemNumber"),
       flex: 1,
     },
     {
       field: "status",
-      headerName: TableLookUps("status"),
+      headerName: translate(language, "status"),
 
       flex: 1,
     },
     {
       field: "createdAt",
-      headerName: TableLookUps("createdAt"),
+      headerName: translate(language, "createdAt"),
 
       flex: 1,
     },
     {
       field: "updatedAt",
-      headerName: TableLookUps("updatedAt"),
+      headerName: translate(language, "updatedAt"),
 
       flex: 1,
     },
@@ -95,7 +95,7 @@ const TriggerTable = () => {
 
   return (
     <div>
-      <h2>{TableLookUps("triggers")}</h2>
+      <h2>{translate(language, "triggers")}</h2>
       <Tables
         QueryName={"Triggers"}
         Massage={massage}

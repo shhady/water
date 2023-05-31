@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TableLookUps from "../constants/TableLookUps";
+import translate from "../services/translate";
 
 const CheckboxList = ({ options, checkedItems, setCheckedItems }) => {
   const handleCheckboxChange = (event, index) => {
@@ -10,6 +10,8 @@ const CheckboxList = ({ options, checkedItems, setCheckedItems }) => {
       setCheckedItems(checkedItems.filter((item) => item !== index));
     }
   };
+
+  const language = localStorage.getItem("language");
 
   return (
     <div>
@@ -25,7 +27,7 @@ const CheckboxList = ({ options, checkedItems, setCheckedItems }) => {
         </label>
       ))}
       <p>
-        {TableLookUps("Checked Items")}: {JSON.stringify(checkedItems)}
+        {translate(language, "Checked Items")}: {JSON.stringify(checkedItems)}
       </p>
     </div>
   );

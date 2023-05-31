@@ -1,48 +1,63 @@
 import React from "react";
 import { Tables } from "../CustomHook/Tables.Custom";
-import TableLookUps from "../constants/TableLookUps";
+import translate from "../services/translate";
 
 const IdentifierTable = () => {
+  const language = localStorage.getItem("language");
   const identifiersColumns = [
     {
       field: "id",
-      headerName: TableLookUps("IdentifierID"),
+      headerName: translate(language, "IdentifierID"),
       flex: 1,
       hide: true,
     },
     {
       field: "sensorName",
-      headerName: TableLookUps("sensorName"),
+      headerName: translate(language, "sensorName"),
       flex: 1,
     },
     {
       field: "sensorType",
-      headerName: TableLookUps("sensorType"),
+      headerName: translate(language, "sensorType"),
       flex: 1,
-    },{
+    },
+    {
       field: "System",
-      headerName: TableLookUps("System"),
+      headerName: translate(language, "System"),
       flex: 1,
-    },{
+    },
+    {
       field: "SystemNumber",
-      headerName: TableLookUps("SystemNumber"),
+      headerName: translate(language, "SystemNumber"),
       flex: 1,
     },
     {
       field: "status",
-      headerName: TableLookUps("status"),
+      headerName: translate(language, "status"),
       flex: 1,
     },
-    { field: "city", headerName: TableLookUps("city"), flex: 1 },
-    { field: "street", headerName: TableLookUps("street"), flex: 1 },
-    { field: "number", headerName: TableLookUps("number"), flex: 1 },
-    { field: "latitude", headerName: TableLookUps("latitude"), flex: 1 },
-    { field: "longitude", headerName: TableLookUps("longitude"), flex: 1 },
-    { field: "createdAt", headerName: TableLookUps("createdAt"), flex: 1 },
-    { field: "updatedAt", headerName: TableLookUps("updatedAt"), flex: 1 },
+    { field: "city", headerName: translate(language, "city"), flex: 1 },
+    { field: "street", headerName: translate(language, "street"), flex: 1 },
+    { field: "number", headerName: translate(language, "number"), flex: 1 },
+    { field: "latitude", headerName: translate(language, "latitude"), flex: 1 },
+    {
+      field: "longitude",
+      headerName: translate(language, "longitude"),
+      flex: 1,
+    },
+    {
+      field: "createdAt",
+      headerName: translate(language, "createdAt"),
+      flex: 1,
+    },
+    {
+      field: "updatedAt",
+      headerName: translate(language, "updatedAt"),
+      flex: 1,
+    },
   ];
   const massage = (Data) => {
-    console.log("Identifiers",Data);
+    console.log("Identifiers", Data);
     Data = Data.map((identifier) => {
       return {
         id: identifier._id,
@@ -50,7 +65,7 @@ const IdentifierTable = () => {
         sensorType: identifier.sensor.sensorType,
         System: identifier.sensor.System,
         SystemNumber: identifier.sensor.SystemNumber,
-        status:identifier.status,
+        status: identifier.status,
         city: identifier.city,
         street: identifier.street,
         number: identifier.number,
@@ -62,12 +77,12 @@ const IdentifierTable = () => {
     });
     console.log("Data Trigger", Data);
     return Data;
-  }
+  };
   return (
     <div>
-      <h2>{TableLookUps("Identifiers")}</h2>
+      <h2>{translate(language, "Identifiers")}</h2>
       <Tables
-       Massage={massage}
+        Massage={massage}
         QueryName={"Identifiers"}
         columns={identifiersColumns}
         type="Identifier"
