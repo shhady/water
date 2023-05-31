@@ -1,13 +1,11 @@
 import { useState } from "react";
 import useChoseTypeStatistic from "../CustomHook/useChoseTypeStatistic";
 import { Statistic } from "../components";
-import translate from "../services/translate";
+import TableLookUps from "../constants/TableLookUps";
 
 const Statistics = () => {
   const [chooseType, setChooseType] = useState(null);
   const { statisticType } = useChoseTypeStatistic();
-
-  const language = localStorage.getItem("language");
 
   const setStatisticType = (e) => {
     setChooseType(e.target.value);
@@ -22,11 +20,11 @@ const Statistics = () => {
         onChange={setStatisticType}
         className={`form-input m-t`}
       >
-        <option value="">{translate(language, "")}</option>
-        <option value="day">{translate(language, "Daily")}</option>
-        <option value="week">{translate(language, "Weekly")}</option>
-        <option value="month">{translate(language, "Monthly")}</option>
-        <option value="year">{translate(language, "Yearly")}</option>
+        <option value="">{TableLookUps("")}</option>
+        <option value="day">{TableLookUps("DAILY")}</option>
+        <option value="week">{TableLookUps("WEEKLY")}</option>
+        <option value="month">{TableLookUps("MONTHLY")}</option>
+        <option value="year">{TableLookUps("YEARLY")}</option>
       </select>
       {chooseType && <Statistic statisticType={chooseType} />}{" "}
     </>
