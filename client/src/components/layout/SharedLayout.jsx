@@ -1,8 +1,10 @@
 import { Outlet } from "react-router-dom";
 import { Alert } from "../";
 import useChangeLanguage from "../../CustomHook/useChangeLanguage";
-import { setItem } from "../../services/localStorageService";
-import translate from "../../services/translate";
+import { setItem, getItem } from "../../services/localStorageService";
+import { setLanguage } from "../../constants/TableLookUps";
+
+const currentLanguage = getItem("language");
 
 const SharedLayout = () => {
   const { language, handleLanguageChange } = useChangeLanguage();
@@ -19,15 +21,21 @@ const SharedLayout = () => {
         onChange={(e) => {
           const language = e.target.value;
           handleLanguageChange(e);
-          localStorage.setItem("language", language);
+          setLanguage(language);
           reloadWindow();
         }}
-        className={`form-input m-t`}
+        className={`dropdown form-input m-t`}
       >
-        <option value="">{translate(language, "Change language")}</option>
-        <option value="he">עברית</option>
-        <option value="en">English</option>
-        <option value="ar">العربية</option>
+        <option value="" style={{ backgroundColor: "black" }}>{`${
+          currentLanguage === "en"
+            ? "English"
+            : currentLanguage === "he"
+            ? "עברית"
+            : "العربية"
+        }`}</option>
+        {currentLanguage !== "he" && <option value="he">עברית</option>}
+        {currentLanguage !== "en" && <option value="en">English</option>}
+        {currentLanguage !== "ar" && <option value="ar">العربية</option>}{" "}
       </select>
 
       <div className="container">
@@ -37,5 +45,4 @@ const SharedLayout = () => {
     </>
   );
 };
-
 export default SharedLayout;

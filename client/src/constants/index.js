@@ -1,5 +1,7 @@
+import { getItem } from "../services/localStorageService";
+
 export const DEFAULT_LANGUAGE = "he";
-export let language = localStorage.getItem("language") || DEFAULT_LANGUAGE; //set hebrew language by default
+export let language = getItem("language") || DEFAULT_LANGUAGE; //set hebrew language by default
 export const BASE_URL_SERVER = "http://localhost:5000";
 export const MS_1000 = 1000;
 export const DEFAULT_TIME_ALERT = 3;

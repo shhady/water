@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import translate from "../services/translate";
+import TableLookUps from "../constants/TableLookUps";
 
 const ConnectionTable = ({ connections }) => {
   const [expandedRows, setExpandedRows] = useState([]);
-  const language = localStorage.getItem("language");
 
   const handleExpandRow = (connectionId) => {
     if (expandedRows.includes(connectionId)) {
@@ -37,10 +36,10 @@ const ConnectionTable = ({ connections }) => {
     <table>
       <thead>
         <tr>
-          <th>{translate(language, "Meaning")} </th>
-          <th>{translate(language, "Activity")}</th>
-          <th>{translate(language, "Parameters")}</th>
-          <th>{translate(language, "Actions")}</th>
+          <th>{TableLookUps("MEANING")} </th>
+          <th>{TableLookUps("ACTIVITY")}</th>
+          <th>{TableLookUps("PARAMETERS")}</th>
+          <th>{TableLookUps("ACTIONS")}</th>
         </tr>
       </thead>
       <tbody>
@@ -77,14 +76,14 @@ const ConnectionTable = ({ connections }) => {
                     <button
                       onClick={() => handleEditParameter(connection._id, index)}
                     >
-                      {translate(language, "Edit")}
+                      {TableLookUps("EDIT")}
                     </button>{" "}
                     <button
                       onClick={() =>
                         handleDeleteParameter(connection._id, index)
                       }
                     >
-                      {translate(language, "Delete")}
+                      {TableLookUps("DELETE")}
                     </button>
                   </td>
                 </tr>

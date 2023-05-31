@@ -1,68 +1,67 @@
 import React, { useEffect, useState } from "react";
 import { Tables } from "../CustomHook/Tables.Custom";
-import translate from "../services/translate";
+import TableLookUps from "../constants/TableLookUps";
 
 const SensorsTable = () => {
   const [rows, setRows] = useState([]);
-  const language = localStorage.getItem("language");
   const sensorsColumns = [
     { field: "id", headerName: "Sensor ID", flex: 1, hide: true },
     //trigger number
     {
       field: "trigger",
-      headerName: translate(language, "trigger"),
+      headerName: TableLookUps("TRIGGER"),
       flex: 1,
     },
     //trigger name
     {
       field: "triggerName",
-      headerName: translate(language, "triggerName"),
+      headerName: TableLookUps("TRIGGER_NAME"),
       flex: 1,
     },
     //trigger number
 
     {
       field: "triggerType",
-      headerName: translate(language, "triggerType"),
+      headerName: TableLookUps("TRIGGER_TYPE"),
       flex: 1,
     },
     //Sensore
     //sensorName
     {
       field: "sensorName",
-      headerName: translate(language, "sensorName"),
+      headerName: TableLookUps("SENSOR_NAME"),
       flex: 1,
     },
     //Sensore
     //sensorType
     {
       field: "sensorType",
-      headerName: translate(language, "sensorType"),
+      headerName: TableLookUps("SENSOR_TYPE"),
       flex: 1,
     },
     //Sensore
     //System
     {
       field: "System",
-      headerName: translate(language, "System"),
+      headerName: TableLookUps("SYSTEM"),
       flex: 1,
     },
     //Sensore
     //SystemNumber
     {
       field: "SystemNumber",
-      headerName: translate(language, "SystemNumber"),
+      headerName: TableLookUps("SYSTEM_NUMBER"),
       flex: 1,
     },
     {
       field: "createdAt",
-      headerName: translate(language, "createdAt"),
+      headerName: TableLookUps("CREATED_AT"),
 
       flex: 1,
     },
     {
       field: "updatedAt",
-      headerName: translate(language, "updatedAt"),
+      headerName: TableLookUps("UPDATED_AT"),
 
       flex: 1,
     },
@@ -88,7 +87,7 @@ const SensorsTable = () => {
 
   return (
     <div>
-      <h2>{translate(language, "sensors")}</h2>
+      <h2>{TableLookUps("SENSORS")}</h2>
       <Tables
         QueryName={"Sensors"}
         Massage={massage}

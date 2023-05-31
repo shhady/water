@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import translate from "../services/translate";
+import { getItem } from "../services/localStorageService";
 
 const CheckboxList = ({ options, checkedItems, setCheckedItems }) => {
   const handleCheckboxChange = (event, index) => {
@@ -11,7 +12,7 @@ const CheckboxList = ({ options, checkedItems, setCheckedItems }) => {
     }
   };
 
-  const language = localStorage.getItem("language");
+  const language = getItem("language");
 
   return (
     <div>

@@ -1,59 +1,41 @@
 import React from "react";
 import { Tables } from "../CustomHook/Tables.Custom";
-import translate from "../services/translate";
+import TableLookUps from "../constants/TableLookUps";
 
 const ConfigConditionTable = () => {
-  const language = localStorage.getItem("language");
-
   const configConditionsColumns = [
     {
       field: "id",
-      headerName: translate(language, "config Condition ID"),
+      headerName: TableLookUps("CONFIG_CONDITION_ID"),
       flex: 1,
       hide: true,
     },
-    { field: "systemId", headerName: translate(language, "systemId"), flex: 1 },
+    { field: "systemId", headerName: TableLookUps("SYSTEM_ID"), flex: 1 },
     {
       field: "previousSystemId",
-      headerName: translate(language, "previousSystemId"),
+      headerName: TableLookUps("PREVIOUS_SYSTEM_ID"),
       flex: 1,
     },
-    { field: "trigger", headerName: translate(language, "trigger"), flex: 1 },
-    { field: "type", headerName: translate(language, "type"), flex: 1 },
-    {
-      field: "triggerName",
-      headerName: translate(language, "triggerName"),
-      flex: 1,
-    },
+    { field: "trigger", headerName: TableLookUps("TRIGGER"), flex: 1 },
+    { field: "type", headerName: TableLookUps("TYPE"), flex: 1 },
+    { field: "triggerName", headerName: TableLookUps("TRIGGER_NAME"), flex: 1 },
     {
       field: "measuredValue",
-      headerName: translate(language, "measuredValue"),
+      headerName: TableLookUps("MEASURED_VALUE"),
       flex: 1,
     },
-    {
-      field: "valueType",
-      headerName: translate(language, "valueType"),
-      flex: 1,
-    },
-    { field: "level", headerName: translate(language, "Level"), flex: 1 },
-    {
-      field: "createdAt",
-      headerName: translate(language, "createdAt"),
-      flex: 1,
-    },
-    {
-      field: "updatedAt",
-      headerName: translate(language, "createdAt"),
-      flex: 1,
-    },
+    { field: "valueType", headerName: TableLookUps("VALUE_TYPE"), flex: 1 },
+    { field: "level", headerName: TableLookUps("LEVEL"), flex: 1 },
+    { field: "createdAt", headerName: TableLookUps("CREATED_AT"), flex: 1 },
+    { field: "updatedAt", headerName: TableLookUps("CREATED_AT"), flex: 1 },
   ];
   const massage = (Data) => {
     console.log("Config Conditions");
     return [];
-  };
+  }
   return (
     <div>
-      <h2>{translate(language, "Config Conditions")}</h2>
+      <h2>{TableLookUps("CONFIG_CONDITIONS")}</h2>
       <Tables
         Massage={massage}
         QueryName={"configConditions"}
