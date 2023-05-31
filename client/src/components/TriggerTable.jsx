@@ -5,7 +5,7 @@ import translate from "../services/translate";
 const TriggerTable = () => {
   const language = localStorage.getItem("language");
   const triggersColumns = [
-    { field: "id", headerName: "Trigger ID", flex: 1, hide: true },
+    { field: "id", headerName: "TRIGGER_ID", flex: 1, hide: true },
     //trigger number
     {
       field: "trigger",

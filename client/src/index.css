@@ -882,11 +882,20 @@ button.disabled {
 .dropdown {
 	appearance: none;
 	padding: 5px;
-	background-color: #0d05f5;
-	color: white;
+	background-color: rgb(25, 47, 241);
+  color:#ffffff;
 	border: none;
 	outline: none;
 }
 
 
+/* 
+select{
+  background: orange;
+  color:#FFF;
+  text-shadow:0 1px 0 rgba(0,0,0,0.4);
+}
+option:not(:checked) { 
+  background-color: #FFF; 
+} */
 
