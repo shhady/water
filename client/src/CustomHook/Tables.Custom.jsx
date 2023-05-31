@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { baseURL } from "../constants/urlConstants";
+import { getItem } from "../services/localStorageService";
+
 const fetchData = async (url) => {
   const res = await fetch(url);
   return res.json();
@@ -51,8 +53,8 @@ function Tables(params) {
     navigate("/data-form");
   };
 
-  //get the lang out of attribute as has been set in the constants/index.js file
-  let lang = document.getElementsByTagName("html")[0].getAttribute("lang");
+  let lang = getItem("language");
+
   const lookUps = {
     en: { action: "Action", update: "Update" },
     he: { action: "פעולה", update: "עדכון" },
