@@ -11,3 +11,5 @@ export const DANGER_TIME_ALERT = 2.5;
 export const MIN_LEN_NUMBER = 2;
 export const MIN_LEN_MEANING = 2;
 export const SUCCESS = true;
+
+export const AH = true;
