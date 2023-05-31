@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { baseURL } from "../constants/urlConstants";
-import translate from "../services/translate";
+import TableLookUps from "../constants/TableLookUps";
 
 const fetchData = async (url) => {
   const res = await fetch(url);
@@ -29,8 +29,6 @@ const ParameterTable = () => {
     }
   };
 
-  const language = localStorage.getItem("language");
-
   const handleAddRange = (rowId) => {
     // Implement your logic to add a new range to the parameter
     console.log(`Add range to Parameter ${rowId}`);
@@ -50,9 +48,9 @@ const ParameterTable = () => {
     <table>
       <thead>
         <tr>
-          <th>{translate(language, "Name")}</th>
-          <th>{translate(language, "Unit")}</th>
-          <th>{translate(language, "Ranges")}</th>
+          <th>{TableLookUps("NAME")}</th>
+          <th>{TableLookUps("UNIT")}</th>
+          <th>{TableLookUps("RANGES")}</th>
         </tr>
       </thead>
       <tbody>
@@ -64,7 +62,7 @@ const ParameterTable = () => {
                 <td>{parameter.unit}</td>
                 <td>
                   <button onClick={() => handleRowExpand(parameter._id)}>
-                    {translate(language, "Expand")}
+                    {TableLookUps("EXPAND")}
                   </button>
                 </td>
               </tr>
@@ -74,10 +72,10 @@ const ParameterTable = () => {
                     <table>
                       <thead>
                         <tr>
-                          <th>{translate(language, "Message")}</th>
-                          <th>{translate(language, "Min")}</th>
-                          <th>{translate(language, "Max")}</th>
-                          <th>{translate(language, "Actions")}</th>
+                          <th>{TableLookUps("MESSAGE")}</th>
+                          <th>{TableLookUps("MIN")}</th>
+                          <th>{TableLookUps("MAX")}</th>
+                          <th>{TableLookUps("ACTIONS")}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -92,14 +90,14 @@ const ParameterTable = () => {
                                   handleUpdateRange(parameter._id, range._id)
                                 }
                               >
-                                {translate(language, "Update")}
+                                {TableLookUps("UPDATE")}
                               </button>
                               <button
                                 onClick={() =>
                                   handleDeleteRange(parameter._id, range._id)
                                 }
                               >
-                                {translate(language, "Delete")}
+                                {TableLookUps("DELETE")}
                               </button>
                             </td>
                           </tr>
@@ -118,7 +116,7 @@ const ParameterTable = () => {
                             <button
                               onClick={() => handleAddRange(parameter._id)}
                             >
-                              {translate(language, "Add Range")}
+                              {TableLookUps("ADD_RANGE")}
                             </button>
                           </td>
                         </tr>

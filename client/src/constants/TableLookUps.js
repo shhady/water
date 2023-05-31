@@ -1,11 +1,11 @@
-import { getItem } from "../services/localStorageService";
+import { getItem, setItem } from "../services/localStorageService";
 import { DEFAULT_LANGUAGE } from "../constants";
 
 export let language = getItem("language") || DEFAULT_LANGUAGE; //set hebrew language by default
 
 export default (word) => {
-  //get the lang out of attribute as has been set in the constants/index.js file
-  let lang = document.getElementsByTagName("html")[0].getAttribute("lang");
+  // //get the lang out of attribute as has been set in the constants/index.js file
+  let lang = language;
 
   const lookUps = {
     he: {
@@ -147,31 +147,30 @@ export default (word) => {
       TRIGGER: "Trigger",
     },
     ar: {
-      //need to be translated into Arabic
       TRIGGER_FIELD_ERROR: "-",
       NUMBER_FIELD_ERROR: "-",
       MEANING_FIELD_ERROR: "-",
       SYSTEM_FIELD_ERROR: "-",
-      SUCCESS_ADD_ROW_MSG: "הנתונים נשלחו בהצלחה",
-      WAITING_BUTTON: "המתן...",
-      SEND_TRIGGER_BUTTON: "שלח טריגר",
-      ADD_TRIGGER_TITLE: " הוספת טריגר",
-      NUMBER_FIELD: "מספר",
-      TRIGGER_FIELD: "טריגר",
-      SYSTEM_FIELD: "מערכת",
-      MEANING_FIELD: "משמעות",
-      LANGUAGE_BUTTON: "שינוי שפה",
-      STATISTIC_BUTTON: "בחר סטטיסטיקת פניות להצגה",
-      STATISTIC_TYPE_A_OPTION: "יומית",
-      STATISTIC_TYPE_B_OPTION: "שבועית",
-      STATISTIC_TYPE_C_OPTION: "חודשית",
-      STATISTIC_TYPE_D_OPTION: "שנתית",
-      OPEN_INQUIRIES_LABEL: "ממתינות לטיפול",
-      HANDLED_ALERT_LABEL: "טופלו",
-      CHART_OPTIONS_TEXT: "סטטוס פניות",
-      CHART_TITLE_H2: "פניות שטופלו",
-      TOTAL_LABEL: 'סה"כ',
-      LOADING_ALT: "טוען...",
+      SUCCESS_ADD_ROW_MSG: "تم إرسال البيانات بنجاح",
+      WAITING_BUTTON: "انتظار...",
+      SEND_TRIGGER_BUTTON: "إرسال تريجر",
+      ADD_TRIGGER_TITLE: "إضافة تريجر",
+      NUMBER_FIELD: "الرقم",
+      TRIGGER_FIELD: "التريجر",
+      SYSTEM_FIELD: "النظام",
+      MEANING_FIELD: "المعنى",
+      LANGUAGE_BUTTON: "تغيير اللغة",
+      STATISTIC_BUTTON: "اختيار إحصاء الاستفسارات للعرض",
+      STATISTIC_TYPE_A_OPTION: "يومي",
+      STATISTIC_TYPE_B_OPTION: "أسبوعي",
+      STATISTIC_TYPE_C_OPTION: "شهري",
+      STATISTIC_TYPE_D_OPTION: "سنوي",
+      OPEN_INQUIRIES_LABEL: "في انتظار المعالجة",
+      HANDLED_ALERT_LABEL: "تمت المعالجة",
+      CHART_OPTIONS_TEXT: "حالة الاستفسارات",
+      CHART_TITLE_H2: "الاستفسارات المعالجة",
+      TOTAL_LABEL: "الإجمالي",
+      LOADING_ALT: "جارٍ التحميل...",
 
       DELETE: "حذف",
       ADD_RANGE: "اضافة حد",
@@ -233,7 +232,8 @@ export const setLanguage = (lang = "he") => {
     document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
   }
 
-  document.getElementsByTagName("html")[0].setAttribute("lang", lang);
+  setItem("language", lang);
   language = lang;
 };
+
 setLanguage(language);
