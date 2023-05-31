@@ -5,11 +5,10 @@ import { Spinner } from "..";
 import { Pie } from "react-chartjs-2";
 import Chart from "chart.js/auto"; //please not remove this, must have it in the code even though not in use
 import { CategoryScale } from "chart.js";
-import translate from "../../services/translate";
+import TableLookUps from "../../constants/TableLookUps";
 
 const Statistic = ({ statisticType }) => {
   const { loading, getHandledAlert, handledAlert } = useStatisticsContext();
-  const language = localStorage.getItem("language");
 
   useEffect(() => {
     getHandledAlert(statisticType);
@@ -27,14 +26,14 @@ const Statistic = ({ statisticType }) => {
             handledAlert.handledAlert,
           ]}
           labels={[
-            translate(language, "Open enquiries"),
-            translate(language, "Handled alert"),
+            TableLookUps("OPEN_INQUIRIES_LABEL"),
+            TableLookUps("HANDLED_ALERT_LABEL"),
           ]}
           backgroundColor={["#bc3c31", "#39b452"]}
-          insideLabel={translate(language, "Total")}
+          insideLabel={TableLookUps("TOTAL_LABEL")}
           graphType={{ component: Pie }}
-          text={translate(language, "Status of inquiries")}
-          chartTitle={translate(language, "Inquiries handled")}
+          text={TableLookUps("CHART_OPTIONS_TEXT")}
+          chartTitle={TableLookUps("CHART_TITLE_H2")}
         />
       )}
     </div>

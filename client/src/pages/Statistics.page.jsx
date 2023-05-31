@@ -20,7 +20,7 @@ const Statistics = () => {
         onChange={setStatisticType}
         className={`form-input m-t`}
       >
-        <option value="">{TableLookUps("")}</option>
+        <option value="">{TableLookUps("STATISTIC_BUTTON")}</option>
         <option value="day">{TableLookUps("DAILY")}</option>
         <option value="week">{TableLookUps("WEEKLY")}</option>
         <option value="month">{TableLookUps("MONTHLY")}</option>
