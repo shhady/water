@@ -12,34 +12,34 @@ const IdentifierTable = () => {
     },
     {
       field: "sensorName",
-      headerName: TableLookUps("sensorName"),
+      headerName: TableLookUps("SENSOR_NAME"),
       flex: 1,
     },
     {
       field: "sensorType",
-      headerName: TableLookUps("sensorType"),
+      headerName: TableLookUps("SENSOR_TYPE"),
       flex: 1,
     },{
       field: "System",
-      headerName: TableLookUps("System"),
+      headerName: TableLookUps("SYSTEM"),
       flex: 1,
     },{
       field: "SystemNumber",
-      headerName: TableLookUps("SystemNumber"),
+      headerName: TableLookUps("SYSTEM_NUMBER"),
       flex: 1,
     },
     {
       field: "status",
-      headerName: TableLookUps("status"),
+      headerName: TableLookUps("STATUS"),
       flex: 1,
     },
-    { field: "city", headerName: TableLookUps("city"), flex: 1 },
-    { field: "street", headerName: TableLookUps("street"), flex: 1 },
-    { field: "number", headerName: TableLookUps("number"), flex: 1 },
-    { field: "latitude", headerName: TableLookUps("latitude"), flex: 1 },
-    { field: "longitude", headerName: TableLookUps("longitude"), flex: 1 },
-    { field: "createdAt", headerName: TableLookUps("createdAt"), flex: 1 },
-    { field: "updatedAt", headerName: TableLookUps("updatedAt"), flex: 1 },
+    { field: "city", headerName: TableLookUps("CITY"), flex: 1 },
+    { field: "street", headerName: TableLookUps("STREET"), flex: 1 },
+    { field: "number", headerName: TableLookUps("NUMBER"), flex: 1 },
+    { field: "latitude", headerName: TableLookUps("LATITUDE"), flex: 1 },
+    { field: "longitude", headerName: TableLookUps("LONGITUDE"), flex: 1 },
+    { field: "createdAt", headerName: TableLookUps("CREATED_AT"), flex: 1 },
+    { field: "updatedAt", headerName: TableLookUps("UPDATED_AT"), flex: 1 },
   ];
   const massage = (Data) => {
     console.log("Identifiers",Data);
@@ -65,7 +65,7 @@ const IdentifierTable = () => {
   }
   return (
     <div>
-      <h2>{TableLookUps("Identifiers")}</h2>
+      <h2>{TableLookUps("IDENTIFIERS")}</h2>
       <Tables
        Massage={massage}
         QueryName={"Identifiers"}

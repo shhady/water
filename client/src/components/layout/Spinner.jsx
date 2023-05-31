@@ -1,10 +1,10 @@
 import spinner from '../../assets/spinner.gif';
-import {LOADING_ALT} from "../../constants"
+import TableLookUps from "../../constants/TableLookUps"
 const Spinner = () => (
   <>
     <img
       src={spinner}
-      alt={LOADING_ALT}
+      alt={TableLookUps("LOADING_ALT")}
       className="spinner"
     />
   </>

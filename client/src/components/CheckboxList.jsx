@@ -25,7 +25,7 @@ const CheckboxList = ({ options, checkedItems, setCheckedItems }) => {
         </label>
       ))}
       <p>
-        {TableLookUps("Checked Items")}: {JSON.stringify(checkedItems)}
+        {TableLookUps("CHECKED_ITEMS")}: {JSON.stringify(checkedItems)}
       </p>
     </div>
   );

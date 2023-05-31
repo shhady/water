@@ -36,10 +36,10 @@ const ConnectionTable = ({ connections }) => {
     <table>
       <thead>
         <tr>
-          <th>{TableLookUps("Meaning")} </th>
-          <th>{TableLookUps("Activity")}</th>
-          <th>{TableLookUps("Parameters")}</th>
-          <th>{TableLookUps("Actions")}</th>
+          <th>{TableLookUps("MEANING")} </th>
+          <th>{TableLookUps("ACTIVITY")}</th>
+          <th>{TableLookUps("PARAMETERS")}</th>
+          <th>{TableLookUps("ACTIONS")}</th>
         </tr>
       </thead>
       <tbody>
@@ -76,14 +76,14 @@ const ConnectionTable = ({ connections }) => {
                     <button
                       onClick={() => handleEditParameter(connection._id, index)}
                     >
-                      {TableLookUps("Edit")}
+                      {TableLookUps("EDIT")}
                     </button>{" "}
                     <button
                       onClick={() =>
                         handleDeleteParameter(connection._id, index)
                       }
                     >
-                      {TableLookUps("Delete")}
+                      {TableLookUps("DELETE")}
                     </button>
                   </td>
                 </tr>

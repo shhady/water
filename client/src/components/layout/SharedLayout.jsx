@@ -1,14 +1,13 @@
 import { Outlet } from "react-router-dom";
 import { Alert } from "../";
-import  useChangeLanguage  from "../../CustomHook/useChangeLanguage";
+import useChangeLanguage from "../../CustomHook/useChangeLanguage";
 import { setItem, getItem } from "../../services/localStorageService";
 import {
-
-  LANGUAGE_BUTTON,
   setLanguage
-} from "../../constants";
+} from "../../constants/TableLookUps";
 
 const currentLanguage = getItem('language');
+
 const SharedLayout = () => {
 
   const { language,
@@ -32,12 +31,12 @@ const SharedLayout = () => {
           reloadWindow();
         }}
         className={`dropdown form-input m-t`}
-      >     
-        <option value=''>{`${currentLanguage==='en'? 'English':currentLanguage==='he'? 'עברית':'العربية'}`}</option>
-        <option value="he"  >עברית</option>
-        <option value="en" >English</option>
-        <option value="ar">العربية</option>
-      </select>
+      >
+        <option value='' style={{backgroundColor:'black'} }>{`${currentLanguage === 'en' ? 'English' : currentLanguage === 'he' ? 'עברית' : 'العربية'}`}</option>
+        {currentLanguage !== 'he' && <option value="he"  >עברית</option>
+        }{currentLanguage !== 'en' && <option value="en" >English</option>
+        }{currentLanguage !== 'ar' && <option value="ar">العربية</option>
+        }      </select>
 
       <div className="container">
         <Alert />
