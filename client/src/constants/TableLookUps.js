@@ -218,7 +218,7 @@ export default (word) => {
   if (!lookUps[lang]) lang = "he";
 
   if (!lookUps[lang][word]) {
-    return "translation error";
+    return word;
   }
   return lookUps[lang][word];
 };
