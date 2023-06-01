@@ -9,59 +9,59 @@ const SensorsTable = () => {
     //trigger number
     {
       field: "trigger",
-      headerName: TableLookUps("trigger"),
+      headerName: TableLookUps("TRIGGER"),
       flex: 1,
     },
     //trigger name
     {
       field: "triggerName",
-      headerName: TableLookUps("triggerName"),
+      headerName: TableLookUps("TRIGGER_NAME"),
       flex: 1,
     },
     //trigger number
 
     {
       field: "triggerType",
-      headerName: TableLookUps("triggerType"),
+      headerName: TableLookUps("TRIGGER_TYPE"),
       flex: 1,
     },
     //Sensore
     //sensorName
     {
       field: "sensorName",
-      headerName: TableLookUps("sensorName"),
+      headerName: TableLookUps("SENSOR_NAME"),
       flex: 1,
     },
     //Sensore
     //sensorType
     {
       field: "sensorType",
-      headerName: TableLookUps("sensorType"),
+      headerName: TableLookUps("SENSOR_TYPE"),
       flex: 1,
     },
     //Sensore
     //System
     {
       field: "System",
-      headerName: TableLookUps("System"),
+      headerName: TableLookUps("SYSTEM"),
       flex: 1,
     },
     //Sensore
     //SystemNumber
     {
       field: "SystemNumber",
-      headerName: TableLookUps("SystemNumber"),
+      headerName: TableLookUps("SYSTEM_NUMBER"),
       flex: 1,
     },
     {
       field: "createdAt",
-      headerName: TableLookUps("createdAt"),
+      headerName: TableLookUps("CREATED_AT"),
 
       flex: 1,
     },
     {
       field: "updatedAt",
-      headerName: TableLookUps("updatedAt"),
+      headerName: TableLookUps("UPDATED_AT"),
 
       flex: 1,
     },
@@ -87,7 +87,7 @@ const SensorsTable = () => {
 
   return (
     <div>
-      <h2>{TableLookUps("sensors")}</h2>
+      <h2>{TableLookUps("SENSORS")}</h2>
       <Tables
         QueryName={"Sensors"}
         Massage={massage}

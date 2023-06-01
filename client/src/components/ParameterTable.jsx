@@ -48,9 +48,9 @@ const ParameterTable = () => {
     <table>
       <thead>
         <tr>
-          <th>{TableLookUps("Name")}</th>
-          <th>{TableLookUps("Unit")}</th>
-          <th>{TableLookUps("Ranges")}</th>
+          <th>{TableLookUps("NAME")}</th>
+          <th>{TableLookUps("UNIT")}</th>
+          <th>{TableLookUps("RANGES")}</th>
         </tr>
       </thead>
       <tbody>
@@ -62,7 +62,7 @@ const ParameterTable = () => {
                 <td>{parameter.unit}</td>
                 <td>
                   <button onClick={() => handleRowExpand(parameter._id)}>
-                    {TableLookUps("Expand")}
+                    {TableLookUps("EXPAND")}
                   </button>
                 </td>
               </tr>
@@ -72,10 +72,10 @@ const ParameterTable = () => {
                     <table>
                       <thead>
                         <tr>
-                          <th>{TableLookUps("Message")}</th>
-                          <th>{TableLookUps("Min")}</th>
-                          <th>{TableLookUps("Max")}</th>
-                          <th>{TableLookUps("Actions")}</th>
+                          <th>{TableLookUps("MESSAGE")}</th>
+                          <th>{TableLookUps("MIN")}</th>
+                          <th>{TableLookUps("MAX")}</th>
+                          <th>{TableLookUps("ACTIONS")}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -90,14 +90,14 @@ const ParameterTable = () => {
                                   handleUpdateRange(parameter._id, range._id)
                                 }
                               >
-                                {TableLookUps("Update")}
+                                {TableLookUps("UPDATE")}
                               </button>
                               <button
                                 onClick={() =>
                                   handleDeleteRange(parameter._id, range._id)
                                 }
                               >
-                                {TableLookUps("Delete")}
+                                {TableLookUps("DELETE")}
                               </button>
                             </td>
                           </tr>
@@ -116,7 +116,7 @@ const ParameterTable = () => {
                             <button
                               onClick={() => handleAddRange(parameter._id)}
                             >
-                              {TableLookUps("Add Range")}
+                              {TableLookUps("ADD_RANGE")}
                             </button>
                           </td>
                         </tr>

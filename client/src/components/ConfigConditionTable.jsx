@@ -6,28 +6,28 @@ const ConfigConditionTable = () => {
   const configConditionsColumns = [
     {
       field: "id",
-      headerName: TableLookUps("config Condition ID"),
+      headerName: TableLookUps("CONFIG_CONDITION_ID"),
       flex: 1,
       hide: true,
     },
-    { field: "systemId", headerName: TableLookUps("systemId"), flex: 1 },
+    { field: "systemId", headerName: TableLookUps("SYSTEM_ID"), flex: 1 },
     {
       field: "previousSystemId",
-      headerName: TableLookUps("previousSystemId"),
+      headerName: TableLookUps("PREVIOUS_SYSTEM_ID"),
       flex: 1,
     },
-    { field: "trigger", headerName: TableLookUps("trigger"), flex: 1 },
-    { field: "type", headerName: TableLookUps("type"), flex: 1 },
-    { field: "triggerName", headerName: TableLookUps("triggerName"), flex: 1 },
+    { field: "trigger", headerName: TableLookUps("TRIGGER"), flex: 1 },
+    { field: "type", headerName: TableLookUps("TYPE"), flex: 1 },
+    { field: "triggerName", headerName: TableLookUps("TRIGGER_NAME"), flex: 1 },
     {
       field: "measuredValue",
-      headerName: TableLookUps("measuredValue"),
+      headerName: TableLookUps("MEASURED_VALUE"),
       flex: 1,
     },
-    { field: "valueType", headerName: TableLookUps("valueType"), flex: 1 },
-    { field: "level", headerName: TableLookUps("Level"), flex: 1 },
-    { field: "createdAt", headerName: TableLookUps("createdAt"), flex: 1 },
-    { field: "updatedAt", headerName: TableLookUps("createdAt"), flex: 1 },
+    { field: "valueType", headerName: TableLookUps("VALUE_TYPE"), flex: 1 },
+    { field: "level", headerName: TableLookUps("LEVEL"), flex: 1 },
+    { field: "createdAt", headerName: TableLookUps("CREATED_AT"), flex: 1 },
+    { field: "updatedAt", headerName: TableLookUps("CREATED_AT"), flex: 1 },
   ];
   const massage = (Data) => {
     console.log("Config Conditions");
@@ -35,7 +35,7 @@ const ConfigConditionTable = () => {
   }
   return (
     <div>
-      <h2>{TableLookUps("Config Conditions")}</h2>
+      <h2>{TableLookUps("CONFIG_CONDITIONS")}</h2>
       <Tables
         Massage={massage}
         QueryName={"configConditions"}

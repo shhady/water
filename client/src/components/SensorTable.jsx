@@ -7,29 +7,29 @@ const SensorTable = () => {
     { field: "id", headerName: "Sensor ID", flex: 1, hide: true },
     {
       field: "SystemNumber",
-      headerName: TableLookUps("SystemNumber"),
+      headerName: TableLookUps("SYSTEM_NUMBER"),
       flex: 1,
     },
     {
       field: "System",
-      headerName: TableLookUps("system"),
+      headerName: TableLookUps("SYSTEM"),
       flex: 1,
     },
     {
       field: "createdAt",
-      headerName: TableLookUps("createdAt"),
+      headerName: TableLookUps("CREATED_AT"),
       flex: 1,
     },
     {
       field: "updatedAt",
-      headerName: TableLookUps("updatedAt"),
+      headerName: TableLookUps("UPDATED_AT"),
       flex: 1,
     },
   ];
   console.log("Sensors");
   return (
     <div>
-      <h2>{TableLookUps("Sensors")}</h2>
+      <h2>{TableLookUps("SENSORS")}</h2>
       <Tables QueryName={"Sensors"} columns={SensorsColumns} type="Sensor" />
     </div>
   );

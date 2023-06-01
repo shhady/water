@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { BASE_URL_SERVER, SUCCESS } from "../constants";
 
 const apiPost = (query, data) => {
@@ -21,4 +23,24 @@ const apiPost = (query, data) => {
 };
 
 
-export { apiPost };
+
+
+// import {BASE_URL_SERVER} from "../constants"
+
+
+const api = axios.create({
+  baseURL: BASE_URL_SERVER,
+});
+
+const apiProtected = axios.create({
+  BASE_URL_SERVER, 
+    withCredentials: true, 
+});
+
+const auth = axios.create({
+  baseURL:BASE_URL_SERVER
+  
+});
+
+
+export { api, apiProtected, auth, apiPost };
