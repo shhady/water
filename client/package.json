@@ -15,9 +15,11 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.13.3",
     "@mui/x-data-grid": "^6.5.0",
+    "@material-ui/core": "^4.12.4",
     "axios": "^1.4.0",
     "chart.js": "^4.3.0",
     "i18n": "^0.15.1",
+    "leaflet": "^1.9.4",
     "moment": "^2.29.4",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -34,5 +36,6 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
-    "vite": "^4.3.9"  }
+    "vite": "^4.3.9"
+  }
 }

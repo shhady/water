@@ -76,8 +76,8 @@ const SensorsTable = () => {
         triggerType: sensor.Trigger.type,
         sensorName: sensor.sensorName,
         sensorType: sensor.sensorType,
-        System: sensor.System,
-        SystemNumber: sensor.SystemNumber,
+        System: sensor.System.name,
+        SystemNumber: sensor.System.number,
         createdAt: sensor.createdAt,
         updatedAt: sensor.updatedAt,
       };

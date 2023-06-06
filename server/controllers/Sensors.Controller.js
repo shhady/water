@@ -4,7 +4,7 @@ import Trigger from "../models/Trigger.Model.js";
 // Get all sensors
 const getAllSensors = async (req, res) => {
   try {
-    const sensors = await Sensors.find().populate("Trigger");
+    const sensors = await Sensors.find().populate("Trigger").populate("System");
     res.json(sensors);
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
@@ -13,13 +13,12 @@ const getAllSensors = async (req, res) => {
 
 // Create a new sensor
 const createSensors = async (req, res) => {
-  const { sensorName, sensorType, System, SystemNumber, Trigger } = req.body;
+  const { sensorName, sensorType, System, Trigger } = req.body;
   try {
     const newSensor = await Sensors.create({
       sensorName,
       sensorType,
       System,
-      SystemNumber,
       Trigger,
     });
     res.status(201).json(newSensor);
@@ -32,7 +31,9 @@ const createSensors = async (req, res) => {
 const getSensors = async (req, res) => {
   const { id } = req.params;
   try {
-    const sensor = await Sensors.findById(id).populate("Trigger");
+    const sensor = await Sensors.findById(id)
+      .populate("Trigger")
+      .populate("System");
     if (!sensor) {
       return res.status(404).json({ message: "Sensor not found" });
     }
@@ -53,15 +54,17 @@ const updateSensors = async (req, res) => {
     Trigger: TriggerType,
   } = req.body;
   try {
-    const sensor = await Sensors.findById(id).populate("Trigger");
+    const sensor = await Sensors.findById(id)
+      .populate("Trigger")
+      .populate("System");
     if (!sensor) {
       return res.status(404).json({ message: "Sensor not found" });
     }
     await Trigger.create({
       sensorName: sensor.sensorName,
       sensorType: sensor.sensorType,
-      System: sensor.System,
-      SystemNumber: sensor.SystemNumber,
+      System: sensor.System.name,
+      SystemNumber: sensor.System.number,
       triggerNumber: sensor.Trigger.number,
       triggerName: sensor.Trigger.name,
       triggerType: sensor.Trigger.type,
@@ -73,11 +76,12 @@ const updateSensors = async (req, res) => {
         sensorName,
         sensorType,
         System,
-        SystemNumber,
         Trigger: TriggerType,
       },
       { new: true }
-    ).populate("Trigger");
+    )
+      .populate("Trigger")
+      .populate("System");
 
     res.json(updatedSensor);
   } catch (error) {

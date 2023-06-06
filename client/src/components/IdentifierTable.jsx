@@ -19,11 +19,13 @@ const IdentifierTable = () => {
       field: "sensorType",
       headerName: TableLookUps("SENSOR_TYPE"),
       flex: 1,
-    },{
+    },
+    {
       field: "System",
       headerName: TableLookUps("SYSTEM"),
       flex: 1,
-    },{
+    },
+    {
       field: "SystemNumber",
       headerName: TableLookUps("SYSTEM_NUMBER"),
       flex: 1,
@@ -42,15 +44,18 @@ const IdentifierTable = () => {
     { field: "updatedAt", headerName: TableLookUps("UPDATED_AT"), flex: 1 },
   ];
   const massage = (Data) => {
-    console.log("Identifiers",Data);
+    console.log("Identifiers", Data);
     Data = Data.map((identifier) => {
       return {
         id: identifier._id,
-        sensorName: identifier.sensor.sensorName,
-        sensorType: identifier.sensor.sensorType,
-        System: identifier.sensor.System,
-        SystemNumber: identifier.sensor.SystemNumber,
-        status:identifier.status,
+        sensorName:
+          identifier.sensor?.sensorName ?? TableLookUps("FIELD_ERROR"),
+        sensorType:
+          identifier.sensor?.sensorType ?? TableLookUps("FIELD_ERROR"),
+        System: identifier.sensor?.System ?? TableLookUps("FIELD_ERROR"),
+        SystemNumber:
+          identifier.sensor?.SystemNumber ?? TableLookUps("FIELD_ERROR"),
+        status: identifier.status,
         city: identifier.city,
         street: identifier.street,
         number: identifier.number,
@@ -62,12 +67,12 @@ const IdentifierTable = () => {
     });
     console.log("Data Trigger", Data);
     return Data;
-  }
+  };
   return (
     <div>
       <h2>{TableLookUps("IDENTIFIERS")}</h2>
       <Tables
-       Massage={massage}
+        Massage={massage}
         QueryName={"Identifiers"}
         columns={identifiersColumns}
         type="Identifier"
