@@ -52,7 +52,13 @@ const generateIdentifiers = async (req, res) => {
 // Get all identifiers
 const getIdentifiers = async (req, res) => {
   try {
-    const identifiers = await Identifier.find().populate("sensor");
+    const identifiers = await Identifier.find().populate({
+      path: "sensor",
+      populate: {
+        path: "System",
+        model: "System", // Replace "System" with the actual model name of the referenced schema
+      },
+    });
     res.json(identifiers);
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
@@ -63,7 +69,13 @@ const getIdentifiers = async (req, res) => {
 const getIdentifierById = async (req, res) => {
   const { id } = req.params;
   try {
-    const identifier = await Identifier.findById(id).populate("sensor");
+    const identifier = await Identifier.findById(id).populate({
+      path: "sensor",
+      populate: {
+        path: "System",
+        model: "System", // Replace "System" with the actual model name of the referenced schema
+      },
+    });
     if (!identifier) {
       return res.status(404).json({ message: "Identifier not found" });
     }
@@ -75,15 +87,8 @@ const getIdentifierById = async (req, res) => {
 
 // Create a new identifier
 const createIdentifier = async (req, res) => {
-  const {
-    sensor,
-    status,
-    city,
-    street,
-    number,
-    latitude,
-    longitude,
-  } = req.body;
+  const { sensor, status, city, street, number, latitude, longitude } =
+    req.body;
   // const additionalIdentifier = createUniqueString("");
   try {
     const newIdentifier = new Identifier({
@@ -121,7 +126,13 @@ const updateIdentifier = async (req, res) => {
         longitude,
       },
       { new: true }
-    ).populate("sensor");
+    ).populate({
+      path: "sensor",
+      populate: {
+        path: "System",
+        model: "System", // Replace "System" with the actual model name of the referenced schema
+      },
+    });
     if (!updatedIdentifier) {
       return res.status(404).json({ message: "Identifier not found" });
     }
@@ -135,9 +146,13 @@ const updateIdentifier = async (req, res) => {
 const deleteIdentifier = async (req, res) => {
   const { id } = req.params;
   try {
-    const deletedIdentifier = await Identifier.findByIdAndDelete(id).populate(
-      "sensor"
-    );
+    const deletedIdentifier = await Identifier.findByIdAndDelete(id).populate({
+      path: "sensor",
+      populate: {
+        path: "System",
+        model: "System", // Replace "System" with the actual model name of the referenced schema
+      },
+    });
     if (!deletedIdentifier) {
       return res.status(404).json({ message: "Identifier not found" });
     }

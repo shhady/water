@@ -52,9 +52,9 @@ const IdentifierTable = () => {
           identifier.sensor?.sensorName ?? TableLookUps("FIELD_ERROR"),
         sensorType:
           identifier.sensor?.sensorType ?? TableLookUps("FIELD_ERROR"),
-        System: identifier.sensor?.System ?? TableLookUps("FIELD_ERROR"),
+        System: identifier.sensor?.System?.name ?? TableLookUps("FIELD_ERROR"),
         SystemNumber:
-          identifier.sensor?.SystemNumber ?? TableLookUps("FIELD_ERROR"),
+          identifier.sensor?.System?.number ?? TableLookUps("FIELD_ERROR"),
         status: identifier.status,
         city: identifier.city,
         street: identifier.street,
