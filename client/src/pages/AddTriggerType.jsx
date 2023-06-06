@@ -1,69 +1,98 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FormRow } from "../components";
 
 function TriggerType() {
   const [triggerType, setTriggerType] = useState("");
+  const [triggerName, setTriggerName] = useState("");
   const [triggerTypeError, setTriggerTypeError] = useState("");
-
-  function submitHandler(e) {
-    e.preventDefault();
-    console.log(triggerType);
-
-    if (!triggerType) {
-      setTriggerTypeError("Invalid");
-      return;
-    }
-
-    setTriggerTypeError("");
-
+  const [triggersType, setTriggersType] = useState([]);
+  const [triggersName, setTriggersName] = useState([]);
+  const newTriggerType = useRef(null);
+  const newTriggerName = useRef(null);
+  const [selectedType, setSelectedType] = useState("");
+  useEffect(() => {
     const url = "http://localhost:5000/TriggerTypes";
-    const headers = {
-      "Content-Type": "application/json",
+    const getTriggersType = async () => {
+      const res = await fetch(url);
+      const data = await res.json();
+      console.log(data);
+      const types = [];
+      const names = [];
+      data.data.forEach((item) => {
+        if (!types.includes(item.type)) {
+          types.push(item.type);
+        }
+        if (!names.some((obj) => obj._id === item._id)) {
+          names.push(item);
+        }
+      });
+      setTriggersType(types);
+      setTriggersName(names);
     };
-    const method = "POST";
 
-    try {
-      fetch(url, {
-        method: method,
-        body: JSON.stringify({ name: triggerType }), // Wrap triggerType in an object to match your API's expected payload
-        headers: headers,
-      })
-        .then((response) => {
-          // Handle the response
-          console.log(response);
-          return response.json(); // Parse the response as JSON
-        })
-        .then((data) => {
-          // Use the response data
-          console.log("Data", data);
-          if (data.error) {
-            setTriggerTypeError(data.error);
-          }
-        })
-        .catch((error) => {
-          // Handle any errors during the fetch request
-          console.error(error);
-        });
-    } catch (error) {
-      // Handle any other errors
-      console.error(error);
-    }
-  }
+    getTriggersType();
+  }, []);
+  console.log(triggersName);
+  console.log(triggersType);
 
+  const handleTypeChange = (event) => {
+    setSelectedType(event.target.value);
+  };
+
+  const handelAddNewTriggerType = (event) => {
+    event.preventDefault();
+    const postNode = document.createElement("input");
+    newTriggerType.current.appendChild(postNode);
+
+    postNode.addEventListener("input", (event) => {
+      // Update triggerType state or perform other actions
+      setTriggerType(event.target.value);
+    });
+  };
+
+  const handelAddNewTriggerName = (event) => {
+    event.preventDefault();
+    const postNode = document.createElement("input");
+    newTriggerName.current.appendChild(postNode);
+
+    postNode.addEventListener("input", (event) => {
+      // Update triggerName state or perform other actions
+      setTriggerName(event.target.value);
+    });
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    // Perform form submission logic
+  };
+
+  console.log(triggerType);
+  console.log(triggerName);
   return (
     <>
-      <form action="" onSubmit={submitHandler}>
-        <input
-          type="text"
-          name="triggerType"
-          id="triggerType"
-          minLength="2"
-          placeholder="Trigger Type"
-          value={triggerType} // Add the value prop to bind the input to the state
-          onChange={(e) => {
-            setTriggerType(e.target.value);
-          }}
-        />
+      <form onSubmit={submitHandler}>
+        <div ref={newTriggerType}>
+          <label htmlFor="">Trigger Type</label>
+          <select name="" id="" onChange={handleTypeChange}>
+            <option value="">Select Type</option>
+            {triggersType?.map((type) => (
+              <option value={type}>{type}</option>
+            ))}
+          </select>
+          <button onClick={handelAddNewTriggerType}>
+            Add new Trigger Type
+          </button>
+        </div>
+
+        {selectedType && (
+          <div ref={newTriggerName}>
+            <label htmlFor="">Trigger name</label>
+            <button onClick={handelAddNewTriggerName}>
+              Add new Trigger name
+            </button>
+          </div>
+        )}
+
         <div>{triggerTypeError}</div>
         <button type="submit">Add Trigger Type</button>
       </form>
