@@ -5,11 +5,13 @@ import {
     get>Name<,
     update>Name<,
     delete>Name<,
+    deleteAll>Name<,
 } from "../controllers/>Name<.Controller.js";
 
 const router = express.Router();
 
 router.get("/", getAll>Name<);
+router.delete("/", deleteAll>Name<);
 router.post("/", create>Name<);
 router.get("/:id", get>Name<);
 router.put("/:id", update>Name<);
