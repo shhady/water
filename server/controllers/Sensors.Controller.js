@@ -46,13 +46,7 @@ const getSensors = async (req, res) => {
 // Update an existing sensor by ID
 const updateSensors = async (req, res) => {
   const { id } = req.params;
-  const {
-    sensorName,
-    sensorType,
-    System,
-    SystemNumber,
-    Trigger: TriggerType,
-  } = req.body;
+  const { sensorName, sensorType, System, Trigger: TriggerType } = req.body;
   try {
     const sensor = await Sensors.findById(id)
       .populate("Trigger")
@@ -60,15 +54,18 @@ const updateSensors = async (req, res) => {
     if (!sensor) {
       return res.status(404).json({ message: "Sensor not found" });
     }
-    await Trigger.create({
-      sensorName: sensor.sensorName,
-      sensorType: sensor.sensorType,
-      System: sensor.System.name,
-      SystemNumber: sensor.System.number,
-      triggerNumber: sensor.Trigger.number,
-      triggerName: sensor.Trigger.name,
-      triggerType: sensor.Trigger.type,
-    });
+
+    if (sensor.Trigger) {
+      await Trigger.create({
+        sensorName: sensor.sensorName,
+        sensorType: sensor.sensorType,
+        System: sensor.System.name,
+        SystemNumber: sensor.System.number,
+        triggerNumber: sensor.Trigger?.number ?? null,
+        triggerName: sensor.Trigger?.name ?? null,
+        triggerType: sensor.Trigger?.type ?? null,
+      });
+    }
 
     const updatedSensor = await Sensors.findByIdAndUpdate(
       id,

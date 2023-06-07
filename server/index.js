@@ -11,6 +11,7 @@ import ParameterRoute from "./routes/Parameter.Route.js";
 import ConnectionRoute from "./routes/Connection.Route.js";
 import TriggerTypeRoute from "./routes/TriggerType.Route.js";
 import SensorsRoute from "./routes/Sensors.Route.js";
+import SystemRoute from "./routes/System.Route.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -37,6 +38,7 @@ app.use("/Parameters", ParameterRoute);
 app.use("/Connections", ConnectionRoute);
 app.use("/TriggerTypes", TriggerTypeRoute);
 app.use("/Sensors", SensorsRoute);
+app.use("/Systems", SystemRoute);
 
 //------- Talal's db
 //const CONNECTION_URL = `mongodb+srv://waterproject:t2k4VkJn963j7guP@water.wn7b7lm.mongodb.net/`;

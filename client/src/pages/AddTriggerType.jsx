@@ -7,9 +7,11 @@ function TriggerType() {
   const [triggerTypeError, setTriggerTypeError] = useState("");
   const [triggersType, setTriggersType] = useState([]);
   const [triggersName, setTriggersName] = useState([]);
-  const newTriggerType = useRef(null);
-  const newTriggerName = useRef(null);
+  const [showAddTriggerType, setShowAddTriggerType] = useState(false);
+  const [showAddTriggerName, setShowAddTriggerName] = useState(false);
   const [selectedType, setSelectedType] = useState("");
+  const [selectedName, setSelectedName] = useState([]);
+
   useEffect(() => {
     const url = "http://localhost:5000/TriggerTypes";
     const getTriggersType = async () => {
@@ -37,33 +39,17 @@ function TriggerType() {
 
   const handleTypeChange = (event) => {
     setSelectedType(event.target.value);
-  };
-
-  const handelAddNewTriggerType = (event) => {
-    event.preventDefault();
-    const postNode = document.createElement("input");
-    newTriggerType.current.appendChild(postNode);
-
-    postNode.addEventListener("input", (event) => {
-      // Update triggerType state or perform other actions
-      setTriggerType(event.target.value);
+    const names = [];
+    triggersName.forEach((item) => {
+      if (item.type === event.target.value) names.push(item.name);
     });
-  };
-
-  const handelAddNewTriggerName = (event) => {
-    event.preventDefault();
-    const postNode = document.createElement("input");
-    newTriggerName.current.appendChild(postNode);
-
-    postNode.addEventListener("input", (event) => {
-      // Update triggerName state or perform other actions
-      setTriggerName(event.target.value);
-    });
+    setSelectedName(names);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
     // Perform form submission logic
+    console.log("handle submit");
   };
 
   console.log(triggerType);
@@ -71,25 +57,54 @@ function TriggerType() {
   return (
     <>
       <form onSubmit={submitHandler}>
-        <div ref={newTriggerType}>
+        <div>
           <label htmlFor="">Trigger Type</label>
           <select name="" id="" onChange={handleTypeChange}>
             <option value="">Select Type</option>
-            {triggersType?.map((type) => (
-              <option value={type}>{type}</option>
+            {triggersType?.map((type, index) => (
+              <option key={index} value={type}>
+                {type}
+              </option>
             ))}
           </select>
-          <button onClick={handelAddNewTriggerType}>
+          <button
+            type="button"
+            onClick={(event) => setShowAddTriggerType(!showAddTriggerType)}
+          >
             Add new Trigger Type
           </button>
+          {showAddTriggerType && !selectedType && (
+            <input
+              type="text"
+              onChange={(event) => setTriggerType(event.target.value)}
+            />
+          )}
         </div>
 
-        {selectedType && (
-          <div ref={newTriggerName}>
+        {(selectedType || showAddTriggerType) && (
+          <div>
             <label htmlFor="">Trigger name</label>
-            <button onClick={handelAddNewTriggerName}>
+            <br />
+            {selectedName && !showAddTriggerType && (
+              <select>
+                <option value="">Select Name</option>
+                {selectedName.map((name, index) => {
+                  return <option key={index}>{name}</option>;
+                })}
+              </select>
+            )}
+            <button
+              type="button"
+              onClick={(event) => setShowAddTriggerName(!showAddTriggerName)}
+            >
               Add new Trigger name
             </button>
+            {showAddTriggerName && (
+              <input
+                type="text"
+                onChange={(event) => setTriggerName(event.target.value)}
+              />
+            )}
           </div>
         )}
 

@@ -71,13 +71,13 @@ const SensorsTable = () => {
     Data = Data.map((sensor) => {
       return {
         id: sensor._id,
-        trigger: sensor.Trigger.number,
-        triggerName: sensor.Trigger.name,
-        triggerType: sensor.Trigger.type,
+        trigger: sensor.Trigger?.number ?? TableLookUps("FIELD_ERROR"),
+        triggerName: sensor.Trigger?.name ?? TableLookUps("FIELD_ERROR"),
+        triggerType: sensor.Trigger?.type ?? TableLookUps("FIELD_ERROR"),
         sensorName: sensor.sensorName,
         sensorType: sensor.sensorType,
-        System: sensor.System.name,
-        SystemNumber: sensor.System.number,
+        System: sensor.System?.name ?? TableLookUps("FIELD_ERROR"),
+        SystemNumber: sensor.System?.number ?? TableLookUps("FIELD_ERROR"),
         createdAt: sensor.createdAt,
         updatedAt: sensor.updatedAt,
       };
