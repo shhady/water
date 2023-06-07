@@ -1,45 +1,28 @@
-// import React from "react";
-// import { DataGrid } from "@mui/x-data-grid";
-// import { TextField } from "@mui/material";
-
-// const MyDataGrid = ({ Rows, Columns }) => {
-//   const rowsWithInputs = Rows.map((row, rowIndex) => {
-//     const rowWithInputs = {};
-
-//     for (const key in row) {
-//       rowWithInputs[key] = (
-//         <TextField defaultValue={row[key]} variant="outlined" size="small" />
-//       );
-//     }
-
-//     return { id: rowIndex, ...rowWithInputs };
-//   });
-
-//   const columnsWithInputs = Columns.map((column) => ({
-//     ...column,
-//     renderCell: (params) => <input />,
-//   }));
-
-//   return (
-//     <div style={{ height: 400, width: "100%" }}>
-//       <DataGrid
-//         rows={rowsWithInputs}
-//         columns={columnsWithInputs}
-//         checkboxSelection
-//       />
-//     </div>
-//   );
-// };
-
-// export default MyDataGrid;
-
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import { useQuery } from "react-query";
+import { baseURL } from "../constants/urlConstants.js";
 
-function MyDataGrid({ Rows, Columns }) {
-  const [rows, setRows] = useState(Rows);
+const fetchData = async (url) => {
+  const res = await fetch(url);
+  return res.json();
+};
+
+function AdjustableTable({ Columns, queryURL, Massage }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editRowIndex, setEditRowIndex] = useState(null);
+  const [rows, setRows] = useState([]);
+  const Response = useQuery(queryURL, () => fetchData(baseURL + queryURL));
+  const Data = Response.data;
+
+  useEffect(() => {
+    if (Massage == undefined) {
+      return;
+    }
+    if (Data != null) {
+      setRows(Massage(Data));
+    }
+  }, [Data, Massage]);
 
   const handleEditClick = (index) => {
     setIsEditing(true);
@@ -49,11 +32,33 @@ function MyDataGrid({ Rows, Columns }) {
   const handleSaveClick = () => {
     setIsEditing(false);
     setEditRowIndex(null);
+
     // Save the updated data
     // ...
 
+    // You can access the edited row object using the editRowIndex
+    const editedRow = rows.find((row) => row.id === editRowIndex);
+    if (editedRow && !editedRow.fresh) {
+      console.log("Edited Row ID:", editedRow.id);
+    } else {
+      console.log("POST request", queryURL);
+      // id = response.id
+      // fresh = false
+    }
+
     // You can update the rows state here if needed
     // setRows(updatedRows);
+  };
+
+  const handleAddRowClick = () => {
+    const newRow = {
+      id: rows.length + 1,
+      ...Columns.map((col) => ""),
+      fresh: true,
+    };
+    setRows([...rows, newRow]);
+    setIsEditing(true);
+    setEditRowIndex(rows.length + 1);
   };
 
   let columns = [
@@ -81,6 +86,7 @@ function MyDataGrid({ Rows, Columns }) {
     if (isEditing && rowIndex === editRowIndex) {
       return (
         <input
+          style={{ fontSize: "10px" }}
           type="text"
           defaultValue={value}
           onChange={(e) => {
@@ -101,14 +107,26 @@ function MyDataGrid({ Rows, Columns }) {
 
   return (
     <div style={{ height: 400, width: "100%" }}>
+      <button onClick={handleAddRowClick}>+</button>
       <DataGrid
+        autoHeight
         rows={rows}
         columns={columns}
-        checkboxSelection
         renderCell={renderCell}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 10 },
+          },
+          columns: {
+            columnVisibilityModel: {
+              id: false,
+            },
+          },
+        }}
+        pageSizeOptions={[10, 50, 100]}
       />
     </div>
   );
 }
 
-export default MyDataGrid;
+export default AdjustableTable;

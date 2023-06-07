@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Tables } from "../CustomHook/Tables.Custom";
+//import { Tables } from "../CustomHook/Tables.Custom";
 import TableLookUps from "../constants/TableLookUps";
+import AdjustableTable from "./AdjustableTable";
 
 const TriggerTable = () => {
-  const [rows, setRows] = useState([]);
   const triggersColumns = [
     { field: "id", headerName: "TRIGGER_ID", flex: 1, hide: true },
-    //trigger number
-    {
-      field: "trigger",
-      headerName: TableLookUps("TRIGGER"),
-      flex: 1,
-    },
     //trigger name
     {
       field: "triggerName",
@@ -25,32 +18,24 @@ const TriggerTable = () => {
       headerName: TableLookUps("TRIGGER_TYPE"),
       flex: 1,
     },
-    //Sensore
-    //sensorName
     {
-      field: "sensorName",
-      headerName: TableLookUps("SENSOR_NAME"),
+      field: "validValueH",
+      headerName: "validValueH",
       flex: 1,
     },
-    //Sensore
-    //sensorType
     {
-      field: "sensorType",
-      headerName: TableLookUps("SENSOR_TYPE"),
+      field: "validValueL",
+      headerName: "validValueL",
       flex: 1,
     },
-    //Sensore
-    //System
     {
-      field: "System",
-      headerName: TableLookUps("SYSTEM"),
+      field: "valueType",
+      headerName: "valueType",
       flex: 1,
     },
-    //Sensore
-    //SystemNumber
     {
-      field: "SystemNumber",
-      headerName: TableLookUps("SYSTEM_NUMBER"),
+      field: "value",
+      headerName: "value",
       flex: 1,
     },
     {
@@ -77,16 +62,17 @@ const TriggerTable = () => {
     Data = Data.map((trigger) => {
       return {
         id: trigger._id,
-        trigger: trigger.triggerNumber,
-        triggerName: trigger.triggerName,
-        triggerType: trigger.triggerType,
-        sensorName: trigger.sensorName,
-        sensorType: trigger.sensorType,
-        System: trigger.System,
-        SystemNumber: trigger.SystemNumber,
-        status: trigger.status,
-        createdAt: trigger.createdAt,
-        updatedAt: trigger.updatedAt,
+        triggerName: trigger?.triggerName ?? TableLookUps("FIELD_ERROR"),
+        triggerType: trigger?.triggerType ?? TableLookUps("FIELD_ERROR"),
+        validValueH: trigger?.validValueH ?? TableLookUps("FIELD_ERROR"),
+        validValueL: trigger?.validValueL ?? TableLookUps("FIELD_ERROR"),
+        valueType: trigger?.valueType ?? TableLookUps("FIELD_ERROR"),
+        value: trigger?.value ?? TableLookUps("FIELD_ERROR"),
+        status: trigger?.status
+          ? "True"
+          : "False" ?? TableLookUps("FIELD_ERROR"),
+        createdAt: trigger?.createdAt ?? TableLookUps("FIELD_ERROR"),
+        updatedAt: trigger?.updatedAt ?? TableLookUps("FIELD_ERROR"),
       };
     });
     console.log("Data Trigger", Data);
@@ -96,11 +82,10 @@ const TriggerTable = () => {
   return (
     <div>
       <h2>{TableLookUps("TRIGGERS")}</h2>
-      <Tables
-        QueryName={"Triggers"}
+      <AdjustableTable
+        queryURL={"/Triggers"}
         Massage={massage}
-        columns={triggersColumns}
-        type="Trigger"
+        Columns={triggersColumns}
       />
     </div>
   );

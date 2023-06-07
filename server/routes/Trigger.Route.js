@@ -5,17 +5,21 @@ import {
   createTrigger,
   updateTrigger,
   deleteTrigger,
+  deleteAllTriggers,
 } from "../controllers/Trigger.Controller.js";
 
 const router = express.Router();
 
 // GET /triggers
 router.get("/", getTriggers);
-// GET /triggers/:id
-router.get("/:id", getTriggerById);
-
 // POST /triggers
 router.post("/", createTrigger);
+
+// DELETE /triggers/all
+router.delete("/", deleteAllTriggers);
+
+// GET /triggers/:id
+router.get("/:id", getTriggerById);
 
 // PUT /triggers/:id
 router.put("/:id", updateTrigger);

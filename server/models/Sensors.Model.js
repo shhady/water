@@ -9,13 +9,29 @@ const SensorsSchema = new mongoose.Schema(
     sensorType: {
       type: String,
     },
-    System: {
+    infrastructureParent: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "System", // Reference to the sensor system
+      ref: "WaterInfrastructure", // Reference to the water infrastructure parent
     },
-    Trigger: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "TriggerType", // Reference to the "Trigger" model
+    sensorProductId: {
+      type: Number,
+      required: true,
+    },
+    sensorAttribute: {
+      type: Number,
+      required: true,
+    },
+    latitude: {
+      type: Number,
+      required: true,
+    },
+    longitude: {
+      type: Number,
+      required: true,
+    },
+    status: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

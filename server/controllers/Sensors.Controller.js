@@ -1,27 +1,11 @@
 import Sensors from "../models/Sensors.Model.js";
-import Trigger from "../models/Trigger.Model.js";
+import WaterInfrastructure from "../models/WaterInfrastructure.Model.js";
 
 // Get all sensors
 const getAllSensors = async (req, res) => {
   try {
-    const sensors = await Sensors.find().populate("Trigger").populate("System");
-    res.json(sensors);
-  } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
-
-// Create a new sensor
-const createSensors = async (req, res) => {
-  const { sensorName, sensorType, System, Trigger } = req.body;
-  try {
-    const newSensor = await Sensors.create({
-      sensorName,
-      sensorType,
-      System,
-      Trigger,
-    });
-    res.status(201).json(newSensor);
+    const sensors = await Sensors.find().populate("infrastructureParent");
+    res.status(200).json(sensors);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -30,73 +14,73 @@ const createSensors = async (req, res) => {
 // Get a single sensor by ID
 const getSensors = async (req, res) => {
   const { id } = req.params;
+
   try {
-    const sensor = await Sensors.findById(id)
-      .populate("Trigger")
-      .populate("System");
+    const sensor = await Sensors.findById(id).populate("infrastructureParent");
     if (!sensor) {
       return res.status(404).json({ message: "Sensor not found" });
     }
-    res.json(sensor);
-  } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
-
-// Update an existing sensor by ID
-const updateSensors = async (req, res) => {
-  const { id } = req.params;
-  const { sensorName, sensorType, System, Trigger: TriggerType } = req.body;
-  try {
-    const sensor = await Sensors.findById(id)
-      .populate("Trigger")
-      .populate("System");
-    if (!sensor) {
-      return res.status(404).json({ message: "Sensor not found" });
-    }
-
-    if (sensor.Trigger) {
-      await Trigger.create({
-        sensorName: sensor.sensorName,
-        sensorType: sensor.sensorType,
-        System: sensor.System.name,
-        SystemNumber: sensor.System.number,
-        triggerNumber: sensor.Trigger?.number ?? null,
-        triggerName: sensor.Trigger?.name ?? null,
-        triggerType: sensor.Trigger?.type ?? null,
-      });
-    }
-
-    const updatedSensor = await Sensors.findByIdAndUpdate(
-      id,
-      {
-        sensorName,
-        sensorType,
-        System,
-        Trigger: TriggerType,
-      },
-      { new: true }
-    )
-      .populate("Trigger")
-      .populate("System");
-
-    res.json(updatedSensor);
+    res.status(200).json(sensor);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-// Delete a sensor by ID
+// Create a new sensor
+const createSensors = async (req, res) => {
+  const sensorData = req.body;
+
+  try {
+    const newSensor = new Sensors(sensorData);
+    const savedSensor = await newSensor.save();
+    res.status(201).json(savedSensor);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+// Update an existing sensor
+const updateSensors = async (req, res) => {
+  const { id } = req.params;
+  const sensorData = req.body;
+
+  try {
+    const existingSensor = await Sensors.findById(id);
+    if (!existingSensor) {
+      return res.status(404).json({ message: "Sensor not found" });
+    }
+
+    existingSensor.set(sensorData);
+    const updatedSensor = await existingSensor.save();
+
+    res.status(200).json(updatedSensor);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+// Delete a sensor
 const deleteSensors = async (req, res) => {
   const { id } = req.params;
+
   try {
-    const deletedSensor = await Sensors.findByIdAndDelete(id);
+    const deletedSensor = await Sensors.findByIdAndRemove(id);
     if (!deletedSensor) {
       return res.status(404).json({ message: "Sensor not found" });
     }
-    res.json({ message: "Sensor deleted successfully" });
+    res.status(200).json({ message: "Sensor deleted successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: error.message });
+  }
+};
+
+//delete all sensors
+const deleteAllSensors = async (req, res) => {
+  try {
+    await Sensors.deleteMany();
+    res.status(200).json({ message: "All sensors deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -106,4 +90,5 @@ export {
   getSensors,
   updateSensors,
   deleteSensors,
+  deleteAllSensors,
 };

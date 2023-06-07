@@ -77,12 +77,25 @@ const delete>Name< = async (req,res) => {
     }
 }
 
+//@desc Delete all >Name< 
+//@route DELETE /
+//@access public
+const deleteAll>Name< = async (req, res) => {
+  try {
+    await >Name<.deleteMany();
+    res.status(200).json({ message: "All >Name< deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export {
     getAll>Name<,
     create>Name<,
     get>Name<,
     update>Name<,
     delete>Name<,
+    deleteAll>Name<,
 };
 
 
