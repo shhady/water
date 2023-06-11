@@ -78,6 +78,16 @@ const TriggerTable = () => {
     console.log("Data Trigger", Data);
     return Data;
   };
+  function format(obj) {
+    const formattedObj = {};
+
+    for (const key in obj) {
+      const value = obj[key];
+      formattedObj[key] = value === "-" ? null : value;
+    }
+    formattedObj.status = Boolean(formattedObj.status);
+    return formattedObj;
+  }
 
   return (
     <div>
@@ -85,6 +95,7 @@ const TriggerTable = () => {
       <AdjustableTable
         queryURL={"/Triggers"}
         Massage={massage}
+        Format={format}
         Columns={triggersColumns}
       />
     </div>

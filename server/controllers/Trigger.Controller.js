@@ -28,13 +28,12 @@ const getTriggerById = async (req, res) => {
 // Create a new trigger
 const createTrigger = async (req, res) => {
   const triggerData = req.body;
-
   try {
     const newTrigger = new Trigger(triggerData);
     const savedTrigger = await newTrigger.save();
     res.status(201).json(savedTrigger);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -44,13 +43,13 @@ const updateTrigger = async (req, res) => {
   const triggerData = req.body;
 
   try {
-    const existingTrigger = await Trigger.findById(id);
-    if (!existingTrigger) {
+    const updatedTrigger = await Trigger.findByIdAndUpdate(id, triggerData, {
+      new: true,
+    });
+
+    if (!updatedTrigger) {
       return res.status(404).json({ message: "Trigger not found" });
     }
-
-    existingTrigger.set(triggerData);
-    const updatedTrigger = await existingTrigger.save();
 
     res.status(200).json(updatedTrigger);
   } catch (error) {
