@@ -89,6 +89,16 @@ const SensorsTable = () => {
     });
     return Data;
   };
+  function format(obj) {
+    const formattedObj = {};
+
+    for (const key in obj) {
+      const value = obj[key];
+      formattedObj[key] = value === "-" ? null : value;
+    }
+    formattedObj.status = Boolean(formattedObj.status);
+    return formattedObj;
+  }
 
   return (
     <div>
@@ -96,6 +106,7 @@ const SensorsTable = () => {
       <AdjustableTable
         queryURL={"/Sensors"}
         Massage={massage}
+        Format={format}
         Columns={sensorsColumns}
       />
     </div>

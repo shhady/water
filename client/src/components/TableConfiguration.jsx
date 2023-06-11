@@ -1,5 +1,6 @@
 import TriggerTable from "./TriggerTable";
 import SensorsTable from "./SensorsTable";
+import WaterInfrastructureTable from "./WaterInfrastructureTable";
 
 function TableConfiguration() {
   return (
@@ -7,6 +8,8 @@ function TableConfiguration() {
       <TriggerTable />
       <hr />
       <SensorsTable />
+      <hr />
+      <WaterInfrastructureTable />
     </div>
   );
 }

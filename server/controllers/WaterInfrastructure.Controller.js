@@ -7,7 +7,7 @@ const getAllWaterInfrastructure = async (req, res) => {
   try {
     const data = await WaterInfrastructure.find({});
     if (!data) throw new Error("Server error, failed to fetch data");
-    res.status(200).json({ data: data });
+    res.status(200).json(data);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
@@ -35,7 +35,7 @@ const getWaterInfrastructure = async (req, res) => {
     if (!id) throw new Error("Invalid id");
     const data = await WaterInfrastructure.findById(id);
     if (!data) throw new Error("Server error, failed to create data");
-    res.status(200).json({ data: data });
+    res.status(200).json(data);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
@@ -54,7 +54,7 @@ const updateWaterInfrastructure = async (req, res) => {
       { new: true }
     );
     if (!updatedData) throw new Error("Failed to update data");
-    res.status(200).json({ data: updatedData });
+    res.status(200).json(updatedData);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
@@ -69,7 +69,7 @@ const deleteWaterInfrastructure = async (req, res) => {
     if (!id) throw new Error("Invalid id");
     const data = await WaterInfrastructure.findByIdAndDelete(id);
     if (!data) throw new Error("Failed to update data");
-    res.status(200).json({ data: data });
+    res.status(200).json(data);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
