@@ -29,8 +29,8 @@ P Pond - case 1: west ,case 2: east , case 3 :south , case 4: north
 5. Permissions
 6. blackmail
 7. spam
-8. fishing
-9. DoS
+8. phishing
+9. DDoS
 10. virus
 
 Permissions , spam, fishing, DoS, virus , heretic
