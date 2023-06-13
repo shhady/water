@@ -40,12 +40,12 @@ const TriggerTable = () => {
     {
       field: "triggerType",
       headerName: TableLookUps("TRIGGER_TYPE"),
-      flex: 2,
+      flex: 1,
     },
     {
       field: "triggerName",
       headerName: TableLookUps("TRIGGER_NAME"),
-      flex: 2,
+      flex: 1,
     },
 
     {
@@ -88,7 +88,9 @@ const TriggerTable = () => {
       return {
         id: trigger._id,
         triggerName: trigger?.triggerName ?? TableLookUps("FIELD_ERROR"),
-        triggerType: trigger?.triggerType?.triggerTypeString ?? TableLookUps("FIELD_ERROR"),
+        triggerType:
+          trigger?.triggerType?.triggerTypeString ??
+          TableLookUps("FIELD_ERROR"),
         validValueH: trigger?.validValueH ?? TableLookUps("FIELD_ERROR"),
         validValueL: trigger?.validValueL ?? TableLookUps("FIELD_ERROR"),
         valueType: trigger?.valueType ?? TableLookUps("FIELD_ERROR"),

@@ -7,7 +7,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/material";
 import { baseURL } from "../constants/urlConstants.js";
 
-const TriggerTable = () => {
+const InfraTypeTable = () => {
   const { loading, error, sendFetchRequest } = useRequest();
 
   // CHANGE THIS AND USE data from useRequest
@@ -35,16 +35,32 @@ const TriggerTable = () => {
     return error ? <h1>{error.message}</h1> : <h1>ERROR</h1>;
   }
 
-  const triggerTypesColumns = [
+  const triggersColumns = [
     { field: "id", headerName: "TRIGGER_ID", flex: 1, hide: true },
     {
-      field: "triggerTypeString",
+      field: "triggerType",
       headerName: TableLookUps("TRIGGER_TYPE"),
       flex: 1,
     },
     {
-      field: "description",
+      field: "triggerName",
       headerName: TableLookUps("TRIGGER_NAME"),
+      flex: 1,
+    },
+
+    {
+      field: "validValueH",
+      headerName: "validValueH",
+      flex: 1,
+    },
+    {
+      field: "validValueL",
+      headerName: "validValueL",
+      flex: 1,
+    },
+    {
+      field: "valueType",
+      headerName: "valueType",
       flex: 1,
     },
     {
@@ -68,20 +84,22 @@ const TriggerTable = () => {
   ];
 
   const massage = (Data) => {
-    if (!Data) {
-      return;
-    }
-    Data = Data.map((triggerType) => {
+    Data = Data.map((trigger) => {
       return {
-        id: triggerType._id,
-        triggerTypeString:
-          triggerType?.triggerTypeString ?? TableLookUps("FIELD_ERROR"),
-        description: triggerType?.description ?? TableLookUps("FIELD_ERROR"),
-        status: triggerType?.status
+        id: trigger._id,
+        triggerName: trigger?.triggerName ?? TableLookUps("FIELD_ERROR"),
+        triggerType:
+          trigger?.triggerType?.triggerTypeString ??
+          TableLookUps("FIELD_ERROR"),
+        validValueH: trigger?.validValueH ?? TableLookUps("FIELD_ERROR"),
+        validValueL: trigger?.validValueL ?? TableLookUps("FIELD_ERROR"),
+        valueType: trigger?.valueType ?? TableLookUps("FIELD_ERROR"),
+        value: trigger?.value ?? TableLookUps("FIELD_ERROR"),
+        status: trigger?.status
           ? "True"
           : "False" ?? TableLookUps("FIELD_ERROR"),
-        createdAt: triggerType?.createdAt ?? TableLookUps("FIELD_ERROR"),
-        updatedAt: triggerType?.updatedAt ?? TableLookUps("FIELD_ERROR"),
+        createdAt: trigger?.createdAt ?? TableLookUps("FIELD_ERROR"),
+        updatedAt: trigger?.updatedAt ?? TableLookUps("FIELD_ERROR"),
       };
     });
     return Data;
@@ -98,29 +116,35 @@ const TriggerTable = () => {
   }
 
   const editRender = {
-    triggerTypeString: {
+    triggerName: {
+      type: "text",
+      renderType: "select",
+      options: () => JSON.parse(localStorage.getItem("trigger-names")),
+    },
+    triggerType: {
       type: "text",
       renderType: "select",
       options: () => JSON.parse(localStorage.getItem("trigger-types")),
     },
-    description: {
-      type: "text",
-    },
+    validValueH: { type: "number" },
+    validValueL: { type: "number" },
+    valueType: { type: "text" },
+    value: { type: "number" },
     status: { type: "checkbox" },
   };
 
   return (
     <div>
-      <h2>{TableLookUps("TRIGGER_TYPES")}</h2>
+      <h2>{TableLookUps("TRIGGERS")}</h2>
       <AdjustableTable
-        queryURL={"/TriggerTypes"}
+        queryURL={"/Triggers"}
         Massage={massage}
         Format={format}
-        Columns={triggerTypesColumns}
+        Columns={triggersColumns}
         EditRender={editRender}
       />
     </div>
   );
 };
 
-export default TriggerTable;
+export default InfraTypeTable;

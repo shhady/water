@@ -6,17 +6,17 @@ const SensorsSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    description:{
+    description: {
       type: String,
-
+      default: null,
     },
     triggerReference: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Trigger", // Reference to the water infrastructure parent
     },
-    infrastructureParent: {
+    reservoirParent: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "WaterInfrastructure", // Reference to the water infrastructure parent
+      ref: "Reservoir", // Reference to the water infrastructure parent
     },
     sensorProductId: {
       type: Number,
@@ -28,11 +28,11 @@ const SensorsSchema = new mongoose.Schema(
     },
     latitude: {
       type: Number,
-      default:null
+      default: null,
     },
     longitude: {
       type: Number,
-      default:null
+      default: null,
     },
     status: {
       type: Boolean,

@@ -10,7 +10,7 @@ const TriggerTypeSchema = new mongoose.Schema({
   //type of problem like quality water or cyber attack
   description: {
     type: String,
-    required: true,
+    default: null,
   },
   status: { type: Boolean, default: true }, // if the trigger has been resolved
 });
