@@ -100,7 +100,7 @@ const WaterInfrastructureTable = () => {
 
   return (
     <div>
-      <h2>{TableLookUps("WATER_INFRASTRUCTURES")}</h2>
+      <h2>{TableLookUps("INFRASTRUCTURES")}</h2>
       <AdjustableTable
         queryURL={"/WaterInfras"}
         Massage={massage}

@@ -11,7 +11,7 @@ const useRequest = () => {
     const requestOptions = {
       method: type,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+      body: body ? JSON.stringify(body) : undefined,
     };
 
     try {
