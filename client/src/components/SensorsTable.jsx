@@ -6,15 +6,20 @@ const SensorsTable = () => {
     { field: "id", headerName: "Sensor ID", flex: 1, hide: true },
     //sensorName
     {
-      field: "sensorName",
-      headerName: TableLookUps("SENSOR_NAME"),
+      field: "sensorId",
+      headerName: TableLookUps("SENSOR_ID"),
+      flex: 1,
+    },
+    {
+      field: "description",
+      headerName: TableLookUps("DESCRIPTION"),
       flex: 1,
     },
     //Sensore
     //sensorType
     {
-      field: "sensorType",
-      headerName: TableLookUps("SENSOR_TYPE"),
+      field: "triggerName",
+      headerName: TableLookUps("TRIGGER_NAME"),
       flex: 1,
     },
     {
@@ -69,22 +74,22 @@ const SensorsTable = () => {
   const massage = (Data) => {
     Data = Data.map((sensor) => {
       return {
-        id: sensor._id,
-        sensorName: sensor.sensorName,
-        sensorType: sensor.sensorType,
-        latitude: sensor.latitude,
-        longitude: sensor.longitude,
-        sensorAttribute: sensor.sensorAttribute,
-        sensorProductId: sensor.sensorProductId,
+        id: sensor?._id ?? TableLookUps("FIELD_ERROR"),
+        sensorId: sensor?.sensorId ?? TableLookUps("FIELD_ERROR"),
+        triggerName: sensor?.triggerReference?.triggerName  ?? TableLookUps("FIELD_ERROR"),
+        latitude: sensor?.latitude ?? TableLookUps("FIELD_ERROR"),
+        longitude: sensor?.longitude ?? TableLookUps("FIELD_ERROR"),
+        sensorAttribute: sensor?.sensorAttribute ?? TableLookUps("FIELD_ERROR"),
+        sensorProductId: sensor?.sensorProductId ?? TableLookUps("FIELD_ERROR"),
         infrastructureName:
-          sensor.infrastructureParent?.infrastructureName ??
-          TableLookUps("FIELD_ERROR"),
+          sensor?.infrastructureParent?.infrastructureName ??
+          TableLookUps("FIELD_ERROR") ,
         infrastructureAttribute:
-          sensor.infrastructureParent?.infrastructureAttribute ??
-          TableLookUps("FIELD_ERROR"),
-        status: sensor.status ? "True" : "False",
-        createdAt: sensor.createdAt,
-        updatedAt: sensor.updatedAt,
+          sensor?.infrastructureParent?.infrastructureAttribute ??
+          TableLookUps("FIELD_ERROR") , 
+        status: sensor?.status ? "True" : "False" ?? TableLookUps("FIELD_ERROR"),
+        createdAt: sensor?.createdAt ?? TableLookUps("FIELD_ERROR"),
+        updatedAt: sensor?.updatedAt ?? TableLookUps("FIELD_ERROR"),
       };
     });
     return Data;

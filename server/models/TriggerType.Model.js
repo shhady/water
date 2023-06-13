@@ -12,6 +12,7 @@ const TriggerTypeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  status: { type: Boolean, default: true }, // if the trigger has been resolved
 });
 
 const TriggerType = mongoose.model("TriggerType", TriggerTypeSchema);

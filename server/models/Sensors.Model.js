@@ -10,7 +10,7 @@ const SensorsSchema = new mongoose.Schema(
       type: String,
 
     },
-    triggerRefrence: {
+    triggerReference: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Trigger", // Reference to the water infrastructure parent
     },

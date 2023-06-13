@@ -7,7 +7,7 @@ const getAllTriggerType = async (req, res) => {
   try {
     const data = await TriggerType.find({});
     if (!data) throw new Error("Server error, failed to fetch data");
-    res.status(200).json({ data: data });
+    res.status(200).json(data);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
