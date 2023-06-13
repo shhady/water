@@ -116,6 +116,14 @@ const deleteTriggerType = async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 };
+const deleteAllTriggerType = async (req, res) => {
+  try {
+    await TriggerType.deleteMany();
+    res.status(200).json({ message: "All TriggerType deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 export {
   getAllTriggerType,
@@ -124,4 +132,5 @@ export {
   updateTriggerType,
   deleteTriggerType,
   generateTriggerTypes,
+  deleteAllTriggerType
 };

@@ -2,16 +2,17 @@ import mongoose from "mongoose";
 
 const SensorsSchema = new mongoose.Schema(
   {
-    sensorName: {
+    sensorId: {
       type: String,
-      default: "sim",
+      default: "",
     },
     description:{
       type: String,
 
     },
     triggerRefrence: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Trigger", // Reference to the water infrastructure parent
     },
     infrastructureParent: {
       type: mongoose.Schema.Types.ObjectId,
@@ -27,11 +28,11 @@ const SensorsSchema = new mongoose.Schema(
     },
     latitude: {
       type: Number,
-      required: true,
+      default:null
     },
     longitude: {
       type: Number,
-      required: true,
+      default:null
     },
     status: {
       type: Boolean,

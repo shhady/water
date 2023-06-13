@@ -4,7 +4,7 @@ import WaterInfrastructure from "../models/WaterInfrastructure.Model.js";
 // Get all sensors
 const getAllSensors = async (req, res) => {
   try {
-    const sensors = await Sensors.find().populate("infrastructureParent");
+    const sensors = await Sensors.find().populate("infrastructureParent").populate("triggerRefrence");
     res.status(200).json(sensors);
   } catch (error) {
     res.status(500).json({ message: error.message });
