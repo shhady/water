@@ -6,13 +6,15 @@ import { Box } from "@mui/material";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import useRequest from "../hooks/useRequest.js";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 
 const fetchData = async (url) => {
   const res = await fetch(url);
   return res.json();
 };
 
-function AdjustableTable({ Columns, queryURL, Massage, Format }) {
+function AdjustableTable({ Columns, queryURL, Massage, Format, EditRender }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editRowIndex, setEditRowIndex] = useState(null);
   const [rows, setRows] = useState([]);
@@ -98,21 +100,62 @@ function AdjustableTable({ Columns, queryURL, Massage, Format }) {
     },
   ];
 
+  const isSemiBoolean = (str) => str == "True" || str == "False";
+  const notSemiBoolean = (str) => (str == "True" ? false : true);
+  const notSemiBooleanString = (str) => (str == "True" ? "False" : "True");
+
   const renderCell = (params) => {
     const rowIndex = params.row.id; // Update here
     const field = params.field;
     const value = params.value;
 
-    if (isEditing && rowIndex === editRowIndex) {
+    if (isEditing && rowIndex === editRowIndex && EditRender[field]) {
+      if (EditRender[field].renderType === "select")
+        return (
+          <select
+            onChange={(e) => {
+              const updatedRows = [...rows];
+              const row = rows.findIndex((row) => row.id === rowIndex);
+              updatedRows[row][field] = e.target.value;
+              setRows(updatedRows);
+            }}
+          >
+            {EditRender[field].options.map((option, index) => (
+              <option key={index}>{option}</option>
+            ))}
+          </select>
+        );
+      if (EditRender[field].renderType === "auto-complete")
+        return (
+          <Autocomplete
+            disablePortal
+            style={{ width: 100, fontSize: 7 }}
+            defaultValue={value}
+            options={EditRender[field].options()}
+            sx={{ width: 100, fontSize: "7" }}
+            onChange={(e, newValue) => {
+              const updatedRows = [...rows];
+              const row = rows.findIndex((row) => row.id === rowIndex);
+              updatedRows[row][field] = newValue;
+              setRows(updatedRows);
+            }}
+            renderInput={(params) => <TextField {...params} label="Option" />}
+          />
+        );
+
       return (
         <input
           style={{ fontSize: "10px" }}
-          type="text"
+          type={EditRender[field].type}
+          checked={!notSemiBoolean(value)}
           defaultValue={value}
           onChange={(e) => {
             const updatedRows = [...rows];
             const row = rows.findIndex((row) => row.id === rowIndex);
-            updatedRows[row][field] = e.target.value;
+            updatedRows[row][field] = isSemiBoolean(value)
+              ? notSemiBooleanString(value)
+              : e.target.value;
+            console.log(value, isSemiBoolean(value));
             setRows(updatedRows);
           }}
         />
@@ -127,7 +170,7 @@ function AdjustableTable({ Columns, queryURL, Massage, Format }) {
   );
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <div style={{ height: 400, width: "1200px" }}>
       <button onClick={handleAddRowClick}>+</button>
       <DataGrid
         autoHeight

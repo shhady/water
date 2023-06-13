@@ -1,23 +1,53 @@
 //import { Tables } from "../CustomHook/Tables.Custom";
 import TableLookUps from "../constants/TableLookUps";
 import AdjustableTable from "./AdjustableTable";
+import { useEffect } from "react";
+import useRequest from "../hooks/useRequest.js";
+import CircularProgress from "@mui/material/CircularProgress";
+import { Box } from "@mui/material";
+import { baseURL } from "../constants/urlConstants.js";
 
 const TriggerTable = () => {
+  const { loading, error, sendFetchRequest } = useRequest();
+
+  useEffect(() => {
+    sendFetchRequest(
+      baseURL + "/Arrays",
+      { names: ["TriggerTypes", "TriggerNames"] },
+      "PUT"
+    )
+      .then((data) => {
+        console.log(data);
+        localStorage.setItem("trigger-types", JSON.stringify(data[1]));
+        localStorage.setItem("trigger-names", JSON.stringify(data[0]));
+      })
+      .catch((err) => console.log(err));
+  }, [sendFetchRequest]);
+
+  if (Response.isLoading || loading) {
+    return (
+      <Box sx={{ display: "flex" }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+  if (Response.isError || error) {
+    return error ? <h1>{error.message}</h1> : <h1>ERROR</h1>;
+  }
+
   const triggersColumns = [
     { field: "id", headerName: "TRIGGER_ID", flex: 1, hide: true },
-    //trigger name
-    {
-      field: "triggerName",
-      headerName: TableLookUps("TRIGGER_NAME"),
-      flex: 1,
-    },
-    //trigger number
-
     {
       field: "triggerType",
       headerName: TableLookUps("TRIGGER_TYPE"),
       flex: 1,
     },
+    {
+      field: "triggerName",
+      headerName: TableLookUps("TRIGGER_NAME"),
+      flex: 1,
+    },
+
     {
       field: "validValueH",
       headerName: "validValueH",
@@ -89,6 +119,24 @@ const TriggerTable = () => {
     return formattedObj;
   }
 
+  const editRender = {
+    triggerName: {
+      type: "text",
+      renderType: "auto-complete",
+      options: () => JSON.parse(localStorage.getItem("trigger-names")),
+    },
+    triggerType: {
+      type: "text",
+      renderType: "auto-complete",
+      options: () => JSON.parse(localStorage.getItem("trigger-types")),
+    },
+    validValueH: { type: "number" },
+    validValueL: { type: "number" },
+    valueType: { type: "text" },
+    value: { type: "number" },
+    status: { type: "checkbox" },
+  };
+
   return (
     <div>
       <h2>{TableLookUps("TRIGGERS")}</h2>
@@ -97,6 +145,7 @@ const TriggerTable = () => {
         Massage={massage}
         Format={format}
         Columns={triggersColumns}
+        EditRender={editRender}
       />
     </div>
   );
