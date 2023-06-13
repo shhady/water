@@ -14,7 +14,7 @@ const fetchData = async (url) => {
   return res.json();
 };
 
-function AdjustableTable({ Columns, queryURL, Massage, Format, EditRender }) {
+function MiniAdjustableTable({ Columns, queryURL, Massage, ReverseMassage }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editRowIndex, setEditRowIndex] = useState(null);
   const [rows, setRows] = useState([]);
@@ -23,9 +23,6 @@ function AdjustableTable({ Columns, queryURL, Massage, Format, EditRender }) {
   const { loading, error, sendFetchRequest } = useRequest();
 
   useEffect(() => {
-    if (Massage == undefined) {
-      return;
-    }
     if (Data != null) {
       setRows(Massage(Data));
     }
@@ -51,32 +48,21 @@ function AdjustableTable({ Columns, queryURL, Massage, Format, EditRender }) {
     setIsEditing(false);
     setEditRowIndex(null);
 
+    console.log(rows);
+
     // You can access the edited row object using the editRowIndex
     const editedRow = rows.find((row) => row.id === editRowIndex);
-    if (editedRow && !editedRow.fresh) {
-      sendFetchRequest(
-        baseURL + queryURL + "/" + editedRow.id,
-        Format(editedRow),
-        "PUT"
-      ).then((data) => console.log(data));
-    } else {
-      console.log("POST request", queryURL);
-      sendFetchRequest(baseURL + queryURL, Format(editedRow), "POST").then(
+    if (editedRow) {
+      sendFetchRequest(baseURL + queryURL, ReverseMassage(rows), "PUT").then(
         (data) => console.log(data)
       );
-      // id = response.id
-      editedRow.fresh = false;
     }
-
-    // You can update the rows state here if needed
-    // setRows(updatedRows);
   };
 
   const handleAddRowClick = () => {
     const newRow = {
       id: rows.length + 1,
       ...Columns.map((col) => ""),
-      fresh: true,
     };
     setRows([...rows, newRow]);
     setIsEditing(true);
@@ -94,68 +80,26 @@ function AdjustableTable({ Columns, queryURL, Massage, Format, EditRender }) {
         if (isEditing && rowIndex === editRowIndex) {
           return <button onClick={handleSaveClick}>Save</button>;
         }
-
         return <button onClick={() => handleEditClick(rowIndex)}>Edit</button>;
       },
     },
   ];
-
-  const isSemiBoolean = (str) => str == "True" || str == "False";
-  const notSemiBoolean = (str) => (str == "True" ? false : true);
-  const notSemiBooleanString = (str) => (str == "True" ? "False" : "True");
 
   const renderCell = (params) => {
     const rowIndex = params.row.id; // Update here
     const field = params.field;
     const value = params.value;
 
-    if (isEditing && rowIndex === editRowIndex && EditRender[field]) {
-      if (EditRender[field].renderType === "select")
-        return (
-          <select
-            onChange={(e) => {
-              const updatedRows = [...rows];
-              const row = rows.findIndex((row) => row.id === rowIndex);
-              updatedRows[row][field] = e.target.value;
-              setRows(updatedRows);
-            }}
-          >
-            {EditRender[field].options().map((option, index) => (
-              <option key={index}>{option}</option>
-            ))}
-          </select>
-        );
-      if (EditRender[field].renderType === "auto-complete")
-        return (
-          <Autocomplete
-            disablePortal
-            style={{ width: 100, fontSize: 7 }}
-            defaultValue={value}
-            options={EditRender[field].options()}
-            sx={{ width: 100, fontSize: "7" }}
-            onChange={(e, newValue) => {
-              const updatedRows = [...rows];
-              const row = rows.findIndex((row) => row.id === rowIndex);
-              updatedRows[row][field] = newValue;
-              setRows(updatedRows);
-            }}
-            renderInput={(params) => <TextField {...params} label="Option" />}
-          />
-        );
-
+    if (isEditing && rowIndex === editRowIndex) {
       return (
         <input
           style={{ fontSize: "10px" }}
-          type={EditRender[field].type}
-          checked={!notSemiBoolean(value)}
+          type="text"
           defaultValue={value}
           onChange={(e) => {
             const updatedRows = [...rows];
             const row = rows.findIndex((row) => row.id === rowIndex);
-            updatedRows[row][field] = isSemiBoolean(value)
-              ? notSemiBooleanString(value)
-              : e.target.value;
-            console.log(value, isSemiBoolean(value));
+            updatedRows[row][field] = e.target.value;
             setRows(updatedRows);
           }}
         />
@@ -170,10 +114,9 @@ function AdjustableTable({ Columns, queryURL, Massage, Format, EditRender }) {
   );
 
   return (
-    <div style={{ height: 400, width: "1200px" }}>
+    <div style={{ height: "fit-content", width: "1200px" }}>
       <button onClick={handleAddRowClick}>+</button>
       <DataGrid
-        autoHeight
         rows={rows}
         columns={columns}
         renderCell={renderCell}
@@ -193,4 +136,4 @@ function AdjustableTable({ Columns, queryURL, Massage, Format, EditRender }) {
   );
 }
 
-export default AdjustableTable;
+export default MiniAdjustableTable;

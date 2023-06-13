@@ -10,6 +10,7 @@ import { baseURL } from "../constants/urlConstants.js";
 const TriggerTable = () => {
   const { loading, error, sendFetchRequest } = useRequest();
 
+  // CHANGE THIS AND USE data from useRequest
   useEffect(() => {
     sendFetchRequest(
       baseURL + "/Arrays",
@@ -17,7 +18,6 @@ const TriggerTable = () => {
       "PUT"
     )
       .then((data) => {
-        console.log(data);
         localStorage.setItem("trigger-types", JSON.stringify(data[1]));
         localStorage.setItem("trigger-names", JSON.stringify(data[0]));
       })
@@ -40,12 +40,12 @@ const TriggerTable = () => {
     {
       field: "triggerType",
       headerName: TableLookUps("TRIGGER_TYPE"),
-      flex: 1,
+      flex: 2,
     },
     {
       field: "triggerName",
       headerName: TableLookUps("TRIGGER_NAME"),
-      flex: 1,
+      flex: 2,
     },
 
     {
@@ -105,7 +105,6 @@ const TriggerTable = () => {
         updatedAt: trigger?.updatedAt ?? TableLookUps("FIELD_ERROR"),
       };
     });
-    console.log("Data Trigger", Data);
     return Data;
   };
   function format(obj) {
@@ -122,12 +121,12 @@ const TriggerTable = () => {
   const editRender = {
     triggerName: {
       type: "text",
-      renderType: "auto-complete",
+      renderType: "select",
       options: () => JSON.parse(localStorage.getItem("trigger-names")),
     },
     triggerType: {
       type: "text",
-      renderType: "auto-complete",
+      renderType: "select",
       options: () => JSON.parse(localStorage.getItem("trigger-types")),
     },
     validValueH: { type: "number" },
