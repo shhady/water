@@ -1,56 +1,71 @@
-import React, { useEffect, useState } from "react";
-import { Tables } from "../CustomHook/Tables.Custom";
+//import { Tables } from "../CustomHook/Tables.Custom";
 import TableLookUps from "../constants/TableLookUps";
+import AdjustableTable from "./AdjustableTable";
+import { useEffect } from "react";
+import useRequest from "../hooks/useRequest.js";
+import CircularProgress from "@mui/material/CircularProgress";
+import { Box } from "@mui/material";
+import { baseURL } from "../constants/urlConstants.js";
 
 const TriggerTable = () => {
-  const [rows, setRows] = useState([]);
+  const { loading, error, sendFetchRequest } = useRequest();
+
+  useEffect(() => {
+    sendFetchRequest(
+      baseURL + "/Arrays",
+      { names: ["TriggerTypes", "TriggerNames"] },
+      "PUT"
+    )
+      .then((data) => {
+        console.log(data);
+        localStorage.setItem("trigger-types", JSON.stringify(data[1]));
+        localStorage.setItem("trigger-names", JSON.stringify(data[0]));
+      })
+      .catch((err) => console.log(err));
+  }, [sendFetchRequest]);
+
+  if (Response.isLoading || loading) {
+    return (
+      <Box sx={{ display: "flex" }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+  if (Response.isError || error) {
+    return error ? <h1>{error.message}</h1> : <h1>ERROR</h1>;
+  }
+
   const triggersColumns = [
     { field: "id", headerName: "TRIGGER_ID", flex: 1, hide: true },
-    //trigger number
-    {
-      field: "trigger",
-      headerName: TableLookUps("TRIGGER"),
-      flex: 1,
-    },
-    //trigger name
-    {
-      field: "triggerName",
-      headerName: TableLookUps("TRIGGER_NAME"),
-      flex: 1,
-    },
-    //trigger number
-
     {
       field: "triggerType",
       headerName: TableLookUps("TRIGGER_TYPE"),
       flex: 1,
     },
-    //Sensore
-    //sensorName
     {
-      field: "sensorName",
-      headerName: TableLookUps("SENSOR_NAME"),
+      field: "triggerName",
+      headerName: TableLookUps("TRIGGER_NAME"),
       flex: 1,
     },
-    //Sensore
-    //sensorType
+
     {
-      field: "sensorType",
-      headerName: TableLookUps("SENSOR_TYPE"),
+      field: "validValueH",
+      headerName: "validValueH",
       flex: 1,
     },
-    //Sensore
-    //System
     {
-      field: "System",
-      headerName: TableLookUps("SYSTEM"),
+      field: "validValueL",
+      headerName: "validValueL",
       flex: 1,
     },
-    //Sensore
-    //SystemNumber
     {
-      field: "SystemNumber",
-      headerName: TableLookUps("SYSTEM_NUMBER"),
+      field: "valueType",
+      headerName: "valueType",
+      flex: 1,
+    },
+    {
+      field: "value",
+      headerName: "value",
       flex: 1,
     },
     {
@@ -77,30 +92,60 @@ const TriggerTable = () => {
     Data = Data.map((trigger) => {
       return {
         id: trigger._id,
-        trigger: trigger.triggerNumber,
-        triggerName: trigger.triggerName,
-        triggerType: trigger.triggerType,
-        sensorName: trigger.sensorName,
-        sensorType: trigger.sensorType,
-        System: trigger.System,
-        SystemNumber: trigger.SystemNumber,
-        status: trigger.status,
-        createdAt: trigger.createdAt,
-        updatedAt: trigger.updatedAt,
+        triggerName: trigger?.triggerName ?? TableLookUps("FIELD_ERROR"),
+        triggerType: trigger?.triggerType ?? TableLookUps("FIELD_ERROR"),
+        validValueH: trigger?.validValueH ?? TableLookUps("FIELD_ERROR"),
+        validValueL: trigger?.validValueL ?? TableLookUps("FIELD_ERROR"),
+        valueType: trigger?.valueType ?? TableLookUps("FIELD_ERROR"),
+        value: trigger?.value ?? TableLookUps("FIELD_ERROR"),
+        status: trigger?.status
+          ? "True"
+          : "False" ?? TableLookUps("FIELD_ERROR"),
+        createdAt: trigger?.createdAt ?? TableLookUps("FIELD_ERROR"),
+        updatedAt: trigger?.updatedAt ?? TableLookUps("FIELD_ERROR"),
       };
     });
     console.log("Data Trigger", Data);
     return Data;
   };
+  function format(obj) {
+    const formattedObj = {};
+
+    for (const key in obj) {
+      const value = obj[key];
+      formattedObj[key] = value === "-" ? null : value;
+    }
+    formattedObj.status = Boolean(formattedObj.status);
+    return formattedObj;
+  }
+
+  const editRender = {
+    triggerName: {
+      type: "text",
+      renderType: "auto-complete",
+      options: () => JSON.parse(localStorage.getItem("trigger-names")),
+    },
+    triggerType: {
+      type: "text",
+      renderType: "auto-complete",
+      options: () => JSON.parse(localStorage.getItem("trigger-types")),
+    },
+    validValueH: { type: "number" },
+    validValueL: { type: "number" },
+    valueType: { type: "text" },
+    value: { type: "number" },
+    status: { type: "checkbox" },
+  };
 
   return (
     <div>
       <h2>{TableLookUps("TRIGGERS")}</h2>
-      <Tables
-        QueryName={"Triggers"}
+      <AdjustableTable
+        queryURL={"/Triggers"}
         Massage={massage}
-        columns={triggersColumns}
-        type="Trigger"
+        Format={format}
+        Columns={triggersColumns}
+        EditRender={editRender}
       />
     </div>
   );

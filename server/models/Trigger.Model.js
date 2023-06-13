@@ -2,17 +2,24 @@ import mongoose from "mongoose";
 
 const triggerSchema = new mongoose.Schema(
   {
-    triggerNumber: { type: Number, required: true },
     triggerName: { type: String, required: true },
     triggerType: { type: String, required: true },
-    sensorName: {
-      type: String,
-      default: "sim",
-      required: true,
+    validValueH: {
+      type: Number,
+      default: null,
     },
-    sensorType: { type: String, required: true },
-    System: { type: String, required: true },
-    SystemNumber: { type: Number, required: true },
+    validValueL: {
+      type: Number,
+      default: null,
+    },
+    valueType: {
+      type: String, // unit of measurement
+      default: null,
+    },
+    value: {
+      type: Number,
+      default: null,
+    },
     status: { type: Boolean, default: false }, // if the trigger has been resolved
   },
   { timestamps: true }

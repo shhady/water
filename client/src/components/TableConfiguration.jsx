@@ -1,24 +1,15 @@
 import TriggerTable from "./TriggerTable";
-import IdentifierTable from "./IdentifierTable";
-import ConfigConditionTable from "./ConfigConditionTable";
-import ConnectionsForm from "./ConnectionsForm";
-import ParameterTable from "./ParameterTable";
 import SensorsTable from "./SensorsTable";
+import WaterInfrastructureTable from "./WaterInfrastructureTable";
 
 function TableConfiguration() {
   return (
     <div>
       <TriggerTable />
       <hr />
-      <IdentifierTable />
-      <hr />
-      <ConfigConditionTable />
-      <hr />
-      <ConnectionsForm />
-      <hr />
-      <ParameterTable />
-      <hr />
       <SensorsTable />
+      <hr />
+      <WaterInfrastructureTable />
     </div>
   );
 }

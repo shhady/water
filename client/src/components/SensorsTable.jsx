@@ -1,31 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Tables } from "../CustomHook/Tables.Custom";
 import TableLookUps from "../constants/TableLookUps";
+import AdjustableTable from "./AdjustableTable";
 
 const SensorsTable = () => {
-  const [rows, setRows] = useState([]);
   const sensorsColumns = [
     { field: "id", headerName: "Sensor ID", flex: 1, hide: true },
-    //trigger number
-    {
-      field: "trigger",
-      headerName: TableLookUps("TRIGGER"),
-      flex: 1,
-    },
-    //trigger name
-    {
-      field: "triggerName",
-      headerName: TableLookUps("TRIGGER_NAME"),
-      flex: 1,
-    },
-    //trigger number
-
-    {
-      field: "triggerType",
-      headerName: TableLookUps("TRIGGER_TYPE"),
-      flex: 1,
-    },
-    //Sensore
     //sensorName
     {
       field: "sensorName",
@@ -39,18 +17,39 @@ const SensorsTable = () => {
       headerName: TableLookUps("SENSOR_TYPE"),
       flex: 1,
     },
-    //Sensore
-    //System
     {
-      field: "System",
-      headerName: TableLookUps("SYSTEM"),
+      field: "status",
+      headerName: TableLookUps("STATUS"),
       flex: 1,
     },
-    //Sensore
-    //SystemNumber
     {
-      field: "SystemNumber",
-      headerName: TableLookUps("SYSTEM_NUMBER"),
+      field: "infrastructureName",
+      headerName: "infrastructure Name",
+      flex: 1,
+    },
+    {
+      field: "infrastructureAttribute",
+      headerName: "infrastructure Attribute",
+      flex: 1,
+    },
+    {
+      field: "latitude",
+      headerName: "latitude",
+      flex: 1,
+    },
+    {
+      field: "longitude",
+      headerName: "longitude",
+      flex: 1,
+    },
+    {
+      field: "sensorAttribute",
+      headerName: "sensorAttribute",
+      flex: 1,
+    },
+    {
+      field: "sensorProductId",
+      headerName: "sensorProductId",
       flex: 1,
     },
     {
@@ -71,28 +70,44 @@ const SensorsTable = () => {
     Data = Data.map((sensor) => {
       return {
         id: sensor._id,
-        trigger: sensor.Trigger.number,
-        triggerName: sensor.Trigger.name,
-        triggerType: sensor.Trigger.type,
         sensorName: sensor.sensorName,
         sensorType: sensor.sensorType,
-        System: sensor.System,
-        SystemNumber: sensor.SystemNumber,
+        latitude: sensor.latitude,
+        longitude: sensor.longitude,
+        sensorAttribute: sensor.sensorAttribute,
+        sensorProductId: sensor.sensorProductId,
+        infrastructureName:
+          sensor.infrastructureParent?.infrastructureName ??
+          TableLookUps("FIELD_ERROR"),
+        infrastructureAttribute:
+          sensor.infrastructureParent?.infrastructureAttribute ??
+          TableLookUps("FIELD_ERROR"),
+        status: sensor.status ? "True" : "False",
         createdAt: sensor.createdAt,
         updatedAt: sensor.updatedAt,
       };
     });
     return Data;
   };
+  function format(obj) {
+    const formattedObj = {};
+
+    for (const key in obj) {
+      const value = obj[key];
+      formattedObj[key] = value === "-" ? null : value;
+    }
+    formattedObj.status = Boolean(formattedObj.status);
+    return formattedObj;
+  }
 
   return (
     <div>
       <h2>{TableLookUps("SENSORS")}</h2>
-      <Tables
-        QueryName={"Sensors"}
+      <AdjustableTable
+        queryURL={"/Sensors"}
         Massage={massage}
-        columns={sensorsColumns}
-        type="Sensor"
+        Format={format}
+        Columns={sensorsColumns}
       />
     </div>
   );

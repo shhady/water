@@ -9,17 +9,29 @@ const SensorsSchema = new mongoose.Schema(
     sensorType: {
       type: String,
     },
-    System: {
-      // pond, tube, tower
-      type: String,
-    },
-    SystemNumber: {
-      // number of pond, number of tube, number of tower
-      type: Number,
-    },
-    Trigger: {
+    infrastructureParent: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "TriggerType", // Reference to the "Trigger" model
+      ref: "WaterInfrastructure", // Reference to the water infrastructure parent
+    },
+    sensorProductId: {
+      type: Number,
+      required: true,
+    },
+    sensorAttribute: {
+      type: Number,
+      required: true,
+    },
+    latitude: {
+      type: Number,
+      required: true,
+    },
+    longitude: {
+      type: Number,
+      required: true,
+    },
+    status: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

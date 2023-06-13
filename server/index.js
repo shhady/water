@@ -2,15 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import http from "http";
-import waterRoute from "./routes/Water.Route.js";
-import cyberRoute from "./routes/Cyber.Route.js";
 import triggerRoute from "./routes/Trigger.Route.js";
-import identifiersRoute from "./routes/Identifiers.Route.js";
-import configConditionRoute from "./routes/configCondition.Route.js";
-import ParameterRoute from "./routes/Parameter.Route.js";
-import ConnectionRoute from "./routes/Connection.Route.js";
 import TriggerTypeRoute from "./routes/TriggerType.Route.js";
 import SensorsRoute from "./routes/Sensors.Route.js";
+import SystemRoute from "./routes/System.Route.js";
+import WaterInfrastructureRoute from "./routes/WaterInfrastructure.Route.js";
+import ArrayRoute from "./routes/Array.Route.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -28,15 +25,12 @@ app.use(
     parameterLimit: 50000000,
   })
 );
-app.use("/WaterData", waterRoute);
-app.use("/CyberProblem", cyberRoute);
 app.use("/Triggers", triggerRoute);
-app.use("/Identifiers", identifiersRoute);
-app.use("/configConditions", configConditionRoute);
-app.use("/Parameters", ParameterRoute);
-app.use("/Connections", ConnectionRoute);
 app.use("/TriggerTypes", TriggerTypeRoute);
 app.use("/Sensors", SensorsRoute);
+app.use("/Systems", SystemRoute);
+app.use("/WaterInfras", WaterInfrastructureRoute);
+app.use("/Arrays", ArrayRoute);
 
 //------- Talal's db
 //const CONNECTION_URL = `mongodb+srv://waterproject:t2k4VkJn963j7guP@water.wn7b7lm.mongodb.net/`;

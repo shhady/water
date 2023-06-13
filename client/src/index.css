@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap");
 
 /* Global Styles */
 :root {
@@ -21,7 +21,6 @@
   --app-color: rgb(73, 165, 244);
   --small-text: 1.25rem;
   --extra-small-text: 0.7em;
-
 }
 
 html {
@@ -42,7 +41,7 @@ html {
 
 body {
   box-sizing: border-box;
-  font-family: 'Roboto', 'Arimo', sans-serif;
+  font-family: "Roboto", "Arimo", sans-serif;
   font-size: 1.6rem;
   line-height: 1.6;
   background-color: var(--white);
@@ -67,16 +66,19 @@ img {
 }
 
 span {
-  font-family: 'Roboto', 'Arimo', sans-serif;
+  font-family: "Roboto", "Arimo", sans-serif;
 }
 
 /* Utilities */
 .container {
-  width: 110rem;
-  max-width: 110rem;
   margin: auto;
   overflow: hidden;
   padding: 1rem 0;
+}
+.countainer div {
+  width: 200rem;
+  max-width: 300rem;
+  margin: auto;
 }
 
 .font-bold {
@@ -157,16 +159,15 @@ span {
 .card {
   padding: 1.6rem;
   border: var(--app-color) 0.5px solid;
-  box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+  box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
   border-radius: 0.5rem;
   margin: 1rem 3%;
   min-width: 6rem;
-
 }
 
 .border-color-uq {
   border: var(--primary-color) 0.5px solid;
-
 }
 
 /* List */
@@ -256,11 +257,11 @@ span {
 .my-3 {
   margin: 3rem 0;
 }
-.m-r-2{
+.m-r-2 {
   margin-right: 2rem;
 }
 
-.m-l-2{
+.m-l-2 {
   margin-left: 2rem;
 }
 .m-t-1 {
@@ -300,7 +301,6 @@ span {
   width: 100%;
 }
 
-
 .grid-col-gap-4 {
   grid-column-gap: 4rem;
 }
@@ -330,7 +330,7 @@ span {
 .btn {
   display: inline-block;
   background: var(--light-color);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   color: var(--dark-gray);
   padding: 0.6rem 2rem;
   font-size: 1.6rem;
@@ -418,7 +418,6 @@ span {
 .alert-warning {
   background: var(--warning-color);
   color: rgb(58, 57, 5);
-
 }
 
 .btn-app,
@@ -448,7 +447,6 @@ span {
   background: var(--success-color);
   color: var(--white);
   width: fit-content;
-
 }
 
 .btn-white,
@@ -459,8 +457,6 @@ span {
   color: var(--dark-gray);
   border: var(--light-gray) solid 1px;
 }
-
-
 
 button:active {
   transform: translateX(0.05rem);
@@ -485,17 +481,16 @@ button:active {
   width: 25rem;
 }
 
-
 /* Forms */
-input, textarea, select {
+input,
+textarea,
+select {
   border-radius: 0.5rem;
   margin: 0.5rem 0;
-
 }
 
 textarea {
   height: 18rem;
-
 }
 
 .form-text {
@@ -504,15 +499,15 @@ textarea {
   color: var(--form-gray);
 }
 
-input[type='submit'] {
+input[type="submit"] {
   border: 0.15rem solid var(--green);
   outline: none;
 }
 
-input[type='text'],
-input[type='email'],
-input[type='password'],
-input[type='number'],
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
 select,
 textarea {
   display: block;
@@ -522,8 +517,8 @@ textarea {
   border: 0.1rem solid var(--light-gray);
 }
 
-input[type='password'],
-input[type='email'] {
+input[type="password"],
+input[type="email"] {
   text-align: left;
 }
 
@@ -557,16 +552,14 @@ select {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   background-color: var(--white);
-
 }
 
-
-input[type='submit'],
+input[type="submit"],
 button {
   font: inherit;
 }
 
-input[type='submit']:disabled {
+input[type="submit"]:disabled {
   opacity: 0.6;
   cursor: default;
 }
@@ -613,11 +606,11 @@ input[type='submit']:disabled {
   transition: all 0.2s ease-in-out;
 }
 
-.navbar .link.active, .link:hover {
+.navbar .link.active,
+.link:hover {
   color: var(--dark-color);
   font-weight: bold;
 }
-
 
 /* Spinner */
 .spinner {
@@ -645,7 +638,7 @@ small,
 
 small {
   color: var(--danger-color);
-  margin-top: -.5rem;
+  margin-top: -0.5rem;
 }
 
 .big-width {
@@ -662,7 +655,9 @@ small {
   text-align: center;
 }
 
-.form-add-item input, select, textarea {
+.form-add-item input,
+select,
+textarea {
   margin: auto;
   margin-bottom: auto;
   margin-bottom: 1.5rem;
@@ -670,7 +665,8 @@ small {
   border: 0.2rem solid var(--dark-gray);
 }
 
-.form-add-item input,textarea {
+.form-add-item input,
+textarea {
   width: 35%;
 }
 
@@ -678,7 +674,6 @@ select {
   width: fit-content;
   min-width: 11.5%;
   text-align: center;
-
 }
 .justified {
   display: flex;
@@ -694,7 +689,6 @@ select {
   color: var(--app-color);
 }
 
-
 .scale {
   width: 3rem;
   height: 3rem;
@@ -706,7 +700,6 @@ select {
 
 .scale:active {
   transform: translateY(0.05rem);
-
 }
 
 .scale:hover {
@@ -728,25 +721,23 @@ select {
   text-align: center;
 }
 
-
 .w {
   width: 52%;
 }
 
 .select-btn {
   color: var(--app-color);
-
 }
 
 input[type="range"] {
-  filter: invert(29%) sepia(80%) saturate(2825%) hue-rotate(1deg) brightness(115%) contrast(123%);
+  filter: invert(29%) sepia(80%) saturate(2825%) hue-rotate(1deg)
+    brightness(115%) contrast(123%);
 }
 
 /* Mobile Styles */
 
 /* Small screens */
 @media (max-width: 1150px) {
-
   .grid-2,
   .grid-3 {
     grid-template-columns: 1fr;
@@ -789,7 +780,8 @@ input[type="range"] {
     margin-right: 0;
   }
 
-  .form-add-item input, textarea {
+  .form-add-item input,
+  textarea {
     width: 35%;
   }
 
@@ -797,15 +789,14 @@ input[type="range"] {
     left: 38.6vw;
   }
 
-  .card, .panel {
+  .card,
+  .panel {
     margin: 1rem 10%;
-
   }
 
   .main-panel {
     margin: auto;
   }
-
 }
 
 /* Tablet and phone */
@@ -814,9 +805,9 @@ input[type="range"] {
     font-size: 50%;
   }
 
-  .card, .panel {
+  .card,
+  .panel {
     margin: 1rem 10%;
-
   }
 
   .hide-sm {
@@ -852,7 +843,8 @@ input[type="range"] {
     width: 71%;
   }
 
-  .form-add-item input, textarea {
+  .form-add-item input,
+  textarea {
     width: 35%;
   }
 
@@ -863,7 +855,6 @@ input[type="range"] {
   .main-panel {
     margin: auto;
   }
-
 }
 
 a.disabled {
@@ -878,16 +869,14 @@ button.disabled {
   color: #666666;
 }
 
-
 .dropdown {
-	appearance: none;
-	padding: 5px;
-	background-color: rgb(25, 47, 241);
-  color:#ffffff;
-	border: none;
-	outline: none;
+  appearance: none;
+  padding: 5px;
+  background-color: rgb(25, 47, 241);
+  color: #ffffff;
+  border: none;
+  outline: none;
 }
-
 
 /* 
 select{
@@ -898,4 +887,3 @@ select{
 option:not(:checked) { 
   background-color: #FFF; 
 } */
-

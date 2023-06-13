@@ -1,11 +1,11 @@
-import >Name< from "../models/>Name<.Model.js";
+import System from "../models/System.Model.js";
 
-//@desc Get all >Name<
+//@desc Get all System
 //@route GET /
 //@access public
-const getAll>Name< = async (req, res) => {
+const getAllSystem = async (req, res) => {
     try {
-        const data = await >Name<.find({});
+        const data = await System.find({});
         if(!data) 
             throw new Error("Server error, failed to fetch data");
         res.status(200).json({data: data});
@@ -14,12 +14,12 @@ const getAll>Name< = async (req, res) => {
     }
 }
 
-//@desc Create new >Name<
+//@desc Create new System
 //@route POST /
 //@access public
-const create>Name< = async (req, res) => {
+const createSystem = async (req, res) => {
     try {
-        const data = await >Name<.create({...req.body});
+        const data = await System.create({...req.body});
         if(!data) throw new Error("Server error, failed to create data");
         res.status(201).json({data: data});
     } catch (e) {
@@ -27,14 +27,14 @@ const create>Name< = async (req, res) => {
     }
 }
 
-//@desc Get >Name< by ID
+//@desc Get System by ID
 //@route GET /:id
 //@access public
-const get>Name< = async (req,res) => {
+const getSystem = async (req,res) => {
     try {
         const id = req.params.id;
         if(!id) throw new Error("Invalid id")
-        const data = await >Name<.findById(id);
+        const data = await System.findById(id);
         if(!data) throw new Error("Server error, failed to create data");
         res.status(200).json({data: data});
     } catch (e) {
@@ -42,14 +42,14 @@ const get>Name< = async (req,res) => {
     }
 }
 
-//@desc Update >Name< by ID
+//@desc Update System by ID
 //@route PUT /:id
 //@access public
-const update>Name< = async (req,res) => {
+const updateSystem = async (req,res) => {
     try {
         const id = req.params.id;
         if(!id) throw new Error("Invalid id")
-        const updatedData = await >Name<.findByIdAndUpdate(
+        const updatedData = await System.findByIdAndUpdate(
             id,
             { ...req.body },
             { new: true }
@@ -62,14 +62,14 @@ const update>Name< = async (req,res) => {
 }
 
 
-//@desc Delete >Name< by ID
+//@desc Delete System by ID
 //@route DELETE /:id
 //@access public
-const delete>Name< = async (req,res) => {
+const deleteSystem = async (req,res) => {
     try {
         const id = req.params.id;
         if(!id) throw new Error("Invalid id")
-        const data = await >Name<.findByIdAndDelete(id);
+        const data = await System.findByIdAndDelete(id);
         if(!data) throw new Error("Failed to update data");
         res.status(200).json({data: data});
     } catch (e) {
@@ -77,25 +77,12 @@ const delete>Name< = async (req,res) => {
     }
 }
 
-//@desc Delete all >Name< 
-//@route DELETE /
-//@access public
-const deleteAll>Name< = async (req, res) => {
-  try {
-    await >Name<.deleteMany();
-    res.status(200).json({ message: "All >Name< deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
 export {
-    getAll>Name<,
-    create>Name<,
-    get>Name<,
-    update>Name<,
-    delete>Name<,
-    deleteAll>Name<,
+    getAllSystem,
+    createSystem,
+    getSystem,
+    updateSystem,
+    deleteSystem,
 };
 
 

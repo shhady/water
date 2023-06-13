@@ -1,69 +1,113 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FormRow } from "../components";
 
 function TriggerType() {
   const [triggerType, setTriggerType] = useState("");
+  const [triggerName, setTriggerName] = useState("");
   const [triggerTypeError, setTriggerTypeError] = useState("");
+  const [triggersType, setTriggersType] = useState([]);
+  const [triggersName, setTriggersName] = useState([]);
+  const [showAddTriggerType, setShowAddTriggerType] = useState(false);
+  const [showAddTriggerName, setShowAddTriggerName] = useState(false);
+  const [selectedType, setSelectedType] = useState("");
+  const [selectedName, setSelectedName] = useState([]);
 
-  function submitHandler(e) {
-    e.preventDefault();
-    console.log(triggerType);
-
-    if (!triggerType) {
-      setTriggerTypeError("Invalid");
-      return;
-    }
-
-    setTriggerTypeError("");
-
+  useEffect(() => {
     const url = "http://localhost:5000/TriggerTypes";
-    const headers = {
-      "Content-Type": "application/json",
+    const getTriggersType = async () => {
+      const res = await fetch(url);
+      const data = await res.json();
+      console.log(data);
+      const types = [];
+      const names = [];
+      data.data.forEach((item) => {
+        if (!types.includes(item.type)) {
+          types.push(item.type);
+        }
+        if (!names.some((obj) => obj._id === item._id)) {
+          names.push(item);
+        }
+      });
+      setTriggersType(types);
+      setTriggersName(names);
     };
-    const method = "POST";
 
-    try {
-      fetch(url, {
-        method: method,
-        body: JSON.stringify({ name: triggerType }), // Wrap triggerType in an object to match your API's expected payload
-        headers: headers,
-      })
-        .then((response) => {
-          // Handle the response
-          console.log(response);
-          return response.json(); // Parse the response as JSON
-        })
-        .then((data) => {
-          // Use the response data
-          console.log("Data", data);
-          if (data.error) {
-            setTriggerTypeError(data.error);
-          }
-        })
-        .catch((error) => {
-          // Handle any errors during the fetch request
-          console.error(error);
-        });
-    } catch (error) {
-      // Handle any other errors
-      console.error(error);
-    }
-  }
+    getTriggersType();
+  }, []);
+  console.log(triggersName);
+  console.log(triggersType);
 
+  const handleTypeChange = (event) => {
+    setSelectedType(event.target.value);
+    const names = [];
+    triggersName.forEach((item) => {
+      if (item.type === event.target.value) names.push(item.name);
+    });
+    setSelectedName(names);
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    // Perform form submission logic
+    console.log("handle submit");
+  };
+
+  console.log(triggerType);
+  console.log(triggerName);
   return (
     <>
-      <form action="" onSubmit={submitHandler}>
-        <input
-          type="text"
-          name="triggerType"
-          id="triggerType"
-          minLength="2"
-          placeholder="Trigger Type"
-          value={triggerType} // Add the value prop to bind the input to the state
-          onChange={(e) => {
-            setTriggerType(e.target.value);
-          }}
-        />
+      <form onSubmit={submitHandler}>
+        <div>
+          <label htmlFor="">Trigger Type</label>
+          <select name="" id="" onChange={handleTypeChange}>
+            <option value="">Select Type</option>
+            {triggersType?.map((type, index) => (
+              <option key={index} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+          <button
+            type="button"
+            onClick={(event) => setShowAddTriggerType(!showAddTriggerType)}
+          >
+            Add new Trigger Type
+          </button>
+          {showAddTriggerType && !selectedType && (
+            <input
+              type="text"
+              onChange={(event) => setTriggerType(event.target.value)}
+            />
+          )}
+        </div>
+
+        {(selectedType || showAddTriggerType) && (
+          <div>
+            <label htmlFor="">Trigger name</label>
+            <br />
+            {selectedName && !showAddTriggerType && (
+              <select>
+                <option value="">Select Name</option>
+                {selectedName.map((name, index) => {
+                  return <option key={index}>{name}</option>;
+                })}
+              </select>
+            )}
+            <button
+              type="button"
+              onClick={(event) => setShowAddTriggerName(!showAddTriggerName)}
+            >
+              Add new Trigger name
+            </button>
+            {showAddTriggerName && (
+              <input
+                type="text"
+                onChange={(event) => setTriggerName(event.target.value)}
+              />
+            )}
+          </div>
+        )}
+
         <div>{triggerTypeError}</div>
         <button type="submit">Add Trigger Type</button>
       </form>
