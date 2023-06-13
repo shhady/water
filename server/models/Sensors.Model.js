@@ -6,7 +6,11 @@ const SensorsSchema = new mongoose.Schema(
       type: String,
       default: "sim",
     },
-    sensorType: {
+    description:{
+      type: String,
+
+    },
+    triggerRefrence: {
       type: String,
     },
     infrastructureParent: {
