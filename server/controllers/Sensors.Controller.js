@@ -1,10 +1,12 @@
 import Sensors from "../models/Sensors.Model.js";
-import WaterInfrastructure from "../models/WaterInfrastructure.Model.js";
+import Reservoir from "../models/Reservoir.Model.js";
 
 // Get all sensors
 const getAllSensors = async (req, res) => {
   try {
-    const sensors = await Sensors.find().populate("infrastructureParent");
+    const sensors = await Sensors.find()
+      .populate("reservoirParent")
+      .populate("triggerReference");
     res.status(200).json(sensors);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -16,7 +18,7 @@ const getSensors = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const sensor = await Sensors.findById(id).populate("infrastructureParent");
+    const sensor = await Sensors.findById(id).populate("reservoirParent");
     if (!sensor) {
       return res.status(404).json({ message: "Sensor not found" });
     }
@@ -31,6 +33,19 @@ const createSensors = async (req, res) => {
   const sensorData = req.body;
 
   try {
+    const { sensorId, triggerReference } = sensorData;
+
+    // Check if a sensor with the same sensorId and triggerReference combination already exists
+    const existingSensor = await Sensors.findOne({
+      sensorId,
+      triggerReference,
+    });
+    if (existingSensor) {
+      return res
+        .status(400)
+        .json({ message: "Sensor with the same combination already exists" });
+    }
+
     const newSensor = new Sensors(sensorData);
     const savedSensor = await newSensor.save();
     res.status(201).json(savedSensor);

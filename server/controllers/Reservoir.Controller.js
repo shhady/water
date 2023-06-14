@@ -1,11 +1,11 @@
-import WaterInfrastructure from "../models/WaterInfrastructure.Model.js";
+import Reservoir from "../models/Reservoir.Model.js";
 
-//@desc Get all WaterInfrastructure
+//@desc Get all Reservoir
 //@route GET /
 //@access public
-const getAllWaterInfrastructure = async (req, res) => {
+const getAllReservoir = async (req, res) => {
   try {
-    const data = await WaterInfrastructure.find({});
+    const data = await Reservoir.find({});
     if (!data) throw new Error("Server error, failed to fetch data");
     res.status(200).json(data);
   } catch (e) {
@@ -13,12 +13,12 @@ const getAllWaterInfrastructure = async (req, res) => {
   }
 };
 
-//@desc Create new WaterInfrastructure
+//@desc Create new Reservoir
 //@route POST /
 //@access public
-const createWaterInfrastructure = async (req, res) => {
+const createReservoir = async (req, res) => {
   try {
-    const data = await WaterInfrastructure.create({ ...req.body });
+    const data = await Reservoir.create({ ...req.body });
     if (!data) throw new Error("Server error, failed to create data");
     res.status(201).json({ data: data });
   } catch (e) {
@@ -26,14 +26,14 @@ const createWaterInfrastructure = async (req, res) => {
   }
 };
 
-//@desc Get WaterInfrastructure by ID
+//@desc Get Reservoir by ID
 //@route GET /:id
 //@access public
-const getWaterInfrastructure = async (req, res) => {
+const getReservoir = async (req, res) => {
   try {
     const id = req.params.id;
     if (!id) throw new Error("Invalid id");
-    const data = await WaterInfrastructure.findById(id);
+    const data = await Reservoir.findById(id);
     if (!data) throw new Error("Server error, failed to create data");
     res.status(200).json(data);
   } catch (e) {
@@ -41,14 +41,14 @@ const getWaterInfrastructure = async (req, res) => {
   }
 };
 
-//@desc Update WaterInfrastructure by ID
+//@desc Update Reservoir by ID
 //@route PUT /:id
 //@access public
-const updateWaterInfrastructure = async (req, res) => {
+const updateReservoir = async (req, res) => {
   try {
     const id = req.params.id;
     if (!id) throw new Error("Invalid id");
-    const updatedData = await WaterInfrastructure.findByIdAndUpdate(
+    const updatedData = await Reservoir.findByIdAndUpdate(
       id,
       { ...req.body },
       { new: true }
@@ -60,14 +60,14 @@ const updateWaterInfrastructure = async (req, res) => {
   }
 };
 
-//@desc Delete WaterInfrastructure by ID
+//@desc Delete Reservoir by ID
 //@route DELETE /:id
 //@access public
-const deleteWaterInfrastructure = async (req, res) => {
+const deleteReservoir = async (req, res) => {
   try {
     const id = req.params.id;
     if (!id) throw new Error("Invalid id");
-    const data = await WaterInfrastructure.findByIdAndDelete(id);
+    const data = await Reservoir.findByIdAndDelete(id);
     if (!data) throw new Error("Failed to update data");
     res.status(200).json(data);
   } catch (e) {
@@ -76,9 +76,9 @@ const deleteWaterInfrastructure = async (req, res) => {
 };
 
 //delete all water infrastructure
-const deleteAllWaterInfrastructure = async (req, res) => {
+const deleteAllReservoir = async (req, res) => {
   try {
-    await WaterInfrastructure.deleteMany();
+    await Reservoir.deleteMany();
     res
       .status(200)
       .json({ message: "All water infrastructure deleted successfully" });
@@ -88,10 +88,10 @@ const deleteAllWaterInfrastructure = async (req, res) => {
 };
 
 export {
-  getAllWaterInfrastructure,
-  createWaterInfrastructure,
-  getWaterInfrastructure,
-  updateWaterInfrastructure,
-  deleteWaterInfrastructure,
-  deleteAllWaterInfrastructure,
+  getAllReservoir,
+  createReservoir,
+  getReservoir,
+  updateReservoir,
+  deleteReservoir,
+  deleteAllReservoir,
 };

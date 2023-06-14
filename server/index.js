@@ -6,8 +6,9 @@ import triggerRoute from "./routes/Trigger.Route.js";
 import TriggerTypeRoute from "./routes/TriggerType.Route.js";
 import SensorsRoute from "./routes/Sensors.Route.js";
 import SystemRoute from "./routes/System.Route.js";
-import WaterInfrastructureRoute from "./routes/WaterInfrastructure.Route.js";
+import ReservoirRoute from "./routes/Reservoir.Route.js";
 import ArrayRoute from "./routes/Array.Route.js";
+import ReservoirTypeRoute from "./routes/ReservoirType.Route.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -29,8 +30,9 @@ app.use("/Triggers", triggerRoute);
 app.use("/TriggerTypes", TriggerTypeRoute);
 app.use("/Sensors", SensorsRoute);
 app.use("/Systems", SystemRoute);
-app.use("/WaterInfras", WaterInfrastructureRoute);
+app.use("/Reservoirs", ReservoirRoute);
 app.use("/Arrays", ArrayRoute);
+app.use("/ReservoirTypes", ReservoirTypeRoute);
 
 //------- Talal's db
 //const CONNECTION_URL = `mongodb+srv://waterproject:t2k4VkJn963j7guP@water.wn7b7lm.mongodb.net/`;

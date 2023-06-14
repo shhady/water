@@ -3,7 +3,10 @@ import mongoose from "mongoose";
 const triggerSchema = new mongoose.Schema(
   {
     triggerName: { type: String, required: true },
-    triggerType: { type: String, required: true },
+    triggerType: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "TriggerType", // Reference to the water infrastructure parent
+    },
     validValueH: {
       type: Number,
       default: null,
@@ -16,11 +19,7 @@ const triggerSchema = new mongoose.Schema(
       type: String, // unit of measurement
       default: null,
     },
-    value: {
-      type: Number,
-      default: null,
-    },
-    status: { type: Boolean, default: false }, // if the trigger has been resolved
+    status: { type: Boolean, default: true }, // if the trigger has been resolved
   },
   { timestamps: true }
 );

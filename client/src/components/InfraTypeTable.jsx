@@ -7,7 +7,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/material";
 import { baseURL } from "../constants/urlConstants.js";
 
-const TriggerTable = () => {
+const InfraTypeTable = () => {
   const { loading, error, sendFetchRequest } = useRequest();
 
   // CHANGE THIS AND USE data from useRequest
@@ -147,4 +147,4 @@ const TriggerTable = () => {
   );
 };
 
-export default TriggerTable;
+export default InfraTypeTable;

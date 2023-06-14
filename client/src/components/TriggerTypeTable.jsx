@@ -35,32 +35,16 @@ const TriggerTable = () => {
     return error ? <h1>{error.message}</h1> : <h1>ERROR</h1>;
   }
 
-  const triggersColumns = [
+  const triggerTypesColumns = [
     { field: "id", headerName: "TRIGGER_ID", flex: 1, hide: true },
     {
-      field: "triggerType",
+      field: "triggerTypeString",
       headerName: TableLookUps("TRIGGER_TYPE"),
       flex: 1,
     },
     {
-      field: "triggerName",
+      field: "description",
       headerName: TableLookUps("TRIGGER_NAME"),
-      flex: 1,
-    },
-
-    {
-      field: "validValueH",
-      headerName: "validValueH",
-      flex: 1,
-    },
-    {
-      field: "validValueL",
-      headerName: "validValueL",
-      flex: 1,
-    },
-    {
-      field: "valueType",
-      headerName: "valueType",
       flex: 1,
     },
     {
@@ -84,22 +68,20 @@ const TriggerTable = () => {
   ];
 
   const massage = (Data) => {
-    Data = Data.map((trigger) => {
+    if (!Data) {
+      return;
+    }
+    Data = Data.map((triggerType) => {
       return {
-        id: trigger._id,
-        triggerName: trigger?.triggerName ?? TableLookUps("FIELD_ERROR"),
-        triggerType:
-          trigger?.triggerType?.triggerTypeString ??
-          TableLookUps("FIELD_ERROR"),
-        validValueH: trigger?.validValueH ?? TableLookUps("FIELD_ERROR"),
-        validValueL: trigger?.validValueL ?? TableLookUps("FIELD_ERROR"),
-        valueType: trigger?.valueType ?? TableLookUps("FIELD_ERROR"),
-        value: trigger?.value ?? TableLookUps("FIELD_ERROR"),
-        status: trigger?.status
+        id: triggerType._id,
+        triggerTypeString:
+          triggerType?.triggerTypeString ?? TableLookUps("FIELD_ERROR"),
+        description: triggerType?.description ?? TableLookUps("FIELD_ERROR"),
+        status: triggerType?.status
           ? "True"
           : "False" ?? TableLookUps("FIELD_ERROR"),
-        createdAt: trigger?.createdAt ?? TableLookUps("FIELD_ERROR"),
-        updatedAt: trigger?.updatedAt ?? TableLookUps("FIELD_ERROR"),
+        createdAt: triggerType?.createdAt ?? TableLookUps("FIELD_ERROR"),
+        updatedAt: triggerType?.updatedAt ?? TableLookUps("FIELD_ERROR"),
       };
     });
     return Data;
@@ -116,31 +98,25 @@ const TriggerTable = () => {
   }
 
   const editRender = {
-    triggerName: {
-      type: "text",
-      renderType: "select",
-      options: () => JSON.parse(localStorage.getItem("trigger-names")),
-    },
-    triggerType: {
+    triggerTypeString: {
       type: "text",
       renderType: "select",
       options: () => JSON.parse(localStorage.getItem("trigger-types")),
     },
-    validValueH: { type: "number" },
-    validValueL: { type: "number" },
-    valueType: { type: "text" },
-    value: { type: "number" },
+    description: {
+      type: "text",
+    },
     status: { type: "checkbox" },
   };
 
   return (
     <div>
-      <h2>{TableLookUps("TRIGGERS")}</h2>
+      <h2>{TableLookUps("TRIGGER_TYPES")}</h2>
       <AdjustableTable
-        queryURL={"/Triggers"}
+        queryURL={"/TriggerTypes"}
         Massage={massage}
         Format={format}
-        Columns={triggersColumns}
+        Columns={triggerTypesColumns}
         EditRender={editRender}
       />
     </div>

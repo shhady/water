@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 
-const WaterInfrastructureSchema = new mongoose.Schema(
+const ReservoirSchema = new mongoose.Schema(
   {
-    // name of the infrastructure
-    infrastructureName: {
+    // name of the Reservoir
+    reservoirName: {
       type: String,
       required: true,
     },
-    // number of infrastructure
-    infrastructureAttribute: {
+    // number of Reservoir
+    reservoirAttribute: {
       type: Number,
       required: true,
     },
@@ -32,7 +32,7 @@ const WaterInfrastructureSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    // status of infrastructure
+    // status of Reservoir
     status: {
       type: Boolean,
       default: false,
@@ -41,9 +41,6 @@ const WaterInfrastructureSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const WaterInfrastructure = mongoose.model(
-  "WaterInfrastructure",
-  WaterInfrastructureSchema
-);
+const Reservoir = mongoose.model("Reservoir", ReservoirSchema);
 
-export default WaterInfrastructure;
+export default Reservoir;

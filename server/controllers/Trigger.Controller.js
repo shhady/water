@@ -82,6 +82,9 @@ const deleteAllTriggers = async (req, res) => {
   }
 };
 
+
+
+
 export {
   getTriggers,
   getTriggerById,
