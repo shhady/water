@@ -35,6 +35,15 @@ const TriggerTable = () => {
     return error ? <h1>{error.message}</h1> : <h1>ERROR</h1>;
   }
 
+  const title = "Triggers";
+  const eventsCols = {
+    id: "Trigger ID",
+    triggerType: "Trigger Type",
+    createdAt: "Created",
+    updatedAt: "Updated",
+    status: "Status",
+  };
+
   const triggersColumns = [
     { field: "id", headerName: "TRIGGER_ID", flex: 1, hide: true },
     {
