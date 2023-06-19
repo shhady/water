@@ -8,6 +8,9 @@ import useRequest from "../hooks/useRequest.js";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/material";
 import { baseURL } from "../constants/urlConstants.js";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarDay,faCalendarWeek,faCalendarDays,faCalendar,faCalendarTimes } from '@fortawesome/free-solid-svg-icons';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const TriggerTable = () => {
   const { loading, error, sendFetchRequest } = useRequest();
@@ -47,9 +50,9 @@ const TriggerTable = () => {
   };
   const options = {
     columnsButton: true,
-    hidden: { id: hideCustomerColumn },
+    // hidden: { id: hideCustomerColumn },
     edit: false,
-    filtering: filtering ? true : false,
+    filtering: false,
     customSort: {},
     filter: { status: false },
     lookup: {
@@ -71,10 +74,7 @@ const TriggerTable = () => {
         position: "relative",
         fontSize: "1.2rem",
         color: "var(--textColor)",
-        backgroundColor:
-          selectedRow.current === rowData.tableData.id
-            ? "var(--light-gray)"
-            : "inherit",
+        backgroundColor:"inherit",
       };
     },
     detailPanel: [
@@ -267,9 +267,7 @@ const TriggerTable = () => {
           actions={[
             {
               icon: () => (
-                <div
-                  style={{ color: dateFilter === 86400 ? "var(--green)" : "" }}
-                >
+                <div>
                   <FontAwesomeIcon icon={faCalendarDay} />
                   <p>יממה</p>
                 </div>
@@ -277,14 +275,12 @@ const TriggerTable = () => {
               tooltip: "הצגה יומית",
               isFreeAction: true,
               onClick: () => {
-                setDateFilter(86400);
+                
               },
             },
             {
               icon: () => (
-                <div
-                  style={{ color: dateFilter === 604800 ? "var(--green)" : "" }}
-                >
+                <div>
                   <FontAwesomeIcon icon={faCalendarWeek} />
                   <p>שבוע</p>
                 </div>
@@ -292,16 +288,12 @@ const TriggerTable = () => {
               tooltip: "הצגה שבועית",
               isFreeAction: true,
               onClick: () => {
-                setDateFilter(604800);
+                
               },
             },
             {
               icon: () => (
-                <div
-                  style={{
-                    color: dateFilter === 2629743 ? "var(--green)" : "",
-                  }}
-                >
+                <div>
                   <FontAwesomeIcon icon={faCalendarDays} />
                   <p>חודש</p>
                 </div>
@@ -310,15 +302,13 @@ const TriggerTable = () => {
               tooltip: "הצגה חודשית",
               isFreeAction: true,
               onClick: () => {
-                setDateFilter(2629743);
+                
               },
             },
             {
               icon: () => (
                 <div
-                  style={{
-                    color: dateFilter === 31556926 ? "var(--green)" : "",
-                  }}
+                 
                 >
                   <FontAwesomeIcon icon={faCalendar} />
                   <p>שנה</p>
@@ -327,15 +317,13 @@ const TriggerTable = () => {
               tooltip: "הצגה שנתית",
               isFreeAction: true,
               onClick: () => {
-                setDateFilter(31556926);
+              
               },
             },
             {
               icon: () => (
                 <div
-                  style={{
-                    color: dateFilter === Infinity ? "var(--green)" : "",
-                  }}
+                 
                 >
                   <FontAwesomeIcon icon={faCalendarTimes} />
                   <p>הכל</p>
@@ -344,7 +332,6 @@ const TriggerTable = () => {
               tooltip: "ללא סינון תאריך",
               isFreeAction: true,
               onClick: () => {
-                setDateFilter(Infinity);
               },
             },
           ]}
