@@ -1,0 +1,35 @@
+
+.MuiTableCell-root,
+.MuiTypography-h6,
+div[class^=MTableToolbar-title] {
+    font-family: Assistant !important;
+    margin: 0 0.5rem;
+}
+
+/* div[class^=MTableToolbar-actions], */
+.MuiToolbar-regular {
+    padding-right: var(--Side-Bar-Width) !important;
+}
+
+.MuiTable-root {
+    right: var(--Side-Bar-Width);
+    max-width: calc(100% - calc(var(--Side-Bar-Width) + 10px));
+    position: relative;
+}
+
+.MuiCollapse-wrapper {
+    position: relative;
+}
+
+.cover {
+    position: absolute;
+    background-color: var(--header-background);
+    width: var(--Side-Bar-Width);
+    z-index: 6;
+    right: 0;
+    top: calc(var(--nav-height) + var(--Screen-Header-Height) + var(--Tab-Selector-Height));
+}
+
+.MuiFilledInput-input{
+    padding: 6px 0 7px    !important;
+}

@@ -1,0 +1,31 @@
+#username,#password,#confirmPassword,#retypePassword,#email{
+    direction: ltr;
+}
+.loginForm{    
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 400px;
+}
+.d-block{
+    display:block;
+}
+.d-none{
+    display:none;
+}
+label::selection{
+    background-color:#04FD8C; 
+}
+.linked-text{
+    text-decoration:none;
+}
+.linked-text:hover{
+    text-decoration: underline;
+}
+
+@media screen and (max-width:750px) {
+    .loginForm{
+        min-width: unset !important;
+    }
+}

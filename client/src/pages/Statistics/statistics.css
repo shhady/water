@@ -1,0 +1,9 @@
+.statistics{
+    display: grid;
+    grid-template-columns: minmax(auto,60%)  auto;
+}
+
+.pieWrepper{
+    max-width: 40vw;
+    min-width: 0;
+}

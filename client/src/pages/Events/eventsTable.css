@@ -1,0 +1,88 @@
+
+
+.TableHandleWrapper{
+   /* position: relative; */
+   display: grid;
+   min-height: 250px;
+   max-height: 420px;
+   /* height: 100%; */
+   margin-bottom: .5rem;
+   color: var(--textColor);    
+   background: var(--box-background);
+   font-size: 1.2rem;
+   font-weight: normal;   
+}
+
+
+
+.TableHandleWrapper.grid1{
+   grid-template-columns: auto ; 
+}
+.TableHandleWrapper.grid2{
+   grid-template-columns: 2fr 0 1.6fr; 
+}
+.TableHandleWrapper.grid3{
+   grid-template-columns: 2fr 0 2fr 0 1.6fr;
+}
+
+
+.TableHandleWrapper hr{    
+   border: 1px solid var(--light-gray);    
+   margin: 0;
+}
+
+/* .TableHandleWrapper .eventHistory .eventHistoryGridWraper{    
+   max-height: calc(100% - 85px);    
+} */
+
+
+.eventTrig1 {
+   color: var(--Flow);
+   display: flex;
+   font-weight:bold;
+   align-items: center;
+}
+
+.eventTrig2 {
+   /* background: var(--ReverseFlow) !important; */
+   color: var(--ReverseFlow);
+   display: flex;
+   font-weight:bold;
+   align-items: center;
+}
+
+
+.eventTrig3 {
+   color: var(--vandalisem);
+   display: flex;
+   font-weight:bold;
+   align-items: center;
+}
+
+
+.eventTrig5 {
+   color: var(--battery);
+   display: flex;
+   font-weight:bold;
+   align-items: center;
+}
+
+
+.eventTrig6 {
+   color: var(--signal);
+   display: flex;
+   font-weight:bold;
+   align-items: center;
+}
+
+.eventTrig7 {
+   color: var(--pressure);
+   display: flex;
+   font-weight:bold;
+   align-items: center;
+}
+
+.MuiIconButton-label p {
+   font-family: Assistant;
+   font-size: 1rem;
+}

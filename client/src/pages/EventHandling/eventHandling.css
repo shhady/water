@@ -1,0 +1,116 @@
+/*************************************
+ ***  Made By Yohay Hackam         ***
+ ***  mail: Yoman_321@hotmail.com  ***
+ ***  054-2616626                  ***
+ *************************************/
+.hydrantsBox {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.hydrant {
+    position: relative;
+}
+
+.hydarantHeader {
+    display: flex;
+    text-align: start;
+    align-items: center;
+    
+    white-space: nowrap;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    height: 60px;
+    justify-content: space-between;
+    padding-right: 1rem;
+    color: var(--textColor);
+    background-color: var(--menu-background);
+    transition: color 0.3s ease;
+}
+
+.eventList {
+    display: none;
+}
+
+.hydrantsBox input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]:checked+.hydrant>.eventList {
+    display: block;
+}
+
+input[type="radio"]:checked+.hydrant>.hydarantHeader,
+input[type="radio"]:checked+.hydrant>.hydarantHeader .hydrantId {
+    color: var(--green);
+    background-color: var(--header-background);
+}
+
+.handleWraper {
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: space-between;
+    font-size: 1rem;
+    color: var(--textColor);
+    text-align: start;
+    background-color: var(--active-eventGruop-background);
+    transition: all .3s ease, font 0s;
+}
+
+.handleIcon {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: -40px;
+    z-index: 5;
+}
+
+.handle {
+    display: flex;
+    flex-direction: column;
+    padding-right: 1rem;
+    justify-content: center;
+}
+
+.hydarantHeader:hover,
+.handleWraper:hover {
+    background: var(--eventHover);
+
+}
+
+.handle-header{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-wrap: nowrap;
+    background-color:var(--header-background);
+    border-bottom: 2px solid var(--green);
+    height: 60px;
+    margin-bottom: 2px;
+}
+
+
+/**************************    Mobile Support     *ָָָָָָָָָָָָָָָָָָָָָָָָָ************************/
+@media screen and (min-width:700px) { 
+
+.hydarantHeader{
+    display: grid;
+    grid-template-columns: 4fr 1fr 4fr;
+    padding-right:1.5rem;    
+    font-size: 1.4rem;
+    justify-items: start;
+    align-content: center;
+}
+.handleWraper{
+    display: grid;
+    grid-template-columns: 4fr 1fr 4fr;
+    padding-right:1.5rem;    
+    font-size: 1.2rem;
+    justify-items: start;
+}
+
+}

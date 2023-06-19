@@ -1,0 +1,74 @@
+
+.MuiList-root{
+    direction: rtl ;
+}
+
+.options-content header svg {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.materialClose:hover {
+    color: var(--white);
+    transform: scale(1.1);
+}
+
+.edit-form {
+    text-align: center;
+}
+
+.edit-form>fieldset>legend {
+    margin-bottom: 10px;
+}
+
+.edit-form>fieldset>button {
+    flex-basis: 65%;
+    width: 100%;
+    margin-right: 35%;
+    padding: 8px 16px;
+    font-size: 1rem;
+    background-color: var(--green);
+    color: var(--white);
+    border-radius: 10px;
+    border: 1px solid var(--green);
+    cursor: pointer;
+}
+
+.edit-form>fieldset>input[type="text"],
+input[type="tel"],
+input[type="number"] {
+    cursor: text;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.edit-form>button:hover,
+fieldset>button:hover {
+    background-color: var(--white);
+    color: var(--green);
+    border: 1px solid var(--green);
+}
+
+.edit-form>button {
+    width: 65%;
+    padding: 8px 16px;
+    font-size: 1.2rem;
+    background-color: var(--green);
+    color: var(--white);
+    border-radius: 10px;
+    border: 1px solid var(--green);
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+.hydrant-Id-Height{
+    align-items: start;
+}
+
+.geoAdress p{
+    font-weight: bold;
+}
