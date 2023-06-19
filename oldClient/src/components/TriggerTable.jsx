@@ -41,48 +41,8 @@ const TriggerTable = () => {
   }
 
   const title = "Triggers";
-  const eventsCols = {
-    id: "Trigger ID",
-    triggerType: "Trigger Type",
-    createdAt: "Created",
-    updatedAt: "Updated",
-    status: "Status",
-  };
-  const options = {
-    columnsButton: true,
-    // hidden: { id: hideCustomerColumn },
-    edit: false,
-    filtering: false,
-    customSort: {},
-    filter: { status: false },
-    lookup: {
-      status: { 0: "new", 1: "done" },
-    },
-    editOptions: {
-      disableCols: ["id", "triggerType", "createdAt", "updatedAt", "status"],
-    },
-    render: {
-      id: (rowData) => rowData.id,
-      triggerType: (rowData) => rowData.triggerType,
-    },
-    onRowClick: (event, rowData, togglePanel) => {
-      togglePanel();
-    },
-    rowStyle: (rowData) => {
-      return {
-        direction: "ltr",
-        position: "relative",
-        fontSize: "1.2rem",
-        color: "var(--textColor)",
-        backgroundColor:"inherit",
-      };
-    },
-    detailPanel: [
-      (rowData) => {
-        <p>hello</p>;
-      },
-    ],
-  };
+  
+ 
 
   // const triggersColumns = [
   //   { field: "id", headerName: "TRIGGER_ID", flex: 1, hide: true },
@@ -188,153 +148,121 @@ const TriggerTable = () => {
       triggerType: "Type A",
       createdAt: "2023-06-01",
       updatedAt: "2023-06-02",
-      status: "Active",
+      status: 1,
     },
     {
       id: 2,
       triggerType: "Type B",
       createdAt: "2023-06-03",
       updatedAt: "2023-06-04",
-      status: "Inactive",
+      status: 0,
     },
     {
       id: 3,
       triggerType: "Type C",
       createdAt: "2023-06-05",
       updatedAt: "2023-06-06",
-      status: "Active",
+      status: 1,
     },
     {
       id: 4,
       triggerType: "Type A",
       createdAt: "2023-06-07",
       updatedAt: "2023-06-08",
-      status: "Inactive",
+      status: 1,
     },
     {
       id: 5,
       triggerType: "Type B",
       createdAt: "2023-06-09",
       updatedAt: "2023-06-10",
-      status: "Active",
+      status: 0,
     },
     {
       id: 6,
       triggerType: "Type C",
       createdAt: "2023-06-11",
       updatedAt: "2023-06-12",
-      status: "Inactive",
+      status: 0,
     },
     {
       id: 7,
       triggerType: "Type A",
       createdAt: "2023-06-13",
       updatedAt: "2023-06-14",
-      status: "Active",
+      status: 1,
     },
     {
       id: 8,
       triggerType: "Type B",
       createdAt: "2023-06-15",
       updatedAt: "2023-06-16",
-      status: "Inactive",
+      status: 1,
     },
     {
       id: 9,
       triggerType: "Type C",
       createdAt: "2023-06-17",
       updatedAt: "2023-06-18",
-      status: "Active",
+      status: 0,
     },
     {
       id: 10,
       triggerType: "Type A",
       createdAt: "2023-06-19",
       updatedAt: "2023-06-20",
-      status: "Inactive",
+      status: 1,
+    },
+    {
+      id: 11,
+      triggerType: "Type A",
+      createdAt: "2023-06-19",
+      updatedAt: "2023-06-20",
+      status: 0,
+    },
+    {
+      id: 12,
+      triggerType: "Type A",
+      createdAt: "2023-06-19",
+      updatedAt: "2023-06-20",
+      status: 0,
+    },
+    {
+      id: 13,
+      triggerType: "Type A",
+      createdAt: "2023-06-19",
+      updatedAt: "2023-06-20",
+      status: 1,
+    },
+    {
+      id: 14,
+      triggerType: "Type A",
+      createdAt: "2023-06-19",
+      updatedAt: "2023-06-20",
+      status: 0,
+    },
+    {
+      id: 15,
+      triggerType: "Type A",
+      createdAt: "2023-06-19",
+      updatedAt: "2023-06-20",
+      status: 1,
     },
   ];
-
+const lookUps = {
+  status:{
+    0:"inActive",
+    1:"active"
+  }
+}
   return (
     <>
       {
         <Table
           indexKey="id"
           title={title}
-          columns={eventsCols}
-          options={options}
           data={triggerArray}
-          actions={[
-            {
-              icon: () => (
-                <div>
-                  <FontAwesomeIcon icon={faCalendarDay} />
-                  <p>יממה</p>
-                </div>
-              ),
-              tooltip: "הצגה יומית",
-              isFreeAction: true,
-              onClick: () => {
-                
-              },
-            },
-            {
-              icon: () => (
-                <div>
-                  <FontAwesomeIcon icon={faCalendarWeek} />
-                  <p>שבוע</p>
-                </div>
-              ),
-              tooltip: "הצגה שבועית",
-              isFreeAction: true,
-              onClick: () => {
-                
-              },
-            },
-            {
-              icon: () => (
-                <div>
-                  <FontAwesomeIcon icon={faCalendarDays} />
-                  <p>חודש</p>
-                </div>
-              ),
-
-              tooltip: "הצגה חודשית",
-              isFreeAction: true,
-              onClick: () => {
-                
-              },
-            },
-            {
-              icon: () => (
-                <div
-                 
-                >
-                  <FontAwesomeIcon icon={faCalendar} />
-                  <p>שנה</p>
-                </div>
-              ),
-              tooltip: "הצגה שנתית",
-              isFreeAction: true,
-              onClick: () => {
-              
-              },
-            },
-            {
-              icon: () => (
-                <div
-                 
-                >
-                  <FontAwesomeIcon icon={faCalendarTimes} />
-                  <p>הכל</p>
-                </div>
-              ),
-              tooltip: "ללא סינון תאריך",
-              isFreeAction: true,
-              onClick: () => {
-              },
-            },
-          ]}
+          lookups={lookUps}
         />
       }
     </>

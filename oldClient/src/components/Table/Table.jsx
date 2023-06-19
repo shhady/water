@@ -1,142 +1,77 @@
-import React, { useState, useEffect, createRef } from "react";
-import MaterialTable from "@material-table/core";
-import tableIcons from "./MaterialTableIcons";
-import { ExportCsv } from "@material-table/exporters";
-import "./table.css";
+import React, { useState } from 'react';
+import MaterialTable from '@material-table/core';
+import EditIcon from '@material-ui/icons/Edit';
 
-function Table({
-  title,
-  data,
-  columns,
-  options,
-  indexKey,
-  isLoading = true,
-  actions = [],
-}) {
-  const tableRef = createRef(null);
-  const [loading, setLoading] = useState(isLoading);
-  const [tableOptions, setTableOptions] = useState({ ...options });
+function Table({ data, lookups }) {
+  const [tableData, setTableData] = useState(data);
 
-  useEffect(() => {
-    setLoading(isLoading);
-  }, [isLoading]);
+  const handleRowClick = (event, rowData) => {
+    const updatedData = [...tableData];
+    const rowIndex = updatedData.findIndex((item) => item.id === rowData.id);
 
-  useEffect(() => {
-    setTableOptions((prevOptions) => ({
-      ...prevOptions,
-      paging: options?.constPageSize
-        ? data?.length > options.constPageSize
-        : true,
-    }));
-  }, [data?.length, options]);
+    if (rowIndex !== -1) {
+      updatedData[rowIndex] = { ...rowData, editing: true };
+      setTableData(updatedData);
+    }
+  };
 
-  const editable = {};
-  if (options?.editOptions?.add) {
-    editable.onRowAdd = (newData) =>
-      new Promise((resolve, reject) => {
-        setLoading(true);
-        if (options.editOptions.add(newData)) {
-          resolve();
-        } else {
-          reject();
-        }
-        setLoading(false);
-      });
-  }
-  if (options?.editOptions?.update) {
-    editable.onRowUpdate = (newData) =>
-      new Promise((resolve, reject) => {
-        setLoading(true);
-        if (options.editOptions.update(newData)) {
-          resolve();
-        } else {
-          reject();
-        }
-        setLoading(false);
-      });
-  }
-  if (options?.editOptions?.delete) {
-    editable.onRowDelete = (oldData) =>
-      new Promise((resolve) => {
-        setLoading(true);
-        options.editOptions.delete(oldData);
-        resolve();
-        setLoading(false);
-      });
-  }
+  const handleSaveRow = (newData, oldData) => {
+    const updatedData = [...tableData];
+    const rowIndex = updatedData.findIndex((item) => item.id === oldData.id);
+    /// send update requst
+    if (rowIndex !== -1) {
+      updatedData[rowIndex] = { ...newData, editing: false };
+      setTableData(updatedData);
+    }
+  };
 
-  const displayColumns = Object.entries(columns).map(([key, value]) => ({
-    title: value,
+  const renderFieldValue = (field, rawValue) => {
+    if (lookups[field] && lookups[field][rawValue]) {
+      return lookups[field][rawValue];
+    }
+    return rawValue;
+  };
+
+  const renderActions = (rowData) => {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <EditIcon
+          style={{ cursor: 'pointer' }}
+          onClick={(event) => handleRowClick(event, rowData)}
+        />
+      </div>
+    );
+  };
+
+  const columns = Object.keys(data[0]).map((key) => ({
+    title: key,
     field: key,
-    initialEditValue: options?.initialEditValue?.[key] || null,
-    lookup: options?.lookup?.[key] || null,
-    filtering: options?.filter?.[key] !== false,
-    render: options?.render?.[key] || null,
-    type: options?.type?.[key] || null,
-    cellStyle: { textAlign: "start" },
-    customSort: options?.customSort?.[key] || null,
-    validate: options?.customValidate?.[key] || null,
-    editable:
-      options?.editOptions?.disableCols?.includes(key) &&
-      !options?.editOptions?.editableOnUpdate?.includes(key)
-        ? "never"
-        : "always",
-    editComponent: options?.editOptions?.customEditComponent?.[key] || null,
-    hidden: options?.hidden?.[key] || null,
+    render: (rowData) => renderFieldValue(key, rowData[key]),
   }));
 
-  useEffect(() => {
-    setTableOptions((prevOptions) => ({
-      ...prevOptions,
-      columns: displayColumns,
-    }));
-  }, [displayColumns]);
-
-  useEffect(() => {
-    if (data) {
-      setLoading(false);
-      if (!options.constPageSize) {
-        if (data.length < 10) {
-          setTableOptions((prevOptions) => ({
-            ...prevOptions,
-            pageSizeOptions: [data.length, 10, 50, 100].sort((a, b) => a - b),
-          }));
-          tableRef.current.dataManager.changePageSize(data.length);
-        } else {
-          setTableOptions((prevOptions) => ({
-            ...prevOptions,
-            pageSizeOptions: [10, 50, 100],
-          }));
-          if (![10, 50, 100].includes(tableRef.current.dataManager.pageSize)) {
-            tableRef.current.dataManager.changePageSize(10);
-          }
-        }
-      }
-    }
-  }, [data]);
-
   return (
-    <div className="table-container">
-      <MaterialTable
-        title={title}
-        icons={tableIcons}
-        columns={tableOptions.columns}
-        data={data}
-        options={{
-          ...tableOptions,
-          loading,
-          pageSize: tableOptions.pageSize || 10,
-          actionsColumnIndex: -1,
-          exportButton: options?.exportCsv !== false ? true : false,
-          exportCsv: () => {
-            ExportCsv(tableRef.current, options.exportCsvOptions);
-          },
-        }}
-        actions={actions}
-        editable={editable}
-        tableRef={tableRef}
-      />
-    </div>
+    <MaterialTable
+      title="Editable Table"
+      columns={columns}
+      data={tableData}
+      options={{
+        search: true,
+        paging: true,
+        draggable: false,
+        toolbar: false,
+        pageSize: 10,
+        pageSizeOptions: [10, 50, 100],
+      }}
+      actions={[
+        {
+          icon: () => null,
+          render: renderActions,
+        },
+      ]}
+      editable={{
+        onRowUpdate: handleSaveRow,
+      }}
+    />
   );
 }
 
