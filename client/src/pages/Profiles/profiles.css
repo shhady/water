@@ -1,0 +1,69 @@
+/*************************************
+ ***  Made By Yohay Hackam         ***
+ ***  mail: Yoman_321@hotmail.com  ***
+ ***  054-2616626                  ***
+ *************************************/
+.Profile{
+    /* margin: 0 50px 0 0 ; */
+    height:  calc(100vh - var(--nav-height) - 40px);
+    overflow: auto;
+    padding: 2rem;
+    padding-left: calc(var(--Side-Bar-Width) + 2rem);
+}
+
+.profileForm fieldset{
+    justify-items: start;
+    align-items: center;
+}
+
+.accessMng fieldset{
+    grid-template-columns: 0.45fr 1fr;    
+
+}
+
+.Profile-header{
+    /* margin: 0 50px 0 0; */
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    justify-content:flex-end;
+    flex-wrap: nowrap;
+    background-color:var(--header-background);
+    border-bottom: 4px solid var(--green);
+    height: 60px;
+}
+
+
+.ProfileModal{
+    display: flex;
+    justify-content:space-around;
+    flex-wrap: wrap;
+    gap:2rem;
+    justify-content: flex-start;
+
+}
+
+.profileAccessList{
+    display: grid;
+    grid-template-columns:1fr 1fr;
+}
+
+
+.profile-box:hover >.profile-box-content{
+background-color: var(--activeBox-background);
+cursor: pointer;
+}
+
+
+.profile-box-content{
+    padding: 1rem;
+    min-width: 300px;
+    min-height: 200px;
+}
+.profile-box-info{
+    display: none;
+}
+
+.showInfo:checked ~.profile-box-info{
+    display: block;
+}

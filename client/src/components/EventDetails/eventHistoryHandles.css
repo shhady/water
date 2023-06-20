@@ -1,0 +1,80 @@
+.eventHistory {
+    display: flex;
+    flex-direction: column;
+    margin-inline:5px;
+    height: inherit;
+    max-height: inherit;    
+}
+
+.EventDetails .eventHistory{
+    max-height: calc(var(--Event-Details-Height) - var(--Event-Info-Height));    
+}
+
+.eventHistoryGridHeader,
+.HandleHistoryRow {
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 1fr;    
+    row-gap: 0.5rem;
+    padding: 0 1rem;
+    align-items: center;
+    justify-items: start;
+}
+
+.eventHistoryGridHeader h5,
+.HandleHistoryRow p{
+    margin-inline-end: 1rem;
+}
+
+.handleInfoBoxGrid{
+    display: grid;
+    
+    grid-template-columns: 2fr 5fr ;    
+    /* column-gap: 5rem;         */
+    align-items: center;
+    justify-items: start;
+}
+
+.HandleHistoryRow {    
+    cursor: pointer;
+    min-height: 2rem;    
+    border-radius: 25px;
+    margin: 4px 0;
+    scroll-snap-align: start;    
+    transition: border-radius 0.3s ease;
+}
+
+.handleInfoBox {
+    display: none;
+}
+
+.showInfo:checked+.HandleHistoryRow>.handleInfoBox{
+    display: grid;
+    width: 100%;
+    grid-column: 1/-1;
+}
+
+.showInfo:checked+.HandleHistoryRow{
+    border-radius: 10px;
+    background-color: var(--light-gray);
+}
+
+.showInfo:checked+.HandleHistoryRow:hover,
+.HandleHistoryRow:hover{
+    background-color: var(--gray);
+}
+
+.eventHistoryGridWraper{
+overflow-y: auto;
+scroll-snap-type: y mandatory;
+}
+
+img.inRowLogo{
+ max-height: 32px;
+ margin:0 0 0 0.5rem;
+}
+/* @media screen and (max-width:1050px) {
+    .eventHistoryGridWraper{
+        max-height: 110px;
+    }
+
+} */

@@ -1,0 +1,54 @@
+/*************************************
+ ***  Made By Yohay Hackam         ***
+ ***  mail: Yoman_321@hotmail.com  ***
+ ***  054-2616626                  ***
+ *************************************/
+.lds-wrapper{
+  top:30%;
+  right:calc(50% - 15px);
+  z-index: 99;
+}
+
+.lds-ring {  
+  position:relative;
+  right:calc(50% - 25px);
+  
+}
+.lds-ring h3{
+  /* text-align: center; */
+  top: 1.5rem;
+  right: 1rem;
+  color: var(--textActiveColor);
+  position: relative;
+  font-weight: bold;
+  z-index: 200 !important;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  /* margin: 18px; */
+  border: 12px solid var(--green);
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: var(--green) transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

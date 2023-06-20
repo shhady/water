@@ -1,0 +1,53 @@
+.reverseWarning {
+    padding: 5% 10%;
+    z-index: 6;
+    position: fixed;
+    right: 20%;
+    bottom: 20%;
+    /* min-width: 60%;
+    min-height: 60%; */
+    width: max-content;
+    height: max-content;
+    background-color: var(--red);
+    color: var(--white);
+    text-align: center;
+}
+
+.reverseWarning h1 {
+    font-size: 10rem;
+    line-height: 10rem;
+    font-weight: bold;
+}
+
+.reverseWarning p {
+    font-size: 2rem;
+}
+
+.reverseWarning .heartbeat {
+    margin-top: 2rem;
+    font-size: 2rem;
+    line-height: 2.5rem;
+    font-weight: bold;
+    padding: 8px 40px;
+    /* padding-inline: 40px; */
+}
+
+.reverseWarning .heartbeat {
+    animation: polse 2s infinite;
+}
+
+.reverseWarning .heartbeat:hover {
+    animation-play-state: paused;
+}
+
+@keyframes polse {
+    50% {
+        padding: 12px 60px;
+        margin-top: calc(2rem - 4px)
+    }
+
+    100% {
+        padding: 8px 40px;
+        margin-top: calc(2rem)
+    }
+}

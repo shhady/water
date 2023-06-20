@@ -1,0 +1,74 @@
+.customer {
+    height: calc(100vh - var(--nav-height) - 60px);
+    overflow: auto;
+    padding: 2rem;
+    padding-left: calc(var(--Side-Bar-Width) + 2rem);
+}
+
+
+.customerModule {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: flex-start;
+
+}
+
+.customerInfoList {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 1rem;
+    justify-items: start;
+    text-align: start;
+}
+
+.customer-box:hover>.customer-box-content {
+    background-color: var(--activeBox-background);
+    cursor: pointer;
+}
+
+
+.customer-box-content {
+    padding: 1rem;
+    width: 350px ;
+    min-height: 240px;
+}
+
+.customer-box-info {
+    display: none;
+}
+
+.customer-box-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.showInfo:checked~.customer-box-info {
+    display: block;
+}
+
+.clientLogoPlaceHolder{
+    height: 100px;
+    line-height: 100px;
+    width: 85px;    
+    /* background-color: var(--gray); */
+    border-radius: 10px;
+    border:2px dashed var(--light-gray);
+    justify-self: center;
+
+}
+.clientLogoPlaceHolder i{
+    color: var(--gray);
+    font-size: 1.1rem;
+}
+
+.clientLogoPlaceHolderText{ 
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+    
+}
