@@ -8,11 +8,11 @@ function TableConfiguration() {
     <div>
       <TriggerTable />
       <hr />
-      <TriggerTypeTable />
+      {/* <TriggerTypeTable /> */}
       <hr />
-      <SensorsTable />
+      {/* <SensorsTable /> */}
       <hr />
-      <WaterInfrastructureTable />
+      {/* <WaterInfrastructureTable /> */}
     </div>
   );
 }

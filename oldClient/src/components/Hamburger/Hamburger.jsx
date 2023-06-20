@@ -1,34 +1,44 @@
-import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
-import "./Hamburger.css";
+import React from "react";
 
-const Hamburger = ({ links }) => {
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
-
-  const handleSidebarToggle = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
-
+const Hamburger = ({ isSidebarOpen, handleSidebarToggle }) => {
   return (
-    <>
-      <div className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
-        <button className="sidebar-toggle" onClick={handleSidebarToggle}>
-          <span className="sidebar-toggle-icon"></span>
-        </button>
-        <div className="sidebar-content">
-          <ul className="sidebar-menu">
-            {links.map((link, index) => (
-              <li key={index}>
-                <Link to={link.endpoint} className="sidebar-link">
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+    <aside className={isSidebarOpen ? "sidebar open" : "sidebar"}>
+      <div className="sidebar__header">
+        <span>Menu</span>
       </div>
-      <Outlet />
-    </>
+      <ul className="sidebar__menu">
+        <li>
+          {isSidebarOpen ? (
+            <>
+              <i className="fas fa-home"></i>
+              <span>Home</span>
+            </>
+          ) : (
+            <i className="fas fa-home"></i>
+          )}
+        </li>
+        <li>
+          {isSidebarOpen ? (
+            <>
+              <i className="fas fa-users"></i>
+              <span>About</span>
+            </>
+          ) : (
+            <i className="fas fa-users"></i>
+          )}
+        </li>
+        <li>
+          {isSidebarOpen ? (
+            <>
+              <i className="fas fa-envelope"></i>
+              <span>Contact</span>
+            </>
+          ) : (
+            <i className="fas fa-envelope"></i>
+          )}
+        </li>
+      </ul>
+    </aside>
   );
 };
 
