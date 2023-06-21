@@ -27,8 +27,7 @@ const SharedLayout = () => {
         handleSidebarToggle={handleSidebarToggle}
         endpoints={[
           { name: "Home", icon: "fas fa-home", path: "/" },
-          { name: "About", icon: "fas fa-users", path: "/about" },
-          { name: "Contact", icon: "fas fa-envelope", path: "/contact" },
+          { name: "Statistics", icon: "fas fa-users", path: "/statistics" },
         ]}
         direction={hamburgerDirection}
       />
