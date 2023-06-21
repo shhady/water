@@ -1,4 +1,5 @@
 import React from 'react';
+import './Navbar.css';
 import LanguageSelector from '../Language/Language';
 
 const Navbar = ({ handleSidebarToggle }) => {

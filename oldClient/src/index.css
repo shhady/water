@@ -1,74 +1,53 @@
-* {
-  padding: 0;
-  margin: 0;
+*{
+  padding: 0%;
+  margin: 0%;
   box-sizing: border-box;
 }
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f1f1f1;
-  padding: 10px;
-}
-
-.navbar__logo {
-  font-weight: bold;
-}
-
-.navbar__right-section {
-  display: flex;
-  align-items: center;
-}
-
-.navbar__toggle {
-  cursor: pointer;
-  margin-left: 10px;
-}
-
-@media screen and (max-width: 768px) {
-  .navbar__logo {
-    display: none;
-  }
-}
-
-.content {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  padding: 0px;
-}
-
 .sidebar {
   position: fixed;
   top: 0;
-  left: -100%;
-  width: 250px;
-  height: 100vh;
-  background-color: #333;
-  color: #fff;
-  transition: transform 0.3s ease;
+  left: -300px;
+  width: 300px;
+  height: 100%;
+  background-color: #f2f2f2;
+  transition: left 0.3s ease;
   z-index: 10;
 }
 
-.sidebar.open {
-  transform: translateX(0%);
+.sidebar-open {
+    position: fixed;
+    top: 0;
+    left: 0px;
+    width: 300px;
+    height: 100%;
+    background-color: #f2f2f2;
+    transition: left 0.3s ease;
+    z-index: 10;
+  
 }
 
 .sidebar__header {
-  padding: 10px;
+  padding: 16px;
+  background-color: #333;
+  color: #fff;
 }
 
 .sidebar__menu {
-  list-style: none;
+  list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 .sidebar__menu li {
-  padding: 10px;
+  padding: 16px;
   display: flex;
   align-items: center;
 }
 
 .sidebar__menu li i {
-  margin-right: 10px;
+  margin-right: 8px;
+}
+
+.sidebar__menu li span {
+  margin-left: 8px;
 }
