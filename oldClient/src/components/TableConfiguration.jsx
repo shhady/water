@@ -3,7 +3,8 @@ import SensorsTable from "./SensorsTable";
 import WaterInfrastructureTable from "./WaterInfrastructureTable";
 import TriggerTypeTable from "./TriggerTypeTable";
 
-function TableConfiguration() {
+const TableConfiguration = () => {
+  console.log("Hello from TableConfiguration");
   return (
     <div>
       <TriggerTable />
@@ -15,6 +16,6 @@ function TableConfiguration() {
       {/* <WaterInfrastructureTable /> */}
     </div>
   );
-}
+};
 
-export { TableConfiguration };
+export default TableConfiguration;
