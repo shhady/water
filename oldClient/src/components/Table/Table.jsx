@@ -7,23 +7,42 @@ function Table({ data, lookups }) {
   const [tableData, setTableData] = useState(data);
   const tableRef = useRef();
 
-  const handleRowClick = (event, rowData) => {
-    const updatedData = [...tableData];
-    const rowIndex = updatedData.findIndex((item) => item.id === rowData.id);
-    if (rowIndex !== -1) {
-      updatedData[rowIndex] = { ...rowData, editing: true };
-      setTableData(updatedData);
-    }
+  const handleRowAdd = (newData) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        setTableData([newData, ...tableData]);
+        resolve();
+      }, 1000);
+    });
   };
 
-  const handleSaveRow = (newData, oldData) => {
-    const updatedData = [...tableData];
-    const rowIndex = updatedData.findIndex((item) => item.id === oldData.id);
-    // send update request
-    if (rowIndex !== -1) {
-      updatedData[rowIndex] = { ...newData, editing: false };
-      setTableData(updatedData);
-    }
+  const handleRowUpdate = (newData, oldData) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const updatedData = [...tableData];
+        const rowIndex = updatedData.findIndex((item) => item.id === oldData.id);
+        if (rowIndex !== -1) {
+          updatedData[rowIndex] = { ...newData, editing: false };
+          setTableData(updatedData);
+          resolve();
+        } else {
+          reject();
+        }
+      }, 1000);
+    });
+  };
+  
+
+  const handleRowDelete = (oldData) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const dataDelete = [...tableData];
+        const index = oldData.tableData.id;
+        dataDelete.splice(index, 1);
+        setTableData([...dataDelete]);
+        resolve();
+      }, 1000);
+    });
   };
 
   const handleAddRow = () => {
@@ -32,11 +51,8 @@ function Table({ data, lookups }) {
     const updatedData = [newRow, ...tableData]; // Add the new row at the beginning of the table data
     setTableData(updatedData);
 
-    // Scroll to the first page of the tablea
+    // Scroll to the first page of the table
     tableRef.current.onQueryChange({ page: 0 });
-
-    
-    
   };
 
   const renderFieldValue = (field, rawValue) => {
@@ -65,30 +81,14 @@ function Table({ data, lookups }) {
 
   return (
     <div>
-      <button onClick={handleAddRow} style={{ marginBottom: "10px" }}>
-        <AddIcon /> Add Row
-      </button>
       <MaterialTable
-        ref={tableRef}
-        title="Editable Table"
+        title="Custom Edit Component Preview"
         columns={columns}
         data={tableData}
-        options={{
-          search: true,
-          paging: true,
-          draggable: false,
-          toolbar: false,
-          pageSize: 10,
-          pageSizeOptions: [10, 50, 100],
-        }}
-        actions={[
-          {
-            icon: () => null,
-            render: renderActions,
-          },
-        ]}
         editable={{
-          onRowUpdate: handleSaveRow,
+          onRowAdd: handleRowAdd,
+          onRowUpdate: handleRowUpdate,
+          onRowDelete: handleRowDelete,
         }}
       />
     </div>
