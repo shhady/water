@@ -10,7 +10,7 @@ function Table({ data, lookups }) {
   const handleRowAdd = (newData) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        setTableData([newData, ...tableData]);
+        setTableData([...tableData,newData]);
         resolve();
       }, 1000);
     });
@@ -45,16 +45,6 @@ function Table({ data, lookups }) {
     });
   };
 
-  const handleAddRow = () => {
-    const newId = Date.now().toString(); // Generate a unique ID
-    const newRow = { id: newId, editing: true }; // Create a new row object
-    const updatedData = [newRow, ...tableData]; // Add the new row at the beginning of the table data
-    setTableData(updatedData);
-
-    // Scroll to the first page of the table
-    tableRef.current.onQueryChange({ page: 0 });
-  };
-
   const renderFieldValue = (field, rawValue) => {
     if (lookups[field] && lookups[field][rawValue]) {
       return lookups[field][rawValue];
@@ -62,16 +52,6 @@ function Table({ data, lookups }) {
     return rawValue;
   };
 
-  const renderActions = (rowData) => {
-    return (
-      <div
-        style={{ display: "flex", justifyContent: "flex-end" }}
-        onClick={(event) => handleRowClick(event, rowData)} // Attach click event to the cell
-      >
-        <EditIcon style={{ cursor: "pointer" }} />
-      </div>
-    );
-  };
 
   const columns = Object.keys(data[0]).map((key) => ({
     title: key,

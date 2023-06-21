@@ -1,0 +1,30 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .navbar__logo span {
+    font-size: 24px;
+  }
+  
+  .navbar__right-section {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar__toggle {
+    cursor: pointer;
+    padding: 8px;
+    color: #fff;
+    font-size: 20px;
+  }
+  
+  .navbar__toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+  }
+  
