@@ -11,6 +11,12 @@ const SharedLayout = () => {
   const handleSidebarToggle = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  const hamburgerDirection =
+    document.getElementsByTagName("html")[0].getAttribute("dir") === "rtl"
+      ? "right"
+      : "left";
+
   return (
     <div className="container">
       <Alert />
@@ -24,6 +30,7 @@ const SharedLayout = () => {
           { name: "About", icon: "fas fa-users", path: "/about" },
           { name: "Contact", icon: "fas fa-envelope", path: "/contact" },
         ]}
+        direction={hamburgerDirection}
       />
       <Outlet />
     </div>

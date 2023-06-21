@@ -2,9 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Hamburger.css";
 
-const Hamburger = ({ isSidebarOpen, handleSidebarToggle, endpoints }) => {
+const Hamburger = ({
+  isSidebarOpen,
+  handleSidebarToggle,
+  endpoints,
+  direction,
+}) => {
+  const sidebarClass = isSidebarOpen ? "sidebar-open" : "sidebar";
+  const sidebarStyle = {
+    left: direction === "left" && isSidebarOpen ? "0" : "-300px",
+    right: direction === "right" && isSidebarOpen ? "0" : "-300px",
+  };
+
   return (
-    <aside className={isSidebarOpen ? "sidebar-open" : "sidebar"}>
+    <aside className={sidebarClass} style={sidebarStyle}>
       <div className="sidebar__header">
         <span>Menu</span>
       </div>
